@@ -4,7 +4,7 @@
         <!--fin titulo div-->
       
     <!--inicio cards de la div-->
-        <div id="cards" data-aos-duration="1000" data-aos-delay="100" data-aos="fade-right">
+        <div id="cards" data-aos-duration="1000" data-aos-delay="100" data-aos="fade-right" data-aos-once="true">>
         <a href="./serv_limpieza.php" class="card">
       <img src="./assets/images/serv_limpieza.jpg">
       <span class="card__footer">

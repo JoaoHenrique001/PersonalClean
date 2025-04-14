@@ -1,12 +1,8 @@
-<!--inicio framework fontawesome-->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<!--fin framework fontawesome-->
-
 <header>
   <!--inicio div cabecera desktop-->
     <div class="cabecera">
-     <a href="./index.php"><img id="logoCompleto" src="./assets/images/logoCompleto.png" alt="Logo-PersonalClean">
-                                       <img id="logoParcial" src="./assets/images/personalClean.png" alt="Logo-PersonalClean"></a>
+     <a href="./index.php"><img id="logoCompleto" src="./assets/images/logoCompleto.png" alt="">
+                                       <img id="logoParcial" src="./assets/images/personalClean.png" alt=""></a>
      <!--inicio barra de navegacion-->
      <nav>
          <div class="GrupoBotonesHeader">
@@ -51,12 +47,8 @@
     </div>
     <!--fin modo oscuro y claro-->
 
-    <!--inicio div botones login y registro-->
-    <div class="">
-      <a href="../login.php"><button>Log-in</button></a>
-      <a href="../registro.php"><button>Registro</button></a>
-    </div>
-    <!--fin div botones login y registro-->
+    <!--inicio icono usuario-->
+    <!--fin icono usuario-->
     
     <!--fin div cabecera desktop-->
 

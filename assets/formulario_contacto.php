@@ -2,23 +2,23 @@
 <div class="contacto" id="contmap">
     <!--inicio espacio ezquierdo de la div de contacto-->
     <div class="espacioContacto1">
-        <h1 data-aos-duration="1000" data-aos-delay="100"  data-aos="fade-right">
+        <h1 data-aos-duration="1000" data-aos-delay="100"  data-aos="fade-right" data-aos-once="true">
             Contacta con nosostros
         </h1>
-        <p data-aos-duration="1000" data-aos-delay="200"  data-aos="fade-right">Cualquier duda, por favor, rellene el formulario. Le responderemos lo más rápido posible.</p>
-        <button data-aos-duration="1000" data-aos-delay="300"  data-aos="fade-right">
+        <p data-aos-duration="1000" data-aos-delay="200"  data-aos="fade-right" data-aos-once="true">Cualquier duda, por favor, rellene el formulario. Le responderemos lo más rápido posible.</p>
+        <button data-aos-duration="1000" data-aos-delay="300"  data-aos="fade-right" data-aos-once="true">
             <span>
            Solicitacion de empleo 
             </span>
         </button>
-        <img data-aos-duration="1000" data-aos-delay="400"  data-aos="fade-right" src="./assets/images/telefono.jpg" alt="">
+        <img data-aos-duration="1000" data-aos-delay="400"  data-aos="fade-right" src="./assets/images/telefono.jpg" alt="" data-aos-once="true">
     </div>
     <!--fin espacio ezquierdo de la div de contacto-->
 
     <!--inicio espacio derecho del contacto, el formulario de contacto-->
     <div class="espacioContacto2">
         <!--inicio formulario--> 
-        <div class="cajaForm" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="400">
+        <div class="cajaForm" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="400" data-aos-once="true">
     <section class="headerForm">
       <h2>Envio de Correo</h2>
     </section>

@@ -1,81 +1,87 @@
-//inicio logica para cambio de modo oscuro y claro
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const chk = document.getElementById('chk');
 
+    //aplicar el modo guardado al cargar la página
+    const modoGuardado = localStorage.getItem('modo');
+    if (modoGuardado === 'oscuro') {
+        chk.checked = true;
+        activarModoOscuro();
+    }
+
+    // Evento para cambiar el modo
     chk.addEventListener('change', () => {
-        document.body.classList.toggle('dark');
+        const isDark = chk.checked;
+
+        if (isDark) {
+            activarModoOscuro();
+            localStorage.setItem('modo', 'oscuro');
+        } else {
+            desactivarModoOscuro();
+            localStorage.setItem('modo', 'claro');
+        }
+    });
+
+    function activarModoOscuro() {
+        document.body.classList.add('dark');
+        document.documentElement.classList.add('dark-scrollbar');
 
         const header = document.querySelector('header');
-        if (header) {
-            header.classList.toggle('dark');
-        }
+        if (header) header.classList.add('dark');
 
         const breadcrumb = document.querySelector('.breadcrumb');
-        if (breadcrumb) {
-            breadcrumb.classList.toggle('dark');
-        }
+        if (breadcrumb) breadcrumb.classList.add('dark');
 
         const contacto = document.querySelector('#contacto');
-        if (contacto) {
-            contacto.classList.toggle('dark');
-        }
-
-        document.documentElement.classList.toggle('dark-scrollbar');
+        if (contacto) contacto.classList.add('dark');
 
         const frase = document.querySelector('#frase');
-        if (frase) {
-            frase.classList.toggle('dark');
-        }
+        if (frase) frase.classList.add('dark');
 
-        document.querySelectorAll('#BotoTel').forEach(function(rope) {
-            rope.classList.toggle('dark');
-        });
+        document.querySelectorAll('#BotoTel').forEach(el => el.classList.add('dark'));
+        document.querySelectorAll('.accordion-button').forEach(el => el.classList.add('dark'));
+        document.querySelectorAll('.GrupoBotonesHeader > ul > li > a').forEach(el => el.classList.add('dark'));
+        document.querySelectorAll('#bottonHeader').forEach(el => el.classList.add('dark'));
+        document.querySelectorAll('#faqAcord').forEach(el => el.classList.add('dark'));
+        document.querySelectorAll('#faqCuerpo').forEach(el => el.classList.add('dark'));
+        document.querySelectorAll('.servicioCampo').forEach(el => el.classList.add('dark'));
+        document.querySelectorAll('.cajaForm').forEach(el => el.classList.add('dark'));
+        document.querySelectorAll('.form-content input').forEach(el => el.classList.add('dark'));
+        document.querySelectorAll('#Mensaje').forEach(el => el.classList.add('dark'));
+        document.querySelectorAll('#SelectServ').forEach(el => el.classList.add('dark'));
+        document.querySelectorAll('.espacioContacto1 > p').forEach(el => el.classList.add('dark'));
+    }
 
-        document.querySelectorAll('.accordion-button').forEach(function(rope1) {
-            rope1.classList.toggle('dark');
-        });
+    function desactivarModoOscuro() {
+        document.body.classList.remove('dark');
+        document.documentElement.classList.remove('dark-scrollbar');
 
-        document.querySelectorAll('.GrupoBotonesHeader > ul > li > a').forEach(function(rope2) {
-            rope2.classList.toggle('dark');
-        });
+        const header = document.querySelector('header');
+        if (header) header.classList.remove('dark');
 
-        document.querySelectorAll('#bottonHeader').forEach(function(rope3) {
-            rope3.classList.toggle('dark');
-        });
+        const breadcrumb = document.querySelector('.breadcrumb');
+        if (breadcrumb) breadcrumb.classList.remove('dark');
 
-        document.querySelectorAll('#faqAcord').forEach(function(rope4) {
-            rope4.classList.toggle('dark');
-        });
+        const contacto = document.querySelector('#contacto');
+        if (contacto) contacto.classList.remove('dark');
 
-        document.querySelectorAll('#faqCuerpo').forEach(function(rope5) {
-            rope5.classList.toggle('dark');
-        });
+        const frase = document.querySelector('#frase');
+        if (frase) frase.classList.remove('dark');
 
-        document.querySelectorAll('.servicioCampo').forEach(function(rope6) {
-            rope6.classList.toggle('dark');
-        });
-
-        document.querySelectorAll('.cajaForm').forEach(function(rope7) {
-            rope7.classList.toggle('dark');
-        });
-
-        document.querySelectorAll('.form-content input').forEach(function(rope8) {
-            rope8.classList.toggle('dark');
-        });
-
-        document.querySelectorAll('#Mensaje').forEach(function(rope9) {
-            rope9.classList.toggle('dark');
-        });
-
-        document.querySelectorAll('#SelectServ').forEach(function(rope10) {
-            rope10.classList.toggle('dark');
-        });
-
-        document.querySelectorAll('.espacioContacto1 > p').forEach(function(rope11) {
-            rope11.classList.toggle('dark');
-        });
-    });
+        document.querySelectorAll('#BotoTel').forEach(el => el.classList.remove('dark'));
+        document.querySelectorAll('.accordion-button').forEach(el => el.classList.remove('dark'));
+        document.querySelectorAll('.GrupoBotonesHeader > ul > li > a').forEach(el => el.classList.remove('dark'));
+        document.querySelectorAll('#bottonHeader').forEach(el => el.classList.remove('dark'));
+        document.querySelectorAll('#faqAcord').forEach(el => el.classList.remove('dark'));
+        document.querySelectorAll('#faqCuerpo').forEach(el => el.classList.remove('dark'));
+        document.querySelectorAll('.servicioCampo').forEach(el => el.classList.remove('dark'));
+        document.querySelectorAll('.cajaForm').forEach(el => el.classList.remove('dark'));
+        document.querySelectorAll('.form-content input').forEach(el => el.classList.remove('dark'));
+        document.querySelectorAll('#Mensaje').forEach(el => el.classList.remove('dark'));
+        document.querySelectorAll('#SelectServ').forEach(el => el.classList.remove('dark'));
+        document.querySelectorAll('.espacioContacto1 > p').forEach(el => el.classList.remove('dark'));
+    }
 });
+
 
 //fin logica para cambio de modo oscuro y claro
 

@@ -15,7 +15,7 @@
     <!--fin framework CSS y Js de AOS-->
 
     <!--inicio framework fontawesome-->
-    <script src="https://kit.fontawesome.com/998c60ef77.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <!--fin framework fontawesome-->
 
     <!--enlace de css-->
@@ -70,11 +70,11 @@
 
 <!--inicio frase llamativa-->
   <div id="fraseDiv">
-    <div data-aos-duration="1000" data-aos-delay="100" data-aos="flip-left" id="frase">
+    <div data-aos-duration="1000" data-aos-delay="100" data-aos="flip-left" id="frase" data-aos-once="true">
       <h1>Relájate</h1>
       <p>respira y deja que Personal Clean se encargue del resto.</p>
     </div>
-    <div data-aos-duration="1000" data-aos-delay="100" data-aos="fade-left"  id="imgFrase">
+    <div data-aos-duration="1000" data-aos-delay="100" data-aos="fade-left"  id="imgFrase" data-aos-once="true">
       <img src="./assets/images/relajar.jpg" alt="">
     </div>
   </div>
@@ -107,7 +107,7 @@
     <!--inicio acordeon con las preguntas-->
     <div id="faqAcord">
       <!--inicio acordion 1-->
-    <div class="accordion" id="accordionPanelsStayOpenExample" data-aos-duration="1000" data-aos-delay="100" data-aos="fade-left">
+    <div class="accordion" id="accordionPanelsStayOpenExample" data-aos-duration="1000" data-aos-delay="100" data-aos="fade-left" data-aos-once="true">
   <div class="accordion-item">
     <h2 class="accordion-header">
       <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
