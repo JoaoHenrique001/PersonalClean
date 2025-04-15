@@ -49,6 +49,11 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelectorAll('#Mensaje').forEach(el => el.classList.add('dark'));
         document.querySelectorAll('#SelectServ').forEach(el => el.classList.add('dark'));
         document.querySelectorAll('.espacioContacto1 > p').forEach(el => el.classList.add('dark'));
+        document.querySelectorAll('.formEnter > input').forEach(el => el.classList.add('dark'));
+        document.querySelectorAll('.formEnter').forEach(el => el.classList.add('dark'));
+        document.querySelectorAll('.formEnter > p > a').forEach(el => el.classList.add('dark'));
+        document.querySelectorAll('.nombreCompleto > input').forEach(input => {input.classList.add('dark');});
+        ['#provincia', '#ciudad', '#tipoUsuario'].forEach(selector => {const el = document.querySelector(selector);if (el) el.classList.add('dark');});
     }
 
     function desactivarModoOscuro() {
@@ -79,6 +84,11 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelectorAll('#Mensaje').forEach(el => el.classList.remove('dark'));
         document.querySelectorAll('#SelectServ').forEach(el => el.classList.remove('dark'));
         document.querySelectorAll('.espacioContacto1 > p').forEach(el => el.classList.remove('dark'));
+        document.querySelectorAll('.formEnter > input').forEach(el => el.classList.remove('dark'));
+        document.querySelectorAll('.formEnter').forEach(el => el.classList.remove('dark'));
+        document.querySelectorAll('.formEnter > p > a').forEach(el => el.classList.remove('dark'));
+        document.querySelectorAll('.nombreCompleto > input').forEach(input => {input.classList.remove('dark');});
+        ['#provincia', '#ciudad', '#tipoUsuario'].forEach(selector => {const el = document.querySelector(selector);if (el) el.classList.remove('dark');});
     }
 });
 

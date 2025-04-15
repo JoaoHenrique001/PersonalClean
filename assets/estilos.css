@@ -135,6 +135,27 @@ header.dark{
 .servicioCampo.dark{
     color: white;
 }
+.formEnter > input.dark{
+    background-color: #373646;
+    color: white;
+}
+.formEnter > input::placeholder.dark{
+    color: #ffffff;
+}
+.formEnter.dark{
+    color: #ffffff;
+}
+.formEnter > p > a.dark{
+    color: #EBDF3D;
+}
+#provincia.dark, #ciudad.dark, #tipoUsuario.dark{
+    background-color: #373646;
+    color: white;
+}
+.nombreCompleto > input.dark{
+    background-color: #373646;
+    color: white;
+}
 /*fin todo que va a ser cambiado a modo oscuro, despues tiene que agregar al script.js*/
 
 /*inicio elementos collaspe*/
@@ -856,6 +877,7 @@ footer{
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
     font-family: Montserrat;
 }
+
 .formEnter > span{
     padding-top: 5px;
     text-align: start;
@@ -898,6 +920,71 @@ footer{
     width: 75%;
 }
 /*Fin pagina de login*/
+
+/*inicio pagina de registro*/
+.nombreCompleto{
+    display: flex;
+    flex-direction: row;
+    gap: 34px;
+}
+.nombreCompleto > input{
+    height: 36px;
+    width: 122px;
+    border-radius: 8px;
+    padding-left: 10px;
+    border: solid rgba(0, 0, 0, 0.5) 1px;
+    background-color: #D9D9D9;
+    font-size: 16px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+    font-family: Montserrat;
+}
+.formEnter > label{
+    align-self: flex-start;
+    margin-left: 13%;
+    padding-top: 8px;
+    padding-bottom: 4px;
+}
+#provincia, #ciudad, #tipoUsuario{
+    height: 36px;
+    width: 122px;
+    border-radius: 8px;
+    border: solid rgba(0, 0, 0, 0.5) 1px;
+    background-color: #D9D9D9;
+    font-size: 16px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+    font-family: Montserrat;
+}
+.ProvCiud{
+    padding-top: 12px;
+    padding-bottom: 14px;
+}
+#cp{
+    align-self: flex-start;
+    margin-left: 13%;
+
+}
+#direccion{
+    align-self: flex-start;
+    margin-left: 13%;
+    width: 75%;
+}
+#tipoUsuario{
+    align-self: flex-start;
+    margin-left: 13%;
+    width: 160px;
+}
+#confcontraseñaInput{
+    width: 75%;
+}
+#fnacimiento{
+    align-self: flex-start;
+    margin-left: 13%;
+}
+#fnacSpan{
+    align-self: flex-start;
+    margin-left: 13%;
+}
+/*Fin pagina de registro*/
 
 /*inicio @media query*/
 
