@@ -91,9 +91,8 @@ document.addEventListener('DOMContentLoaded', function () {
         ['#provincia', '#ciudad', '#tipoUsuario'].forEach(selector => {const el = document.querySelector(selector);if (el) el.classList.remove('dark');});
     }
 });
-
-
 //fin logica para cambio de modo oscuro y claro
+
 
 /*inicio logica para enseñar barra de navegacion telefono*/
     function toggleAccordion() {

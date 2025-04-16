@@ -52,7 +52,7 @@
     <!--fin modo oscuro y claro-->
 
     <!--inicio div botones login y registro-->
-    <div class="">
+    <div class="logReg">
       <a href="../login.php"><button>Log-in</button></a>
       <a href="../registro.php"><button>Registro</button></a>
     </div>

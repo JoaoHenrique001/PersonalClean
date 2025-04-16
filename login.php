@@ -18,7 +18,7 @@
     <!--fin logo de la pagina ventana-->
 
     <!--enlace de script.js-->
-    <script src="./script.js"></script>
+    <script src="./assets/js/modoOscuro.js"></script>
     <!--enlace de script.js-->
 </head>
 <body>
