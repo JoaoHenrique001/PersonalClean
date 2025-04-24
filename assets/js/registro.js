@@ -193,6 +193,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 ciudadCampo.innerHTML = '<option value="">Ciudad</option>';
             }
     })
+
+    const formulario = document.getElementById("formRegistro");
+
     //sistema verificar campos usuario
     let nombre = document.getElementById("nombreInput");
     let apellidos = document.getElementById("apellidoInput");
@@ -215,12 +218,17 @@ document.addEventListener("DOMContentLoaded", function () {
     let MfNacimiento = document.getElementById("fnacSpan");
     let Mcp = document.getElementById("cpSpan");
     let Mdireccion = document.getElementById("direcSpan");
+    let MtipoUsuario = document.getElementById("tipoSpan");
+    let Mprov = document.getElementById("proviSpan");
+    let Mciudad = document.getElementById("ciudadSpan");
     
+    //expresiones regulares necesarias
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const telefonoRegex = /^[6-9]\d{8}$/;
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/;
     const cpRegex = /^(?:0[1-9]|[1-4][0-9]|5[0-2])\d{3}$/;
 
+    // funciones de verificacion
     function validarNombre() {
       const nombreVacio = nombre.value.trim() === "";
       const apellidoVacio = apellidos.value.trim() === "";
@@ -276,22 +284,32 @@ document.addEventListener("DOMContentLoaded", function () {
     
       return esValida;
     }
-      //he parado aqui
+
     function validarTelefono() {
-      // Formateamos el número mientras el usuario escribe
-      formatearTelefono(numeroTel);
-    
-      const esValido = telefonoRegex.test(numeroTel.value.trim());
-    
+    numeroTel.value = numeroTel.value.replace(/\s+/g, ' ').trim();
+
+    const numerosSolo = numeroTel.value.replace(/\D/g, '');
+    let formateado = "";
+
+    for (let i = 0; i < numerosSolo.length && i < 9; i++) {
+      formateado += numerosSolo[i];
+      if (i === 2 || i === 4 || i === 6) {
+        formateado += " ";
+      }
+    }
+
+      numeroTel.value = formateado;
+
+      const esValido = telefonoRegex.test(numeroTel.value);
+
       numeroTel.classList.toggle("errorInput", !esValido);
       Mtelefono.textContent = esValido ? "" : "Debe seguir el formato 444 44 44 44.";
       Mtelefono.classList.toggle("errorSpan", !esValido);
-    
+
       return esValido;
     }
     
-      
-      function validarFechaNacimiento() {
+    function validarFechaNacimiento() {
         const fechaNacimiento = new Date(fnacimiento.value);
         const hoy = new Date();
         const edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
@@ -305,7 +323,6 @@ document.addEventListener("DOMContentLoaded", function () {
           return false;
         }
       
-        // Ajustar edad si aún no ha cumplido años este año
         if (mes < 0 || (mes === 0 && dia < 0)) {
           edad--;
         }
@@ -321,30 +338,67 @@ document.addEventListener("DOMContentLoaded", function () {
           MfNacimiento.classList.remove("errorSpan");
           return true;
         }
-      }      
-      function validarCP() {
+    }     
+
+    function validarCP() {
         if (!cpRegex.test(codigoPostal.value)) {
           codigoPostal.classList.add("errorInput");
           Mcp.textContent = "Debe ingresar su codigo postal.";
           Mcp.classList.add("errorSpan");
+          return false;
         } else {
           codigoPostal.classList.remove("errorInput");
           Mcp.textContent = "";
           Mcp.classList.remove("errorSpan");
+          return true;
         }
-      }
-      function validarDireccion() {
+    }
+
+    function validarDireccion() {
         if (direccion.value === "") {
           direccion.classList.add("errorInput");
           Mdireccion.textContent = "Debe ingresar su direccion.";
           Mdireccion.classList.add("errorSpan");
+          return true;
         } else {
           codigoPostal.classList.remove("errorInput");
           Mdireccion.textContent = "";
           Mdireccion.classList.remove("errorSpan");
+          return false;
         }
-      }
+    }
 
+    function validarTipoUsuario() {
+        const esValido = tipoUsuario.value !== "Tipo de Usuario";
+      
+        tipoUsuario.classList.toggle("errorInput", !esValido);
+        MtipoUsuario.textContent = esValido ? "" : "Debe seleccionar un tipo de usuario válido.";
+        MtipoUsuario.classList.toggle("errorSpan", !esValido);
+      
+        return esValido;
+    }
+
+    function validarProvincia() {
+        const esValido = provincia.value !== "Provincia";
+      
+        provincia.classList.toggle("errorInput", !esValido);
+        Mprov.textContent = esValido ? "" : "Debe seleccionar una provincia válida.";
+        Mprov.classList.toggle("errorSpan", !esValido);
+      
+        return esValido;
+    }
+
+    function validarCiudad() {
+        const esValido = ciudad.value !== "Ciudad";
+      
+        ciudad.classList.toggle("errorInput", !esValido);
+        Mciudad.textContent = esValido ? "" : "Debe seleccionar una ciudad válida.";
+        Mciudad.classList.toggle("errorSpan", !esValido);
+      
+        return esValido;
+    }
+
+      // eventos vinculados al elemento
       nombre.addEventListener("blur", validarNombre);
       apellidos.addEventListener("blur", validarNombre)
       email.addEventListener("blur", validarEmail);
@@ -356,7 +410,79 @@ document.addEventListener("DOMContentLoaded", function () {
       codigoPostal.addEventListener("blur", validarCP);
       direccion.addEventListener("blur", validarDireccion);
       
-      tipoUsuario.addEventListener("change", validarTipoUsuario);
-      provincia.addEventListener("change", validarProvincia);
-      ciudad.addEventListener("change", validarCiudad);
+      tipoUsuario.addEventListener("blur", validarTipoUsuario);
+      provincia.addEventListener("blur", validarProvincia);
+      ciudad.addEventListener("blur", validarCiudad);
+
+      formulario.addEventListener("submit", enviarFormulario);
+
+      // envio final
+      function enviarFormulario(event) {
+        const validaciones = [
+          validarNombre(),
+          validarEmail(),
+          validarContraseña(),
+          validarConfContraseña(),
+          validarTelefono(),
+          validarTipoUsuario(),
+          validarProvincia(),
+          validarCiudad()
+        ];
+      
+        const todoValido = validaciones.every(valor => valor === true);
+      
+        if (!todoValido) {
+          event.preventDefault();
+        }else{
+          //fetch
+
+          let datosForm = {
+              nombre: nombre.value,
+              apellidos: apellidos.value,
+              email: email.value,
+              contraseña: contraseña.value,
+              telefono: numeroTel.value,
+              fnacimiento: fnacimiento.value,
+              tipoUsuario: tipoUsuario.value,
+              provincia: provincia.value,
+              ciudad: ciudad.value,
+              codigoPostal: codigoPostal.value,
+              direccion: direccion.value
+          };
+        
+          // Configuración del fetch
+          let options = {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(datosForm)
+          };
+        
+          // Enviar al archivo PHP en la carpeta AJAX
+          fetch('../ajax/registroEnvio.php', options)
+            .then(response => {
+              if (!response.ok) {
+                throw new Error("Error en la respuesta del servidor: " + response.statusText);
+              }
+              return response.json();
+            })
+            .then(data => {
+              if (data.success) {
+                alert("Registro hecho correctamente.");
+                // Redirigir si es necesario
+                window.location.href = "login.php";
+              } else {
+                alert("Error del servidor: " + data.message);
+                // Aquí podrías resaltar algún campo si es necesario, como email error de lo que sea email repetido por ejemplo
+              }
+            })
+            .catch(error => {
+              console.error('Error de conexión:', error);
+              alert("Hubo un error al conectar con el servidor.");
+            });
+
+        }
+      }
+
   });

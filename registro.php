@@ -34,7 +34,7 @@
     </div>
     <!--fin modo oscuro y claro-->
     <div class="cajaformEnter">
-    <form action="" class="formEnter">
+    <form action="" id="formRegistro"  class="formEnter">
         <a href="./index.php"><img src="./assets/images/logo.png" width="10px" height="10px" alt="logo"></a>
 
         <div class="nombreCompleto">
@@ -64,17 +64,21 @@
             <option value="funcionario">Funcionario</option>
             <option value="cliente">Cliente</option>
         </select>
+        <span id="tipoSpan"></span>
+
 
         <div class="ProvCiud">
         <select name="provincia" id="provincia">
             <option value="">Provincia</option>
             <option value="Madrid">Madrid</option>
         </select>
+        <span id="proviSpan"></span>
 
         <select name="ciudad" id="ciudad">
             <option value="">Ciudad</option>
         </select>
         </div>
+        <span id="ciudadSpan"></span>
 
         <input type="text" id="cp" maxlength="5" placeholder="Codigo Postal ej:44444">
         <span id="cpSpan"></span>
