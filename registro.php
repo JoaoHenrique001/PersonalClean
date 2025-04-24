@@ -19,6 +19,7 @@
 
     <!--enlace de script.js-->
     <script src="./assets/js/modoOscuro.js"></script>
+    <script src="./assets/js/registro.js"></script>
     <!--enlace de script.js-->
 </head>
 <body>
@@ -45,11 +46,14 @@
         <input type="text" placeholder="Email" id="emailInput">
         <span id="emailSpan"></span>
 
-        <input type="password" placeholder="Contraseña" id="contraseñaInput">
+        <input type="text" placeholder="Contraseña" id="contraseñaInput">
         <span id="contraSpan"></span>
 
-        <input type="password" placeholder="Confirmar Contraseña" id="confcontraseñaInput">
+        <input type="text" placeholder="Confirmar Contraseña" id="confcontraseñaInput">
         <span id="confcontraSpan"></span>
+
+        <input type="text" placeholder="Numero telefono ej: 444 44 44 44" id="numTelefono">
+        <span id="numTelefonoSpan"></span>
 
         <label for="fechaNacimiento">Fecha nacimiento:</label>
         <input type="date" name="fnacimiento" id="fnacimiento">
@@ -62,16 +66,17 @@
         </select>
 
         <div class="ProvCiud">
-        <select name="" id="provincia">
+        <select name="provincia" id="provincia">
             <option value="">Provincia</option>
+            <option value="Madrid">Madrid</option>
         </select>
 
-        <select name="" id="ciudad">
+        <select name="ciudad" id="ciudad">
             <option value="">Ciudad</option>
         </select>
         </div>
 
-        <input type="number" id="cp" placeholder="Codigo Postal ej:44444">
+        <input type="text" id="cp" maxlength="5" placeholder="Codigo Postal ej:44444">
         <span id="cpSpan"></span>
 
         <input type="text" id="direccion" placeholder="Direccion">
