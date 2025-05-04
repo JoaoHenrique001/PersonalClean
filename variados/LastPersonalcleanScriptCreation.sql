@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-04-2025 a las 15:46:43
+-- Tiempo de generación: 29-04-2025 a las 23:48:52
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -55,16 +55,17 @@ CREATE TABLE `chats` (
 CREATE TABLE `clientes` (
   `idCliente` int(11) NOT NULL,
   `nombre` varchar(45) NOT NULL,
-  `apellido` varchar(45) NOT NULL,
+  `apellidos` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
   `contraseña` varchar(45) NOT NULL,
   `telefono` varchar(15) NOT NULL,
   `f_nacimiento` varchar(45) NOT NULL,
   `foto_perfil` varchar(255) DEFAULT NULL,
-  `notaMedia` int(11) NOT NULL,
+  `notaMedia` float DEFAULT NULL,
   `direccion` varchar(45) DEFAULT NULL,
   `provincia` varchar(100) DEFAULT NULL,
-  `ciudad` varchar(100) DEFAULT NULL
+  `ciudad` varchar(100) DEFAULT NULL,
+  `codigoPostal` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
@@ -76,18 +77,30 @@ CREATE TABLE `clientes` (
 CREATE TABLE `funcionarios` (
   `idfuncionarios` int(11) NOT NULL,
   `nombre` varchar(45) NOT NULL,
-  `apellido` varchar(45) NOT NULL,
+  `apellidos` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
   `contraseña` varchar(45) NOT NULL,
   `telefono` varchar(15) NOT NULL,
   `f_nacimiento` date NOT NULL,
   `descripcion` varchar(1000) DEFAULT NULL,
   `foto_perfil` varchar(255) DEFAULT NULL,
-  `notaMedia` int(11) NOT NULL,
+  `notaMedia` float DEFAULT NULL,
   `direccion` varchar(45) DEFAULT NULL,
   `provincia` varchar(100) DEFAULT NULL,
-  `ciudad` varchar(100) DEFAULT NULL
+  `ciudad` varchar(100) DEFAULT NULL,
+  `codigoPostal` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `funcionarios`
+--
+
+INSERT INTO `funcionarios` (`idfuncionarios`, `nombre`, `apellidos`, `email`, `contraseña`, `telefono`, `f_nacimiento`, `descripcion`, `foto_perfil`, `notaMedia`, `direccion`, `provincia`, `ciudad`, `codigoPostal`) VALUES
+(1, 'Laura', 'Gómez', 'laura.gomez@example.com', 'contraseña123', '612345678', '1990-05-12', 'Psicóloga con 10 años de experiencia en salud mental.', NULL, 9, 'Calle Real 12', 'Madrid', 'Madrid', NULL),
+(2, 'Carlos', 'Pérez', 'carlos.perez@example.com', 'qwerty456', '687123456', '1985-08-20', NULL, NULL, 8, NULL, NULL, 'Barcelona', NULL),
+(3, 'Marta', 'López', 'marta.lopez@example.com', 'abc123456', '698745123', '1992-11-30', 'Orientadora educativa especializada en adolescentes.', 'marta.jpg', 10, 'Av. Constitución 89', 'Sevilla', 'Sevilla', NULL),
+(4, 'Javier', 'Santos', 'javier.santos@example.com', 'miClaveSegura', '677223344', '1988-03-15', NULL, NULL, 7, NULL, 'Valencia', NULL, NULL),
+(5, 'Ana', 'Ramírez', 'ana.ramirez@example.com', 'ana456789', '655112233', '1995-09-08', 'Experta en inserción laboral y coaching profesional.', 'ana_foto.png', 9, 'Calle Luna 7', NULL, 'Bilbao', NULL);
 
 -- --------------------------------------------------------
 
@@ -259,13 +272,13 @@ ALTER TABLE `chats`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `funcionarios`
 --
 ALTER TABLE `funcionarios`
-  MODIFY `idfuncionarios` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idfuncionarios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `mensajes`

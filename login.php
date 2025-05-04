@@ -1,10 +1,53 @@
+<?php
+session_start();
+include './assets/ajax/conexionBD.php';
+
+// Mostra erros para facilitar o debug
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+$errores = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = $_POST['email'] ?? '';
+    $pass = $_POST['contraseña'] ?? '';
+
+    $tablas = [
+        'administradores' => 'area_administradores.php',
+        'funcionarios' => 'area_funcionarios.php',
+        'clientes' => 'area_clientes.php'
+    ];
+
+    foreach ($tablas as $tabla => $redirect) {
+        $sql = "SELECT * FROM $tabla WHERE email = :email";
+        $stmt = $conexion->prepare($sql);
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($user && $pass === $user['contraseña']) {
+            $_SESSION['usuario'] = [
+                'tipo' => $tabla,
+                'id' => $user['id'],
+                'nombre' => $user['nombre'],
+                'email' => $user['email']
+            ];
+            header("Location: " . $redirect);
+            exit;
+        }
+    }
+
+    $errores = "Credenciales incorrectas.";
+}
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | Personal Clean</title>
-
+    
     <!--inicio framework fontawesome-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <!--fin framework fontawesome-->
@@ -20,10 +63,11 @@
     <!--enlace de script.js-->
     <script src="./assets/js/modoOscuro.js"></script>
     <!--enlace de script.js-->
+
 </head>
 <body>
-     <!--inicio modo oscuro y claro-->
-     <div class="switchCO" id="varCO">
+   <!--inicio modo oscuro y claro-->
+   <div class="switchCO" id="varCO">
       <input type="checkbox" class="checkbox" id="chk"/>
       <label class="modoCO" for="chk">
         <i class="fas fa-moon"></i>
@@ -32,17 +76,20 @@
       </label>
     </div>
     <!--fin modo oscuro y claro-->
-
     <div class="cajaformEnter">
-    <form action="" class="formEnter">
-        <a href="./index.php"><img src="./assets/images/logo.png" width="10px" height="10px" alt="logo"></a>
-        <input type="text" placeholder="Email" name="emailInput" id="emailInput">
-        <span id="emailSpan"></span>
-        <input type="password" placeholder="Contraseña" name="contraseñaInput" id="contraseñaInput">
-        <span id="contraSpan"></span>
-        <button type="submit">Entrar</button>
-        <p>¿No tienes cuenta? <a href="./registro.php">Registrate</a></p>
-    </form>
+        <form method="POST" class="formEnter">
+            <a href="./index.php"><img src="./assets/images/logo.png" alt="logo" width="10" height="10"></a>
+
+            <?php if ($errores): ?>
+                <p style="color: red; text-align: center;"><?php echo $errores; ?></p>
+            <?php endif; ?>
+
+            <input type="text" name="email" placeholder="Email" required>
+            <input type="password" name="contraseña" placeholder="Contraseña" required>
+
+            <button type="submit">Iniciar Sesión</button>
+            <p>¿No tienes cuenta? <a href="./registro.php">Registrarse</a></p>
+        </form>
     </div>
 </body>
 </html>

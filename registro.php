@@ -1,3 +1,57 @@
+<?php
+$errores = [];
+$mensaje = "";
+include './assets/ajax/conexionBD.php';
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+    // Sanitizar entradas
+    $nombre = htmlspecialchars(trim($_POST["nombreInput"]));
+    $apellidos = htmlspecialchars(trim($_POST["apellidoInput"]));
+    $email = filter_var(trim($_POST["emailInput"]), FILTER_VALIDATE_EMAIL);
+    $pass = trim($_POST["contraseñaInput"]);
+    $confPass = trim($_POST["confcontraseñaInput"]);
+    $telefono = htmlspecialchars(trim($_POST["numTelefono"]));
+    $fechaNacimiento = $_POST["fnacimiento"];
+    $tipoUsuario = $_POST["tipoUsuario"];
+    $provincia = $_POST["provincia"];
+    $ciudad = $_POST["ciudad"];
+    $cp = htmlspecialchars(trim($_POST["cp"]));
+    $direccion = htmlspecialchars(trim($_POST["direccion"]));
+
+    // Validaciones
+    if (!$nombre || !$apellidos || !$email || !$pass || !$confPass || !$telefono || !$fechaNacimiento || !$tipoUsuario || !$provincia || !$ciudad || !$cp || !$direccion) {
+        $errores[] = "Todos los campos son obligatorios.";
+    }
+
+    if (!$email) {
+        $errores[] = "Email no válido.";
+    }
+
+    if ($pass !== $confPass) {
+        $errores[] = "Las contraseñas no coinciden.";
+    }
+
+    // Si no hay errores, insertar en la base de datos
+    if (empty($errores)) {
+        $passHash = password_hash($pass, PASSWORD_DEFAULT);
+
+        $stmt = $conexion->prepare("INSERT INTO usuarios (nombre, apellidos, email, password, telefono, fecha_nacimiento, tipo_usuario, provincia, ciudad, codigo_postal, direccion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssssssssss", $nombre, $apellidos, $email, $passHash, $telefono, $fechaNacimiento, $tipoUsuario, $provincia, $ciudad, $cp, $direccion);
+
+        if ($stmt->execute()) {
+            $mensaje = "Registro exitoso. Puedes <a href='login.php'>iniciar sesión aquí</a>.";
+        } else {
+            $errores[] = "Error al registrar. Intenta más tarde.";
+        }
+
+        $stmt->close();
+    }
+
+    $conexion->close();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,56 +88,56 @@
     </div>
     <!--fin modo oscuro y claro-->
     <div class="cajaformEnter">
-    <form action="" id="formRegistro"  class="formEnter">
+    <form id="formRegistro"  class="formEnter">
         <a href="./index.php"><img src="./assets/images/logo.png" width="10px" height="10px" alt="logo"></a>
 
         <div class="nombreCompleto">
-            <input type="text" placeholder="Nombre" name="nombreInput" id="nombreInput">
-            <input type="text" placeholder="Apellidos" name="apellidoInput" id="apellidoInput">
+            <input type="text" placeholder="Nombre" name="nombreInput" id="nombreInput" required>
+            <input type="text" placeholder="Apellidos" name="apellidoInput" id="apellidoInput" required>
         </div>
         <span id="nombreSpan"></span>
 
-        <input type="text" placeholder="Email" id="emailInput">
+        <input type="text" placeholder="Email" id="emailInput" required>
         <span id="emailSpan"></span>
 
-        <input type="text" placeholder="Contraseña" id="contraseñaInput">
+        <input type="text" placeholder="Contraseña" id="contraseñaInput" required>
         <span id="contraSpan"></span>
 
-        <input type="text" placeholder="Confirmar Contraseña" id="confcontraseñaInput">
+        <input type="text" placeholder="Confirmar Contraseña" id="confcontraseñaInput" required>
         <span id="confcontraSpan"></span>
 
-        <input type="text" placeholder="Numero telefono ej: 444 44 44 44" id="numTelefono">
+        <input type="text" placeholder="Numero telefono ej: 444 44 44 44" id="numTelefono" required>
         <span id="numTelefonoSpan"></span>
 
         <label for="fechaNacimiento">Fecha nacimiento:</label>
-        <input type="date" name="fnacimiento" id="fnacimiento">
+        <input type="date" name="fnacimiento" id="fnacimiento" required>
         <span id="fnacSpan"></span>
 
-        <select name="tipoUsuario" id="tipoUsuario">
+        <select name="tipoUsuario" id="tipoUsuario" required>
             <option value="">Tipo de Usuario</option>
-            <option value="funcionario">Funcionario</option>
-            <option value="cliente">Cliente</option>
+            <option value="funcionarios">Funcionario</option>
+            <option value="clientes">Cliente</option>
         </select>
         <span id="tipoSpan"></span>
 
 
         <div class="ProvCiud">
-        <select name="provincia" id="provincia">
+        <select name="provincia" id="provincia" required>
             <option value="">Provincia</option>
             <option value="Madrid">Madrid</option>
         </select>
         <span id="proviSpan"></span>
 
-        <select name="ciudad" id="ciudad">
+        <select name="ciudad" id="ciudad" required>
             <option value="">Ciudad</option>
         </select>
         </div>
         <span id="ciudadSpan"></span>
 
-        <input type="text" id="cp" maxlength="5" placeholder="Codigo Postal ej:44444">
+        <input type="text" id="cp" maxlength="5" placeholder="Codigo Postal ej:44444" required>
         <span id="cpSpan"></span>
 
-        <input type="text" id="direccion" placeholder="Direccion">
+        <input type="text" id="direccion" placeholder="Direccion" required>
         <span id=direcSpan></span>
 
         <button type="submit">Registrar</button>

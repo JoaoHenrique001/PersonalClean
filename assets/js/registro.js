@@ -224,7 +224,7 @@ document.addEventListener("DOMContentLoaded", function () {
     
     //expresiones regulares necesarias
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const telefonoRegex = /^[6-9]\d{8}$/;
+    const telefonoRegex = /^[6-9]\d*$/; 
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/;
     const cpRegex = /^(?:0[1-9]|[1-4][0-9]|5[0-2])\d{3}$/;
 
@@ -285,25 +285,17 @@ document.addEventListener("DOMContentLoaded", function () {
       return esValida;
     }
 
+    
     function validarTelefono() {
-    numeroTel.value = numeroTel.value.replace(/\s+/g, ' ').trim();
+      // Dejar solo los números
+      numeroTel.value = numeroTel.value.replace(/\D/g, '');
 
-    const numerosSolo = numeroTel.value.replace(/\D/g, '');
-    let formateado = "";
-
-    for (let i = 0; i < numerosSolo.length && i < 9; i++) {
-      formateado += numerosSolo[i];
-      if (i === 2 || i === 4 || i === 6) {
-        formateado += " ";
-      }
-    }
-
-      numeroTel.value = formateado;
-
+      // Validar usando el regex
       const esValido = telefonoRegex.test(numeroTel.value);
 
+      // Aplicar clases de error o limpiar mensajes
       numeroTel.classList.toggle("errorInput", !esValido);
-      Mtelefono.textContent = esValido ? "" : "Debe seguir el formato 444 44 44 44.";
+      Mtelefono.textContent = esValido ? "" : "El teléfono debe empezar con 6, 7, 8 o 9 y contener solo números.";
       Mtelefono.classList.toggle("errorSpan", !esValido);
 
       return esValido;
@@ -339,6 +331,21 @@ document.addEventListener("DOMContentLoaded", function () {
           return true;
         }
     }     
+    function transformarFecha(fecha) {
+      // Separar la fecha original por "/"
+      var partes = fecha.split("/");
+    
+      if (partes.length !== 3) {
+        return "Formato inválido";
+      }
+    
+      var dia = partes[0];
+      var mes = partes[1];
+      var anio = partes[2];
+    
+      // Retornar en el nuevo formato
+      return anio + "/" + mes + "/" + dia;
+    }
 
     function validarCP() {
         if (!cpRegex.test(codigoPostal.value)) {
@@ -418,6 +425,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // envio final
       function enviarFormulario(event) {
+        event.preventDefault();
         const validaciones = [
           validarNombre(),
           validarEmail(),
@@ -434,55 +442,9 @@ document.addEventListener("DOMContentLoaded", function () {
         if (!todoValido) {
           event.preventDefault();
         }else{
-          //fetch
-
-          let datosForm = {
-              nombre: nombre.value,
-              apellidos: apellidos.value,
-              email: email.value,
-              contraseña: contraseña.value,
-              telefono: numeroTel.value,
-              fnacimiento: fnacimiento.value,
-              tipoUsuario: tipoUsuario.value,
-              provincia: provincia.value,
-              ciudad: ciudad.value,
-              codigoPostal: codigoPostal.value,
-              direccion: direccion.value
-          };
-        
-          // Configuración del fetch
-          let options = {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(datosForm)
-          };
-        
-          // Enviar al archivo PHP en la carpeta AJAX
-          fetch('../ajax/registroEnvio.php', options)
-            .then(response => {
-              if (!response.ok) {
-                throw new Error("Error en la respuesta del servidor: " + response.statusText);
-              }
-              return response.json();
-            })
-            .then(data => {
-              if (data.success) {
-                alert("Registro hecho correctamente.");
-                // Redirigir si es necesario
-                window.location.href = "login.php";
-              } else {
-                alert("Error del servidor: " + data.message);
-                // Aquí podrías resaltar algún campo si es necesario, como email error de lo que sea email repetido por ejemplo
-              }
-            })
-            .catch(error => {
-              console.error('Error de conexión:', error);
-              alert("Hubo un error al conectar con el servidor.");
-            });
-
+          event.preventDefault();
         }
+          
       }
 
   });
