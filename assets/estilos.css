@@ -194,6 +194,9 @@ header.dark{
     background-color: #373646;
     color: white;
 }
+.preAd.dark{
+    color: white;
+}
 /*fin todo que va a ser cambiado a modo oscuro, despues tiene que agregar al script.js*/
 
 /*inicio elementos collaspe*/
@@ -1034,6 +1037,57 @@ footer{
 }
 /*Fin pagina de registro*/
 
+/*inicio pagina area administradores*/
+.preAd{
+margin-left: 50px;
+position: relative;
+top: 30px;
+color: black;
+}
+.preAd > span{
+    color: #743EE0;
+}
+
+.cajas{
+    margin-top: 100px;
+    margin-left: 100px;
+    display: grid;
+    grid-template-columns: repeat(2, auto); /* 2 columnas automáticas */
+    gap: 45px 136px; /* 45px vertical, 136px horizontal */
+    justify-content: center; 
+}
+.cajaControl{
+    border-radius: 30px;
+    background-color: #C8ACFF;
+    width: 376px;
+    height: 207px;
+    padding-left: 25px;
+    padding-top: 5px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 10px 10px 2px rgba(0, 0, 0, 0.25);
+    justify-content: space-around;
+}
+.cajaControl > .cajaContador{
+    display: flex;
+    flex-direction: row;
+}
+.cajaControl > .cajaContador > img{
+    width: 29.25px;
+    padding-bottom: 10px;
+}
+.cajaControl > .cajaContador > h3{
+    font-size: 30px;
+}
+.cajaControl > h4{
+    font-size: 20px;
+    color: #0340D5;
+}
+.cajaControl > h4 > a{
+    text-decoration: none;
+}
+/*fin pagina area administradores*/
+
 /*inicio @media query*/
 @media only screen and (max-width: 1483px){
     .logReg{
@@ -1049,7 +1103,6 @@ footer{
         padding-left: 15px;
         padding-right: 15px;
         text-align: center;
-
     }
 }
 /*fin 768px para que no se quiebre la imagen en servicios*/

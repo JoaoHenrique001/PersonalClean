@@ -1,8 +1,8 @@
-<?php
+<?php  
 session_start();
 include './assets/ajax/conexionBD.php';
 
-// Mostra erros para facilitar o debug
+// Mostrar errores para debug
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -26,13 +26,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute();
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
+        // Verifica que exista y la contraseña coincida (sin password_hash aquí)
         if ($user && $pass === $user['contraseña']) {
             $_SESSION['usuario'] = [
-                'tipo' => $tabla,
-                'id' => $user['id'],
-                'nombre' => $user['nombre'],
-                'email' => $user['email']
+                'nombre' => $user['nombre_completo'],
+                'tipo' => $tabla
             ];
+
             header("Location: " . $redirect);
             exit;
         }
@@ -47,35 +47,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Login | Personal Clean</title>
-    
-    <!--inicio framework fontawesome-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <!--fin framework fontawesome-->
-
-    <!--enlace de css-->
     <link rel="stylesheet" href="./assets/estilos.css">
-    <!--enlace de css-->
-
-    <!--inicio logo de la pagina ventana-->
     <link rel="icon" type="image/ico" href="./assets/images/logo.ico">
-    <!--fin logo de la pagina ventana-->
-
-    <!--enlace de script.js-->
     <script src="./assets/js/modoOscuro.js"></script>
-    <!--enlace de script.js-->
-
 </head>
 <body>
-   <!--inicio modo oscuro y claro-->
-   <div class="switchCO" id="varCO">
-      <input type="checkbox" class="checkbox" id="chk"/>
-      <label class="modoCO" for="chk">
-        <i class="fas fa-moon"></i>
-        <i class="fas fa-sun"></i>
-        <div class="ball"></div>
-      </label>
-    </div>
-    <!--fin modo oscuro y claro-->
+    <?php include './assets/switchModoClaroOscuro.php'; ?>
+
     <div class="cajaformEnter">
         <form method="POST" class="formEnter">
             <a href="./index.php"><img src="./assets/images/logo.png" alt="logo" width="10" height="10"></a>

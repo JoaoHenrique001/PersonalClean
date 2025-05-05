@@ -77,15 +77,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <!--enlace de script.js-->
 </head>
 <body>
-     <!--inicio modo oscuro y claro-->
-     <div class="switchCO" id="varCO">
-      <input type="checkbox" class="checkbox" id="chk"/>
-      <label class="modoCO" for="chk">
-        <i class="fas fa-moon"></i>
-        <i class="fas fa-sun"></i>
-        <div class="ball"></div>
-      </label>
-    </div>
+    <!--inicio modo oscuro y claro-->
+    <?php
+    include './assets/switchModoClaroOscuro.php';
+    ?>
     <!--fin modo oscuro y claro-->
     <div class="cajaformEnter">
     <form id="formRegistro"  class="formEnter">
