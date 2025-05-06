@@ -44,7 +44,7 @@ $totalServicios = $consultaServicios->fetch(PDO::FETCH_ASSOC)['total'];
                     <h3><?php echo $totalFuncionarios; ?></h3>
                     <img src="./assets/images/person-fill.svg" alt="person">
                 </div>
-                <h4><a href="">Gestionar</a></h4>
+                <h4><a href="./gestionarFuncionarios.php">Gestionar</a></h4>
             </div>
 
             <div class="cajaControl">
@@ -53,7 +53,7 @@ $totalServicios = $consultaServicios->fetch(PDO::FETCH_ASSOC)['total'];
                     <h3><?php echo $totalServicios; ?></h3>
                     <img src="./assets/images/person-fill.svg" alt="person">
                 </div>
-                <h4><a href="">Gestionar</a></h4>
+                <h4><a href="./gestionarServicios.php">Gestionar</a></h4>
             </div>
 
             <div class="cajaControl">
@@ -62,7 +62,7 @@ $totalServicios = $consultaServicios->fetch(PDO::FETCH_ASSOC)['total'];
                     <h3><?php echo $totalClientes; ?></h3>
                     <img src="./assets/images/person-fill.svg" alt="person">
                 </div>
-                <h4><a href="">Gestionar</a></h4>
+                <h4><a href="./gestionarClientes.php">Gestionar</a></h4>
             </div>
         </div>
     </main>

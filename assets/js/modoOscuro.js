@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
     const chk = document.getElementById('chk');
-
     //aplicar el modo guardado al cargar la página
     const modoGuardado = localStorage.getItem('modo');
     if (modoGuardado === 'oscuro') {
@@ -54,6 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelectorAll('.formEnter > p > a').forEach(el => el.classList.add('dark'));
         document.querySelectorAll('.nombreCompleto > input').forEach(input => {input.classList.add('dark');});
         document.querySelectorAll('.preAd').forEach(el => el.classList.add('dark'));
+        document.querySelectorAll('.logout > h1').forEach(el => el.classList.add('dark'));
         ['#provincia', '#ciudad', '#tipoUsuario'].forEach(selector => {const el = document.querySelector(selector);if (el) el.classList.add('dark');});
     }
 
@@ -90,6 +90,7 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelectorAll('.formEnter > p > a').forEach(el => el.classList.remove('dark'));
         document.querySelectorAll('.nombreCompleto > input').forEach(input => {input.classList.remove('dark');});
         document.querySelectorAll('.preAd').forEach(el => el.classList.remove('dark'));
+        document.querySelectorAll('.logout > h1').forEach(el => el.classList.remove('dark'));
         ['#provincia', '#ciudad', '#tipoUsuario'].forEach(selector => {const el = document.querySelector(selector);if (el) el.classList.remove('dark');});
     }
 });
