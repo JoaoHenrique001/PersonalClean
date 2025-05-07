@@ -54,6 +54,8 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelectorAll('.nombreCompleto > input').forEach(input => {input.classList.add('dark');});
         document.querySelectorAll('.preAd').forEach(el => el.classList.add('dark'));
         document.querySelectorAll('.logout > h1').forEach(el => el.classList.add('dark'));
+        document.querySelectorAll('.areaDetalle').forEach(el => el.classList.add('dark'));
+        document.querySelectorAll('.tablaDetalle tr').forEach(tr => {const lastTd = tr.querySelector('td:last-child');if (lastTd) lastTd.classList.add('dark');});
         ['#provincia', '#ciudad', '#tipoUsuario'].forEach(selector => {const el = document.querySelector(selector);if (el) el.classList.add('dark');});
     }
 
@@ -91,6 +93,8 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelectorAll('.nombreCompleto > input').forEach(input => {input.classList.remove('dark');});
         document.querySelectorAll('.preAd').forEach(el => el.classList.remove('dark'));
         document.querySelectorAll('.logout > h1').forEach(el => el.classList.remove('dark'));
+        document.querySelectorAll('.areaDetalle').forEach(el => el.classList.remove('dark'));
+        document.querySelectorAll('.tablaDetalle tr').forEach(tr => {const lastTd = tr.querySelector('td:last-child');if (lastTd) lastTd.classList.remove('dark');});
         ['#provincia', '#ciudad', '#tipoUsuario'].forEach(selector => {const el = document.querySelector(selector);if (el) el.classList.remove('dark');});
     }
 });
