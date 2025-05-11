@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <header>
   <!--inicio div cabecera desktop-->
     <div class="cabecera">
@@ -48,6 +49,18 @@
     <!--fin modo oscuro y claro-->
 
     <!--inicio icono usuario-->
+    <div class="dropdown">
+      <div class="areaUsuario" role="button" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
+        <img src="./assets/images/userIcon.svg" alt="Icono usuario" >
+      </div>
+      <ul class="dropdown-menu dropdown-menu-end user-dropdown">
+        <li><a class="dropdown-item" href="./perfil.php">Editar perfil</a></li>
+        <li><a class="dropdown-item" href="./perfil.php">Mi Area</a></li>
+        <li><a class="dropdown-item" href="./mis_servicios.php">Mis servicios</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item text-danger" href="./logout.php">Cerrar sesión</a></li>
+      </ul>
+    </div>
     <!--fin icono usuario-->
     
     <!--fin div cabecera desktop-->

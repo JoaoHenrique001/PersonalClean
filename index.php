@@ -1,38 +1,41 @@
+<?php
+session_start(); // ← Asegúrate de iniciar la sesión
+
+// Verificar si el usuario está logueado (puedes adaptar la condición si usas otro nombre)
+$usuarioLogueado = isset($_SESSION['usuario']);
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagina Inicial | Personal Clean</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pagina Inicial | Personal Clean</title>
 
-    <!--inicio framework CSS y Js de Bootstrap-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <!--fin framework CSS y Js de Bootstrap-->
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!--inicio framework CSS y Js de AOS-->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <!--fin framework CSS y Js de AOS-->
+  <!-- AOS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-    <!--enlace de css-->
-    <link rel="stylesheet" href="./assets/estilos.css">
-    <!--enlace de css-->
+  <!-- Estilos y Scripts -->
+  <link rel="stylesheet" href="./assets/estilos.css">
+  <script src="./assets/js/modoOscuro.js"></script>
 
-    <!--enlace de script.js-->
-    <script src="./assets/js/modoOscuro.js"></script>
-    <!--enlace de script.js-->
-
-    <!--inicio logo de la pagina ventana-->
-    <link rel="icon" type="image/ico" href="./assets/images/logo.ico">
-    <!--fin logo de la pagina ventana-->
+  <!-- Favicon -->
+  <link rel="icon" type="image/ico" href="./assets/images/logo.ico">
 </head>
 <body>
 
-    <!--inicio de cabecera-->
-  <?php 
-  include_once './assets/header.php';
+  <!-- inicio Cabecera dinámica -->
+  <?php
+    if ($usuarioLogueado) {
+      include_once './assets/headerLogueado.php';
+    } else {
+      include_once './assets/header.php';
+    }
   ?>
-    <!--fin de cabecera-->
+  <!--fin Cabecera dinámica -->
 
     <!--inicio migas de pan-->
     <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">

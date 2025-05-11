@@ -203,8 +203,8 @@ header.dark{
 .areaDetalle.dark{
     background-color: #3c4b5b;
 }
-.tablaDetalle td:last-child.dark{
-    color: white;
+.dropdown-item.dark {
+    color: #ffffff;
 }
 /*fin todo que va a ser cambiado a modo oscuro, despues tiene que agregar al script.js*/
 
@@ -761,7 +761,8 @@ footer{
 .cajaForm{
     background-color: #fafafa;
     border-radius: 14px;
-    margin: 14px;
+    margin-top: 14px;
+    margin-bottom: 14px;
     max-width: 650px;
     width: 100%;
     box-sizing: 0 3px 5px rgba(0,0,0, 0.5);
@@ -883,6 +884,88 @@ footer{
     border-radius: 1000px;
 }
 /*fin pagina de servicios*/
+
+/*inicio pagina de sobre nosotros*/
+.sobreNosotros {
+    display: flex;
+    justify-content: center;
+}
+
+.contenido-sobreNosotros{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;     /* contenido interno */
+}
+.contenido-sobreNosotros > img{
+    width: 600px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.sobreTexto {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 1.2rem;
+    color: #333;
+    width: 600px;
+}
+
+.sobreTexto strong {
+    color: #743ee0;
+    font-weight: 600;
+}
+
+.sobreTexto em {
+    font-style: italic;
+    color: #5e5e5e;
+}
+
+.destacado {
+    background-color: #EBDF3D;
+    color: #000;
+    padding: 0.1rem 0.3rem;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+/*fin pagina de sobre nosotros*/
+
+/*inicio icono usuario*/
+.areaUsuario > img {
+    width: 55.83px;
+    cursor: pointer;
+}
+
+.areaUsuario {
+    margin-top: 80px;
+    margin-left: 200px;
+}
+
+/* Estilo do dropdown que aparece ao clicar no ícone */
+.areaUsuario + .dropdown-menu {
+    background-color: #ffffff; /* transparente com sombra leve */
+    border: 1px solid #743ee0;
+    color: white;
+}
+
+/* Estilo dos itens */
+.areaUsuario + .dropdown-menu .dropdown-item {
+    color: rgb(0, 0, 0);
+    transition: 0.3s;
+}
+
+/* Hover nos itens */
+.areaUsuario + .dropdown-menu .dropdown-item:hover {
+    color: #743ee0;
+    background-color: #743ee031;
+}
+
+/* Linha separadora */
+.areaUsuario + .dropdown-menu hr.dropdown-divider {
+    border-top: 1px solid #743ee0;
+}
+/*fin  icono usuario*/
 
 /*inicio pagina de login*/
 .cajaformEnter{
@@ -1345,6 +1428,10 @@ color: black;
     }
     .logReg a:last-child button {
         color: #000000;
+    }
+    .areaUsuario{
+        position: absolute;
+        bottom: 15px;
     }
   }
 /*fin telefono*/

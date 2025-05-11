@@ -1,3 +1,9 @@
+<?php
+session_start(); // ← Asegúrate de iniciar la sesión
+
+// Verificar si el usuario está logueado (puedes adaptar la condición si usas otro nombre)
+$usuarioLogueado = isset($_SESSION['usuario']);
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -32,11 +38,15 @@
 </head>
 <body>
 
-    <!--inicio de cabecera-->
-  <?php 
-  include_once './assets/header.php';
+    <!-- inicio Cabecera dinámica -->
+  <?php
+    if ($usuarioLogueado) {
+      include_once './assets/headerLogueado.php';
+    } else {
+      include_once './assets/header.php';
+    }
   ?>
-    <!--fin de cabecera-->
+  <!--fin Cabecera dinámica -->
 
     <!--inicio migas de pan-->
     <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
