@@ -11,8 +11,8 @@
                Sobre Personal Clean
              </button>
              <ul class="dropdown-menu">
-               <li><a class="dropdown-item" href="#">Sobre Nosotros</a></li>
-               <li><a class="dropdown-item" href="#">Por qué contratarnos</a></li>
+               <li><a class="dropdown-item" href="../sobreNosotros.php">Sobre Nosotros</a></li>
+               <li><a class="dropdown-item" href="../porqueContractarnos.php">Por qué contratarnos</a></li>
              </ul>
              <button id="bottonHeader" type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
                  Servicios

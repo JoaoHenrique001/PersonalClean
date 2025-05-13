@@ -1,5 +1,5 @@
 <?php
-session_start();
+session_start(); 
 
 $usuarioLogueado = isset($_SESSION['usuario']);
 ?>
@@ -8,7 +8,7 @@ $usuarioLogueado = isset($_SESSION['usuario']);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cuidado de mayores | Personal Clean</title>
+    <title>Ofertas de Empleo | Personal Clean</title>
 
     <!--inicio framework CSS y Js de Bootstrap-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -51,7 +51,7 @@ $usuarioLogueado = isset($_SESSION['usuario']);
     <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
     <ol class="breadcrumb" style="--bs-breadcrumb-margin-bottom: 0rem;">
     <li class="breadcrumb-item active" aria-current="page"><a href="index.php"><img src="./assets/images/house.svg" alt=""></a></li>
-    <li class="breadcrumb-item">Sobre nosotros</li>
+    <li class="breadcrumb-item">Ofertas de Empleo</li>
     </ol>
     </nav>
     <!--fin migas de pan-->
@@ -59,38 +59,9 @@ $usuarioLogueado = isset($_SESSION['usuario']);
     <!--inicio Main-->
       <div class="sobreNosotros">
         <div class="contenido-sobreNosotros">
-        <img src="./assets/images/personalCleanCartoon.png" alt="">
+        <img src="./assets/images/funcionarioBuscandoEmpleo.png" alt="">
 
-        <p class="sobreTexto">
-  En <strong>Personal Clean</strong>, creemos que la limpieza va más allá de una simple tarea: 
-  es un <span class="destacado">compromiso con el bienestar, la comodidad y la tranquilidad</span> de nuestros clientes.
-</p>
-
-<p class="sobreTexto">
-  Desde nuestros inicios, trabajamos con la misión de ofrecer <strong>servicios de limpieza de alta calidad</strong>, con <span class="destacado">profesionalismo, responsabilidad y dedicación</span>.
-</p>
-
-<p class="sobreTexto">
-  Contamos con un <strong>equipo capacitado</strong>, con experiencia y comprometido en ofrecer siempre <span class="destacado">los mejores resultados</span>. 
-  Utilizamos <strong>productos de calidad</strong> y <em>técnicas modernas</em> para garantizar espacios <span class="destacado">limpios, organizados y saludables</span>, 
-  ya sea en hogares, oficinas, empresas o locales comerciales.
-</p>
-
-<p class="sobreTexto">
-  Nuestro principal valor es el <span class="destacado">cuidado por los detalles</span> y el <span class="destacado">respeto por las necesidades de cada cliente</span>. 
-  Valoramos la <strong>confianza</strong> que depositan en nuestro trabajo y buscamos <em>constantemente superar las expectativas</em>, 
-  manteniendo un alto estándar de excelencia.
-</p>
-
-<p class="sobreTexto">
-  Personal Clean actúa con <strong>ética</strong>, <strong>puntualidad</strong> y <strong>seriedad</strong>, priorizando la <span class="destacado">satisfacción total</span> de quienes confían en nosotros.
-  Sabemos que un entorno limpio <em>transforma la rutina</em>, <em>mejora la productividad</em> y <strong>aporta calidad de vida</strong>.
-</p>
-
-<p class="sobreTexto">
-  Por eso, cada servicio se realiza con <span class="destacado">esmero, atención y compromiso</span>. 
-  <strong>Más que una empresa de limpieza, somos tu aliado en el cuidado de tu espacio.</strong>
-</p>
+                <p class="sobreTexto"> En <strong>Personal Clean</strong>, no solo ofrecemos empleo: brindamos la oportunidad de formar parte de un equipo <span class="destacado">profesional, comprometido y humano</span>. </p> <p class="sobreTexto"> Si quieres convertirte en uno de nuestros funcionarios, sigue estos pasos: </p> <ol class="sobreTexto"> <li><strong>Crea tu cuenta</strong> como funcionario en nuestro sistema utilizando tus datos personales.</li> <li>Una vez dentro, accede a la sección <em>"Ofertas de Empleo"</em>.</li> <li>Allí podrás postularte a los <span class="destacado">servicios disponibles</span> que se adapten a tu perfil.</li> <li>Cuando tu postulación sea <strong>aprobada</strong>, recibirás una notificación y podrás comenzar a trabajar.</li> <li>Los clientes también podrán ver tu perfil y elegirte directamente si tu perfil les interesa.</li> </ol> <p class="sobreTexto"> Nuestro equipo está aquí para apoyarte. ¡Te esperamos! </p>
         </div>
       </div>
     <!--fin Main-->

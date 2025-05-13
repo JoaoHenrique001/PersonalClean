@@ -206,6 +206,20 @@ header.dark{
 .dropdown-item.dark {
     color: #ffffff;
 }
+.contenido-sobreNosotros.dark {
+    background: #37364645;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+    color: white;
+}
+.sobreTexto strong.dark{
+    color: white;
+}
+.sobreTexto em.dark{
+    color: white;
+}
 /*fin todo que va a ser cambiado a modo oscuro, despues tiene que agregar al script.js*/
 
 /*inicio elementos collaspe*/
@@ -896,7 +910,14 @@ footer{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;     /* contenido interno */
+    align-items: center;     
+    
+    background: rgba(255, 255, 255, 0.2); /* fondo blanco semitransparente */
+    backdrop-filter: blur(1px); /* efecto de blur suave */
+    -webkit-backdrop-filter: blur(10px); /* compatibilidad con Safari */
+    border-radius: 15px; /* bordes redondeados */
+    padding: 20px; /* espacio interior opcional */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* sombra sutil */
 }
 .contenido-sobreNosotros > img{
     width: 600px;
@@ -915,7 +936,6 @@ footer{
     color: #743ee0;
     font-weight: 600;
 }
-
 .sobreTexto em {
     font-style: italic;
     color: #5e5e5e;

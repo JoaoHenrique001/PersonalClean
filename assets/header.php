@@ -11,7 +11,7 @@
              </button>
              <ul class="dropdown-menu">
                <li><a class="dropdown-item" href="../sobreNosotros.php">Sobre Nosotros</a></li>
-               <li><a class="dropdown-item" href="#">Por qué contratarnos</a></li>
+               <li><a class="dropdown-item" href="../porqueContractarnos.php">¿Por qué contratarnos?</a></li>
              </ul>
              <button id="bottonHeader" type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
                  Servicios
@@ -29,8 +29,8 @@
                 Trabaje con nosotros
               </button>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Nuestros funcionario</a></li>
-                <li><a class="dropdown-item" href="#">Ofertas de Empleo</a></li>
+                <li><a class="dropdown-item" href="../nuestrosFuncionarios.php">Nuestros funcionarios</a></li>
+                <li><a class="dropdown-item" href="../ofertasDeEmpleo.php">Ofertas de Empleo</a></li>
               </ul>
            </div>
      </nav>

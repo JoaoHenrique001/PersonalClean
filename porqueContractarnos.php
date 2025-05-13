@@ -1,5 +1,5 @@
 <?php
-session_start();
+session_start(); 
 
 $usuarioLogueado = isset($_SESSION['usuario']);
 ?>
@@ -8,7 +8,7 @@ $usuarioLogueado = isset($_SESSION['usuario']);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cuidado de mayores | Personal Clean</title>
+    <title>Porque Contractarnos | Personal Clean</title>
 
     <!--inicio framework CSS y Js de Bootstrap-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -51,7 +51,7 @@ $usuarioLogueado = isset($_SESSION['usuario']);
     <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
     <ol class="breadcrumb" style="--bs-breadcrumb-margin-bottom: 0rem;">
     <li class="breadcrumb-item active" aria-current="page"><a href="index.php"><img src="./assets/images/house.svg" alt=""></a></li>
-    <li class="breadcrumb-item">Sobre nosotros</li>
+    <li class="breadcrumb-item">¿Por que Contractarnos?</li>
     </ol>
     </nav>
     <!--fin migas de pan-->
@@ -59,38 +59,9 @@ $usuarioLogueado = isset($_SESSION['usuario']);
     <!--inicio Main-->
       <div class="sobreNosotros">
         <div class="contenido-sobreNosotros">
-        <img src="./assets/images/personalCleanCartoon.png" alt="">
+        <img src="./assets/images/pqContractarnos.png" alt="">
 
-        <p class="sobreTexto">
-  En <strong>Personal Clean</strong>, creemos que la limpieza va más allá de una simple tarea: 
-  es un <span class="destacado">compromiso con el bienestar, la comodidad y la tranquilidad</span> de nuestros clientes.
-</p>
-
-<p class="sobreTexto">
-  Desde nuestros inicios, trabajamos con la misión de ofrecer <strong>servicios de limpieza de alta calidad</strong>, con <span class="destacado">profesionalismo, responsabilidad y dedicación</span>.
-</p>
-
-<p class="sobreTexto">
-  Contamos con un <strong>equipo capacitado</strong>, con experiencia y comprometido en ofrecer siempre <span class="destacado">los mejores resultados</span>. 
-  Utilizamos <strong>productos de calidad</strong> y <em>técnicas modernas</em> para garantizar espacios <span class="destacado">limpios, organizados y saludables</span>, 
-  ya sea en hogares, oficinas, empresas o locales comerciales.
-</p>
-
-<p class="sobreTexto">
-  Nuestro principal valor es el <span class="destacado">cuidado por los detalles</span> y el <span class="destacado">respeto por las necesidades de cada cliente</span>. 
-  Valoramos la <strong>confianza</strong> que depositan en nuestro trabajo y buscamos <em>constantemente superar las expectativas</em>, 
-  manteniendo un alto estándar de excelencia.
-</p>
-
-<p class="sobreTexto">
-  Personal Clean actúa con <strong>ética</strong>, <strong>puntualidad</strong> y <strong>seriedad</strong>, priorizando la <span class="destacado">satisfacción total</span> de quienes confían en nosotros.
-  Sabemos que un entorno limpio <em>transforma la rutina</em>, <em>mejora la productividad</em> y <strong>aporta calidad de vida</strong>.
-</p>
-
-<p class="sobreTexto">
-  Por eso, cada servicio se realiza con <span class="destacado">esmero, atención y compromiso</span>. 
-  <strong>Más que una empresa de limpieza, somos tu aliado en el cuidado de tu espacio.</strong>
-</p>
+        <p class="sobreTexto"> En <strong>Personal Clean</strong>, no solo limpiamos espacios, <em>transformamos ambientes</em>. Nuestro objetivo es que cada cliente sienta la tranquilidad de estar en un lugar <span class="destacado">limpio, seguro y acogedor</span>. </p> <p class="sobreTexto"> ¿Por qué elegirnos? Porque ofrecemos mucho más que un servicio: brindamos <strong>resultados visibles</strong>, <strong>trato humano</strong> y <strong>soluciones personalizadas</strong>, adaptadas a tus necesidades reales. </p> <p class="sobreTexto"> Nuestro equipo está formado por profesionales <span class="destacado">entrenados, responsables y apasionados</span> por lo que hacen. Trabajamos con <strong>productos certificados</strong> y aplicamos <em>técnicas actuales</em> que garantizan una limpieza eficiente y respetuosa con tu entorno. </p> <p class="sobreTexto"> Cada detalle importa. Por eso, nos enfocamos en ofrecer un servicio que combine <strong>eficacia, confianza y cercanía</strong>. Nos esforzamos para que cada experiencia con Personal Clean sea <span class="destacado">satisfactoria y libre de preocupaciones</span>. </p> <p class="sobreTexto"> Puntualidad, compromiso y transparencia son pilares que nos definen. <strong>Nos tomamos tu tiempo en serio</strong> y cuidamos cada espacio como si fuera nuestro. </p> <p class="sobreTexto"> <strong>Elegir Personal Clean</strong> es optar por una empresa que entiende que la limpieza va más allá del orden: es bienestar, salud y calidad de vida. <span class="destacado">Confía en nosotros y descubre cómo podemos hacer la diferencia en tu día a día.</span> </p>
         </div>
       </div>
     <!--fin Main-->
