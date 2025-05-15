@@ -30,7 +30,7 @@
                 Trabaje con nosotros
               </button>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Nuestros funcionario</a></li>
+                <li><a class="dropdown-item" href="#">Nuestros funcionarios</a></li>
                 <li><a class="dropdown-item" href="#">Ofertas de Empleo</a></li>
               </ul>
            </div>
@@ -54,7 +54,7 @@
         <img src="./assets/images/userIcon.svg" alt="Icono usuario" >
       </div>
       <ul class="dropdown-menu dropdown-menu-end user-dropdown">
-        <li><a class="dropdown-item" href="./perfil.php">Editar perfil</a></li>
+        <li><a class="dropdown-item" href="./edicionPerfil.php">Editar perfil</a></li>
         <li><a class="dropdown-item" href="./perfil.php">Mi Area</a></li>
         <li><a class="dropdown-item" href="./mis_servicios.php">Mis servicios</a></li>
         <li><hr class="dropdown-divider"></li>

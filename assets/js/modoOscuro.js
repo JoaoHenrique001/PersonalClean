@@ -58,6 +58,8 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelectorAll('.dropdown-item').forEach(el => el.classList.add('dark'));
         document.querySelectorAll('.tablaDetalle tr').forEach(tr => {const lastTd = tr.querySelector('td:last-child');if (lastTd) lastTd.classList.add('dark');});
         document.querySelectorAll('.contenido-sobreNosotros').forEach(el => el.classList.add('dark'));
+        document.querySelectorAll('.campos > .campoedit').forEach(el => el.classList.add('dark'));
+        document.querySelectorAll('.campos > .labeledit').forEach(el => el.classList.add('dark'));
         ['#provincia', '#ciudad', '#tipoUsuario'].forEach(selector => {const el = document.querySelector(selector);if (el) el.classList.add('dark');});
     }
 
@@ -99,6 +101,8 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelectorAll('.dropdown-item').forEach(el => el.classList.remove('dark'));
         document.querySelectorAll('.tablaDetalle tr').forEach(tr => {const lastTd = tr.querySelector('td:last-child');if (lastTd) lastTd.classList.remove('dark');});
         document.querySelectorAll('.contenido-sobreNosotros').forEach(el => el.classList.add('dark'));
+        document.querySelectorAll('.campos > .campoedit').forEach(el => el.classList.remove('dark'));
+        document.querySelectorAll('.campos > .labeledit').forEach(el => el.classList.remove('dark'));
         ['#provincia', '#ciudad', '#tipoUsuario'].forEach(selector => {const el = document.querySelector(selector);if (el) el.classList.remove('dark');});
     }
 });
