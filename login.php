@@ -26,10 +26,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute();
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        // Verifica que exista y la contraseña coincida (sin password_hash aquí)
+        // Verifica que exista y que la contraseña coincida (sin password_hash aquí)
         if ($user && $pass === $user['contraseña']) {
+            // Guardar en la sesión los datos comunes
             $_SESSION['usuario'] = [
-                'nombre' => $user['nombre_completo'],
+                'nombre' => $user['nombre'], // <-- Asegúrate que el campo se llama así en todas las tablas
+                'email' => $user['email'],
                 'tipo' => $tabla
             ];
 
