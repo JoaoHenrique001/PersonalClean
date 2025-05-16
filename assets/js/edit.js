@@ -181,8 +181,9 @@ document.addEventListener("DOMContentLoaded", function () {
         "Zarzalejo"];
     let ciudadCampo = document.getElementById("ciudad");
     let provinciaCampo = document.getElementById("provincia");
+    let botonOK = document.getElementById("ok")
     // Llenar el select con las ciudades
-    provinciaCampo.addEventListener("change" , () => {
+    provinciaCampo.addEventListener("click" , () => {
         if(provinciaCampo.value == "Madrid"){
             for (let i = 0; i < Madrid.length; i++) {
               const option = document.createElement("option");
@@ -193,4 +194,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 ciudadCampo.innerHTML = '<option value="">Ciudad</option>';
             }
     })
+    //aviso que se salga
+    function visoOk() {
+    let cajaAviso = document.getElementById("cajaAviso");
+    cajaAviso.classList.add("display", "none");
+    }
+    botonOK.addEventListener("click", visoOk); 
   });

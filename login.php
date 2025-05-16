@@ -26,7 +26,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute();
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        // Verifica que exista y que la contraseña coincida (sin password_hash aquí)
         if ($user && $pass === $user['contraseña']) {
             // Guardar en la sesión los datos comunes
             $_SESSION['usuario'] = [

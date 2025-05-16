@@ -1424,6 +1424,54 @@ color: black;
 
 /*inicio pagina de edicion de perfil*/
 
+/*inicio caja de aviso*/
+.cajaAviso {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 120vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;     
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  .avisoContenido {
+    width: 532px;
+    height: 288px;
+    border-radius: 14px;
+    background: #008000;
+    color: white;
+    box-shadow: inset 0px 4px 20px 10px rgba(0, 0, 0, 0.25);;
+    display: flex;
+    flex-direction: column;
+    
+  }
+  .avisoContenido > p{
+    font-size: 20px;
+    margin-left: 48px;
+    margin-top: 48px;
+  }
+  .avisoContenido > button{
+    width: 145px;
+    height: 40px;
+    font-size: 16px;
+    border-radius: 14px;
+    background-color: #EBDF3D;
+     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+     border: none;
+    align-self: flex-end;
+    margin-right: 44px;
+    transition: 0.3s;
+  }
+  .avisoContenido > button:hover{
+    background-color: #743EE0;
+    color: white;
+    cursor: pointer;
+  }
+/*fin caja de aviso*/
+
 /*inicio @media query*/
 @media only screen and (max-width: 1483px){
     .logReg{
