@@ -55,8 +55,6 @@
       </div>
       <ul class="dropdown-menu dropdown-menu-end user-dropdown">
         <li><a class="dropdown-item" href="./edicionPerfil.php">Editar perfil</a></li>
-        <li><a class="dropdown-item" href="./perfil.php">Mi Area</a></li>
-        <li><a class="dropdown-item" href="./mis_servicios.php">Mis servicios</a></li>
         <li><hr class="dropdown-divider"></li>
         <li><a class="dropdown-item text-danger" href="./logout.php">Cerrar sesión</a></li>
       </ul>

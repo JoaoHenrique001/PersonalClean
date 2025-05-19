@@ -227,6 +227,9 @@ header.dark{
 .campos > .labeledit.dark{
     color: white;
 }
+.soyPrincipal > .notificaciones > h1.dark{
+    color: white;
+}
 /*fin todo que va a ser cambiado a modo oscuro, despues tiene que agregar al script.js*/
 
 /*inicio elementos collaspe*/
@@ -1471,6 +1474,84 @@ color: black;
     cursor: pointer;
   }
 /*fin caja de aviso*/
+
+/*inicio pagina de soy funcionario y soy cliente*/
+.soyPrincipal{
+    display: flex;
+    flex-direction: row;
+}
+.soyPrincipal > .listadoGeneral{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    background-color: #03d5b9;
+}
+.soyPrincipal > .notificaciones{
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    height: auto;
+    background-color: #0340D5;
+    align-items: center;
+}
+.soyPrincipal > .notificaciones > h1{
+    font-size: 24px;
+    margin-top: 15.19px;
+    margin-bottom: 0px;
+    color: black;
+}
+.notificaciones > a{
+    text-decoration: none;
+}
+.notificacionCaja{
+    margin-top: 32px;
+    background-color: #743EE0;
+    width: 156px;
+    height: 164px;
+    border-radius: 14px;
+    transition: 0.3s;
+}
+.notificacionCaja:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+}
+.notificacionCaja > p{
+    background-color: red;
+    border-radius: 100px;
+    color: white;
+    position: absolute;
+    width: auto;
+    min-width: 30px;
+    height: 25px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-right: 3px;
+    padding-left: 3px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+
+}
+.notificacionCaja > img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    top: 40%;
+    transform: translateY(-50%);
+}
+.notificacionCaja > h2{
+    margin-top: 40px;
+    justify-self: center;
+    align-self: center;
+    font-size: 16px;
+    color: white;
+}
+.elementoCaja-data{
+    display: flex;
+    flex-direction: row;
+}
+/*fin pagina de soy funcionario y soy cliente*/
 
 /*inicio @media query*/
 @media only screen and (max-width: 1483px){
