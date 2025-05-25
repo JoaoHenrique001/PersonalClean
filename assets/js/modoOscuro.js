@@ -61,6 +61,9 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelectorAll('.campos > .campoedit').forEach(el => el.classList.add('dark'));
         document.querySelectorAll('.campos > .labeledit').forEach(el => el.classList.add('dark'));
         document.querySelectorAll('.soyPrincipal > .notificaciones > h1').forEach(el => el.classList.add('dark'));
+        document.querySelectorAll('.elementoCaja-timeinfo').forEach(el => el.classList.add('dark'));
+        document.querySelectorAll('.elementoCaja-data').forEach(el => el.classList.add('dark'));
+        document.querySelectorAll('.elementoCaja').forEach(el => el.classList.add('dark'));
         ['#provincia', '#ciudad', '#tipoUsuario'].forEach(selector => {const el = document.querySelector(selector);if (el) el.classList.add('dark');});
     }
 
@@ -105,6 +108,9 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelectorAll('.campos > .campoedit').forEach(el => el.classList.remove('dark'));
         document.querySelectorAll('.campos > .labeledit').forEach(el => el.classList.remove('dark'));
         document.querySelectorAll('.soyPrincipal > .notificaciones > h1').forEach(el => el.classList.remove('dark'));
+        document.querySelectorAll('.elementoCaja-timeinfo').forEach(el => el.classList.remove('dark'));
+        document.querySelectorAll('.elementoCaja-data').forEach(el => el.classList.remove('dark'));
+        document.querySelectorAll('.elementoCaja').forEach(el => el.classList.remove('dark'));
         ['#provincia', '#ciudad', '#tipoUsuario'].forEach(selector => {const el = document.querySelector(selector);if (el) el.classList.remove('dark');});
     }
 });

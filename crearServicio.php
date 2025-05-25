@@ -56,70 +56,31 @@ $servicios = $consulta->fetchAll(PDO::FETCH_ASSOC);
     <ol class="breadcrumb" style="--bs-breadcrumb-margin-bottom: 0rem;">
     <li class="breadcrumb-item active" aria-current="page"><a href="index.php"><img src="./assets/images/house.svg" alt=""></a></li>
     <li class="breadcrumb-item">Area Principal</li>
+    <li class="breadcrumb-item">Crear Servicio </li>
     </ol>
     </nav>
     <!--fin migas de pan-->
 
-    <div class="soyPrincipal">
-        <!--inicio caja que se ira repetir dependendo del contenido de la pagina-->
-        <div class="listadoGeneral">
-        <?php foreach ($servicios as $servicio) { ?>
-            <a href="paginaTrabajo.php?idServicio=<?php echo $servicio['idServicio']; ?>">
-            <div class="elementoCaja">
-                <p class="elementoCaja-timeinfo">Creado hace <span><?php echo tiempoTranscurrido($servicio['fechaServicio']); ?></span></p>    
-                <p class="elementoCaja-tituloServ"><?php echo htmlspecialchars($servicio['titulo']); ?></p>
-                <p class="elementoCaja-timeinfo"><?php echo htmlspecialchars($servicio['diaServicio']); ?></p> 
-                <p class="elementoCaja-descripcion"><?php echo htmlspecialchars($servicio['descripcion']); ?></p>
-                <div class="elementoCaja-data">
-                    <p class="data-dinero"><span><?php echo htmlspecialchars($servicio['valor']); ?></span>€</p>
-                    <p class="data-localidad"><img src="./assets/images/mappoint.svg" alt=""> <?php echo htmlspecialchars($servicio['provincia'] . " - " . $servicio['ciudad']); ?></p>
-                    <p class="data-person"><img src="./assets/images/personpc.svg" alt=""><span><?php echo htmlspecialchars($servicio['nombre_cliente']); ?></span></p>
-                    <p class="data-twork"><img src="./assets/images/handwork.svg" alt=""><span>Tipo:</span> <?php echo htmlspecialchars($servicio['tipoServicio']); ?></p>
-                    <p class="data-estado">
-    <?php 
-        echo "Estado: " . ucfirst($servicio['estado']); 
-        $estado = $servicio['estado'];
-        $clase = '';
-
-        // Definir la clase CSS según el estado
-        if ($estado == 'activo') $clase = 'estado-activo';
-        elseif ($estado == 'confirmacion') $clase = 'estado-confirmacion';
-        elseif ($estado == 'terminado') $clase = 'estado-terminado';
-    ?>
-    <span class="estado-indicador <?php echo $clase; ?>"></span>
-</p>
-
+    <div class="crearServ">
+        <form action="">
+        <div class="crearServ-campos">
+            <div class="crearServ-izq">
+                <input type="text" placeholder="Titulo">
+                <input type="text" placeholder="Descripcion">
+            </div>
+            <div class="crearServ-derec">
+                <div class="crearServ-campJ">
+                    <select name="" id=""></select>
+                    <select name="" id=""></select>
                 </div>
+                <input type="text" placeholder="valor">
+                <input type="text" placeholder="Mi dirección">
             </div>
-            </a>
-        <?php } ?>
-    </div>
-        <!--fin caja que se ira repetir dependendo del contenido de la pagina-->
-        <div class="notificaciones">
-            <h1>Notificaciones</h1>
-
-            <a href="">
-            <div class="notificacionCaja">
-                <p>2</p>
-                <img src="./assets/images/chatIcon.svg" alt="">
-                <h2>Chats</h2>
-            </div>
-            </a>
-
-            <a href="">
-            <div class="notificacionCaja">
-                <img src="./assets/images/listIcon.svg" alt="">
-                <h2>Mi Servicios</h2>
-            </div>
-            </a>
-
-            <a href="">
-            <div class="notificacionCaja">
-                <img src="./assets/images/Starinbox.svg" alt="">
-                <h2>Dar Valoraciones</h2>
-            </div>
-            </a>
         </div>
+        <div class="crearServ-bot">
+
+        </div>
+        </form>
     </div>
 
     <?php include_once './assets/footer.php'; ?>

@@ -1,3 +1,11 @@
+/*inicio reset*/
+p{
+    margin: 0;
+}
+a {
+    text-decoration: none;
+}
+/*fin reset*/
 /*inicio estilos generales*/
 html{
     scroll-behavior: smooth;
@@ -228,6 +236,11 @@ header.dark{
     color: white;
 }
 .soyPrincipal > .notificaciones > h1.dark{
+    color: white;
+}
+.dark .elementoCaja-timeinfo,
+.dark .elementoCaja-data,
+.dark .elementoCaja {
     color: white;
 }
 /*fin todo que va a ser cambiado a modo oscuro, despues tiene que agregar al script.js*/
@@ -1485,14 +1498,14 @@ color: black;
     flex-direction: column;
     width: 100%;
     height: auto;
-    background-color: #03d5b9;
+    padding-top: 64.69px;
+    padding-left: 108px;
 }
 .soyPrincipal > .notificaciones{
     display: flex;
     flex-direction: column;
     width: 350px;
     height: auto;
-    background-color: #0340D5;
     align-items: center;
 }
 .soyPrincipal > .notificaciones > h1{
@@ -1547,11 +1560,55 @@ color: black;
     font-size: 16px;
     color: white;
 }
+.elementoCaja {
+    border-bottom: 1px solid #7b7b7b; /* solo borde inferior */
+    color: #7b7b7b;
+    margin-bottom: 10px;
+    height: 130.52px;
+}
+.elementoCajaFuncionario{
+    height: 100.52px;
+}
 .elementoCaja-data{
     display: flex;
     flex-direction: row;
+     color: #686868;
+     gap: 5%;
+     margin-top: 10px;
 }
+.elementoCaja-timeinfo{
+    font-size: 13px;
+    color: #686868;
+}
+.elementoCaja-tituloServ{
+    font-size: 20px;
+}
+.elementoCaja-descripcion{
+    font-size: 15px;
+    color: #743EE0;
+    line-height: 18px;
+}
+.elementoCaja-data > p{
+    font-size: 14px;
+}
+.elementoCaja-data > p > img{
+    margin-bottom: 7px;
+    margin-right: 2px;
+}
+
 /*fin pagina de soy funcionario y soy cliente*/
+
+/*inicio pagina crear servicio*/
+.crearServ{
+    width: 636px;
+    height: 360px;
+    margin-top: 91.15px;
+    margin-bottom: 91.15px;
+    border-radius: 14px;
+    box-shadow: inset 0px 4px 20px 10px rgba(0, 0, 0, 0.25);
+    justify-self: center;
+}
+/*fin pagina crear servicio*/
 
 /*inicio @media query*/
 @media only screen and (max-width: 1483px){
