@@ -1,12 +1,6 @@
 <?php  
 session_start();
 include './assets/ajax/conexionBD.php';
-
-// Mostrar errores para debug
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 $errores = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -27,12 +21,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($user && $pass === $user['contraseña']) {
-            // Guardar en la sesión los datos comunes
+
+            if($tabla == 'funcionarios'){
             $_SESSION['usuario'] = [
-                'nombre' => $user['nombre'], // <-- Asegúrate que el campo se llama así en todas las tablas
+                'idFuncionarios' => $user['idFuncionarios'],
+                'nombre' => $user['nombre'],
                 'email' => $user['email'],
+                'direccion' => $user['direccion'],
+                'provincia' => $user['provincia'],
+                'ciudad' => $user['ciudad'],
                 'tipo' => $tabla
-            ];
+            ];}else if($tabla == 'clientes'){
+                 $_SESSION['usuario'] = [
+                'idCliente' => $user['idCliente'],
+                'nombre' => $user['nombre'],
+                'email' => $user['email'],
+                'direccion' => $user['direccion'],
+                'provincia' => $user['provincia'],
+                'ciudad' => $user['ciudad'],
+                'tipo' => $tabla
+                 ];}else{
+                
+            }
 
             header("Location: " . $redirect);
             exit;

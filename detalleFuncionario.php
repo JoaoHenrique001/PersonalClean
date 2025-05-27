@@ -48,18 +48,18 @@ if (isset($_GET['idfuncionarios'])) {
 
     <div class="areaDetalle">
     <table class="tablaDetalle">
-        <tr><td>Id Funcionario:</td><td><?php echo $funcionario['idfuncionarios']; ?></td></tr>
-        <tr><td>Nombre:</td><td><?php echo $funcionario['nombre']; ?></td></tr>
-        <tr><td>Apellidos:</td><td><?php echo $funcionario['apellidos']; ?></td></tr>
-        <tr><td>Email:</td><td><?php echo $funcionario['email']; ?></td></tr>
-        <tr><td>Contraseña:</td><td><?php echo $funcionario['contraseña']; ?></td></tr>
-        <tr><td>Teléfono:</td><td><?php echo $funcionario['telefono']; ?></td></tr>
-        <tr><td>Fecha Nacimiento:</td><td><?php echo $funcionario['f_nacimiento']; ?></td></tr>
-        <tr><td>Descripción:</td><td><?php echo $funcionario['descripcion']; ?></td></tr>
-        <tr><td>Nota media:</td><td><?php echo $funcionario['notaMedia']; ?></td></tr>
-        <tr><td>Dirección:</td><td><?php echo $funcionario['direccion']; ?></td></tr>
-        <tr><td>Provincia:</td><td><?php echo $funcionario['provincia']; ?></td></tr>
-        <tr><td>Ciudad:</td><td><?php echo $funcionario['ciudad']; ?></td></tr>
+        <tr><td>Id Funcionario:</td><td class="detalleCampo"><?php echo $funcionario['idFuncionarios']; ?></td></tr>
+        <tr><td>Nombre:</td><td class="detalleCampo"><?php echo $funcionario['nombre']; ?></td></tr>
+        <tr><td>Apellidos:</td><td class="detalleCampo"><?php echo $funcionario['apellidos']; ?></td></tr>
+        <tr><td>Email:</td><td class="detalleCampo"><?php echo $funcionario['email']; ?></td></tr>
+        <tr><td>Contraseña:</td><td class="detalleCampo"><?php echo $funcionario['contraseña']; ?></td></tr>
+        <tr><td>Teléfono:</td><td class="detalleCampo"><?php echo $funcionario['telefono']; ?></td></tr>
+        <tr><td>Fecha Nacimiento:</td><td class="detalleCampo"><?php echo $funcionario['f_nacimiento']; ?></td></tr>
+        <tr><td>Descripción:</td><td class="detalleCampo"><?php echo $funcionario['descripcion']; ?></td></tr>
+        <tr><td>Nota media:</td><td class="detalleCampo"><?php echo $funcionario['notaMedia']; ?></td></tr>
+        <tr><td>Dirección:</td><td class="detalleCampo"><?php echo $funcionario['direccion']; ?></td></tr>
+        <tr><td>Provincia:</td><td class="detalleCampo"><?php echo $funcionario['provincia']; ?></td></tr>
+        <tr><td>Ciudad:</td><td class="detalleCampo"><?php echo $funcionario['ciudad']; ?></td></tr>
         <tr><td>Código Postal:</td><td><?php echo $funcionario['codigoPostal']; ?></td></tr>
     </table>
 </div>

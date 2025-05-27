@@ -1,0 +1,67 @@
+<?php
+include './assets/ajax/conexionBD.php';
+session_start();
+echo "<pre>";
+var_dump($_SESSION);
+echo "</pre>";
+// Verificar si el usuario es un cliente, si no, redirigir a logout
+if ($_SESSION['usuario']['tipo'] == 'clientes') {
+    header("Location: logout.php");
+    exit;
+}
+
+
+?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina Principal Funcionario | Personal Clean</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/998c60ef77.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./assets/estilos.css" />
+    <script src="./assets/js/modoOscuro.js"></script>
+    <script src="./assets/js/cajaAviso.js"></script> <!--puede ser que crie otro archivo js-->
+    <link rel="icon" type="image/ico" href="./assets/images/logo.ico" />
+</head>
+<body>
+    <?php include_once './assets/headerLogueado.php'; ?>
+
+      <!--inicio migas de pan-->
+    <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+    <ol class="breadcrumb" style="--bs-breadcrumb-margin-bottom: 0rem;">
+    <li class="breadcrumb-item active" aria-current="page"><a href="index.php"><img src="./assets/images/house.svg" alt=""></a></li>
+    <li class="breadcrumb-item">Area Principal</li>
+    <li class="breadcrumb-item">Pagina de contratación</li>
+    </ol>
+    </nav>
+    <!--fin migas de pan-->
+    <div class="pTrabajo">
+
+    <div class="CajaDetalle">
+        <p><b>Titulo:</b></p>
+        <p><b>Tipo:</b></p>
+        <p><b>Valor:</b></p>
+        <p><b>Dia:</b></p>
+        <p><b>Cliente:</b></p>
+        <p><b>Dirección:</b></p>
+        <p><b>Provincia:</b></p>
+        <p><b>Ciudad:</b></p>
+        <p><b>Descripción:</b></p>
+        <a href=""><button>Aplicar a trabajo</button></a>
+    </div>
+
+    <div class="valoraciones">
+   <h2>Valoraciones de Clientes:</h2>
+    <!--aqui mediante php va las valoraciones en caso de que no tenga va a parecer otra cosa-->
+    </div>
+    </div>
+
+    <?php include_once './assets/footer.php'; ?>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>AOS.init();</script>
+</body>
+</html>

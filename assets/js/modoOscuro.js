@@ -55,6 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelectorAll('.preAd').forEach(el => el.classList.add('dark'));
         document.querySelectorAll('.logout > h1').forEach(el => el.classList.add('dark'));
         document.querySelectorAll('.areaDetalle').forEach(el => el.classList.add('dark'));
+        document.querySelectorAll('.detalleCampo').forEach(el => el.classList.add('dark'));
         document.querySelectorAll('.dropdown-item').forEach(el => el.classList.add('dark'));
         document.querySelectorAll('.tablaDetalle tr').forEach(tr => {const lastTd = tr.querySelector('td:last-child');if (lastTd) lastTd.classList.add('dark');});
         document.querySelectorAll('.contenido-sobreNosotros').forEach(el => el.classList.add('dark'));
@@ -63,7 +64,13 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelectorAll('.soyPrincipal > .notificaciones > h1').forEach(el => el.classList.add('dark'));
         document.querySelectorAll('.elementoCaja-timeinfo').forEach(el => el.classList.add('dark'));
         document.querySelectorAll('.elementoCaja-data').forEach(el => el.classList.add('dark'));
-        document.querySelectorAll('.elementoCaja').forEach(el => el.classList.add('dark'));
+        document.querySelectorAll('.elementoCaja').forEach(el => el.classList.add('dark'));   
+        document.querySelectorAll('.contraServ > label').forEach(el => el.classList.add('dark'));
+        document.querySelectorAll('.contraServ > label').forEach(el => el.classList.add('dark'));
+        document.querySelectorAll('.contraServ > textarea').forEach(el => el.classList.add('dark'));
+        document.querySelectorAll('.contraServ > input').forEach(el => el.classList.add('dark'));
+        document.querySelectorAll('.pTrabajo').forEach(el => el.classList.add('dark'));
+        document.querySelectorAll('.CajaDetalle').forEach(el => el.classList.add('dark'));
         ['#provincia', '#ciudad', '#tipoUsuario'].forEach(selector => {const el = document.querySelector(selector);if (el) el.classList.add('dark');});
     }
 
@@ -102,6 +109,7 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelectorAll('.preAd').forEach(el => el.classList.remove('dark'));
         document.querySelectorAll('.logout > h1').forEach(el => el.classList.remove('dark'));
         document.querySelectorAll('.areaDetalle').forEach(el => el.classList.remove('dark'));
+        document.querySelectorAll('.detalleCampo').forEach(el => el.classList.remove('dark'));
         document.querySelectorAll('.dropdown-item').forEach(el => el.classList.remove('dark'));
         document.querySelectorAll('.tablaDetalle tr').forEach(tr => {const lastTd = tr.querySelector('td:last-child');if (lastTd) lastTd.classList.remove('dark');});
         document.querySelectorAll('.contenido-sobreNosotros').forEach(el => el.classList.add('dark'));
@@ -111,6 +119,12 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelectorAll('.elementoCaja-timeinfo').forEach(el => el.classList.remove('dark'));
         document.querySelectorAll('.elementoCaja-data').forEach(el => el.classList.remove('dark'));
         document.querySelectorAll('.elementoCaja').forEach(el => el.classList.remove('dark'));
+        document.querySelectorAll('.contraServ > label').forEach(el => el.classList.remove('dark'));
+        document.querySelectorAll('.contraServ > label').forEach(el => el.classList.remove('dark'));
+        document.querySelectorAll('.contraServ > textarea').forEach(el => el.classList.remove('dark'));
+        document.querySelectorAll('.contraServ > input').forEach(el => el.classList.remove('dark'));
+        document.querySelectorAll('.pTrabajo').forEach(el => el.classList.remove('dark'));
+        document.querySelectorAll('.CajaDetalle').forEach(el => el.classList.remove('dark'));
         ['#provincia', '#ciudad', '#tipoUsuario'].forEach(selector => {const el = document.querySelector(selector);if (el) el.classList.remove('dark');});
     }
 });

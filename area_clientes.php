@@ -1,5 +1,14 @@
 <?php
+session_start();
 include './assets/ajax/conexionBD.php';
+echo "<pre>";
+var_dump($_SESSION);
+echo "</pre>";
+// Verificar si el usuario es un cliente, si no, redirigir a logout
+if ($_SESSION['usuario']['tipo'] !== 'clientes') {
+    header("Location: logout.php");
+    exit;
+}
 
 $sql = "SELECT f.idFuncionarios, f.nombre, f.apellidos, f.descripcion, f.telefono, f.provincia, f.ciudad 
         FROM funcionarios f";
@@ -68,7 +77,7 @@ $funcionarios = $consulta->fetchAll(PDO::FETCH_ASSOC);
             </div>
             </a>
 
-            <a href="">
+            <a href="./crearServicio.php">
             <div class="notificacionCaja">
                 <img src="./assets/images/addicon.svg" alt="">
                 <h2>Crear Servicio</h2>

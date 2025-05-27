@@ -1,37 +1,58 @@
 <?php
 include './assets/ajax/conexionBD.php';
-
-function tiempoTranscurrido($fecha) {
-    $ahora = new DateTime();
-    $fechaServicio = new DateTime($fecha);
-    $diferencia = $ahora->diff($fechaServicio);
-
-    if ($diferencia->y > 0) {
-        return $diferencia->y . " año(s)";
-    } elseif ($diferencia->m > 0) {
-        return $diferencia->m . " mes(es)";
-    } elseif ($diferencia->d > 0) {
-        return $diferencia->d . " día(s)";
-    } elseif ($diferencia->h > 0) {
-        return $diferencia->h . " hora(s)";
-    } elseif ($diferencia->i > 0) {
-        return $diferencia->i . " minuto(s)";
-    } else {
-        return "Hace instantes";
-    }
+session_start();
+echo "<pre>";
+var_dump($_SESSION);
+echo "</pre>";
+// Verificar si el usuario es un cliente, si no, redirigir a logout
+if ($_SESSION['usuario']['tipo'] !== 'clientes') {
+    header("Location: logout.php");
+    exit;
 }
 
-// Obtener servicios desde la base de datos
-$sql = "SELECT s.*, c.nombre AS nombre_cliente, f.nombre AS nombre_funcionario 
-        FROM servicios s 
-        LEFT JOIN clientes c ON s.idcliente = c.idcliente 
-        LEFT JOIN funcionarios f ON s.idFuncionario = f.idFuncionarios
-        WHERE s.estado != 'terminado'";
+// Obtener datos del usuario desde la sesión
+$idCliente = $_SESSION['usuario']['idCliente'];
+$provincia = $_SESSION['usuario']['provincia'] ?? "";
+$ciudad = $_SESSION['usuario']['ciudad'] ?? "";
+$direccion = $_SESSION['usuario']['direccion'] ?? "";
 
-$consulta = $conexion->prepare($sql);
-$consulta->execute();
-$servicios = $consulta->fetchAll(PDO::FETCH_ASSOC);
+// Si el formulario se ha enviado, procesar la inserción
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $titulo = $_POST['titulo'] ?? "";
+    $descripcion = $_POST['descripcion'] ?? "";
+    $tipoServicio = $_POST['tipoServicio'] ?? "";
+    $valor = $_POST['valor'] ?? "";
+    $diaServicio = $_POST['diaServicio'] ?? "";
+    $miProvincia = $_POST['miProvincia'] ?? $provincia;
+    $miCiudad = $_POST['miCiudad'] ?? $ciudad;
+    $miDireccion = $_POST['miDireccion'] ?? $direccion;
+    $fechaServicio = date("Y-m-d H:i:s");
+    $estado = "activo";
+    $valorado = "no";
+
+    $sql = "INSERT INTO servicios (idcliente, fechaServicio, estado, titulo, descripcion, tipoServicio, valor, diaServicio, direccion, provincia, ciudad, valorado) 
+            VALUES (:idcliente, :fechaServicio, :estado, :titulo, :descripcion, :tipoServicio, :valor, :diaServicio, :direccion, :provincia, :ciudad, :valorado)";
+    
+    $consulta = $conexion->prepare($sql);
+    $consulta->execute([
+        ':idcliente' => $idCliente,
+        ':fechaServicio' => $fechaServicio,
+        ':estado' => $estado,
+        ':titulo' => $titulo,
+        ':descripcion' => $descripcion,
+        ':tipoServicio' => $tipoServicio,
+        ':valor' => $valor,
+        ':diaServicio' => $diaServicio,
+        ':direccion' => $miDireccion,
+        ':provincia' => $miProvincia,
+        ':ciudad' => $miCiudad,
+        ':valorado' => $valorado
+    ]);
+
+    echo "<div id='cajaid' class='cajaAviso'><div id='avisoGeneral' class='avisoContenido'><p>Servicio creado correctamente, ir a mis servicios?</p><button id='si'>Si</button><button id='no'>No</button></div></div>";
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -65,20 +86,69 @@ $servicios = $consulta->fetchAll(PDO::FETCH_ASSOC);
         <form action="">
         <div class="crearServ-campos">
             <div class="crearServ-izq">
-                <input type="text" placeholder="Titulo">
-                <input type="text" placeholder="Descripcion">
+                <input type="text" placeholder="Titulo" name="titulo" id="tituloServ">
+                <textarea placeholder="Descripcion" name="descripcion" id="descripcion"></textarea>
             </div>
             <div class="crearServ-derec">
                 <div class="crearServ-campJ">
-                    <select name="" id=""></select>
-                    <select name="" id=""></select>
+                    <input type="text" placeholder="Valor" name="valor" id="valor">
+                    <select name="diaServicio" id="diaServicio">
+                        <option value="">Dia Servicio</option>
+                        <option value="Lunes">Lunes</option>
+                        <option value="Martes">Martes</option>
+                        <option value="Miércoles">Miércoles</option>
+                        <option value="Jueves">Jueves</option>
+                        <option value="Viernes">Viernes</option>
+                        <option value="Sabado">Sabado</option>
+                        <option value="Domingo">Domingo</option>
+                    </select>
                 </div>
-                <input type="text" placeholder="valor">
-                <input type="text" placeholder="Mi dirección">
+                <select name="tipoServicio" id="tipoServicio">
+                        <option value="">Tipo Servicio</option>
+                        <option value="Cuidado de mayores - Puntual">Cuidado de mayores - Puntual</option>
+                        <option value="Cuidado de mayores - Semanal">Cuidado de mayores - Semanal</option>
+                        <option value="Cuidado de niños - Puntual">Cuidado de niños - Puntual</option>
+                        <option value="Cuidado de niños - Semanal">Cuidado de niños - Semanal</option>
+                        <option value="Cristales - Puntual">Cristales - Puntual</option>
+                        <option value="Cristales - Semanal">Cristales - Semanal</option>
+                        <option value="Cuidado de mascotas - Puntual">Cuidado de mascotas - Puntual</option>
+                        <option value="Cuidado de mascotas - Semanal">Cuidado de mascotas - Semanal</option>
+                        <option value="Desinfección - Puntual">Desinfección - Puntual</option>
+                        <option value="Desinfección - Semanal">Desinfección - Semanal</option>
+                        <option value="Jardinería - Puntual">Jardinería - Puntual</option>
+                        <option value="Jardinería - Semanal">Jardinería - Semanal</option>
+                        <option value="Lavandería - Puntual">Lavandería - Puntual</option>
+                        <option value="Lavandería - Semanal">Lavandería - Semanal</option>
+                        <option value="Limpieza - Puntual">Limpieza - Puntual</option>
+                        <option value="Limpieza - Semanal">Limpieza - Semanal</option>
+                        <option value="Limpieza de garaje - Puntual">Limpieza de garaje - Puntual</option>
+                        <option value="Limpieza de garaje - Semanal">Limpieza de garaje - Semanal</option>
+                        <option value="Limpieza post-obra - Puntual">Limpieza post-obra - Puntual</option>
+                        <option value="Limpieza post-obra - Semanal">Limpieza post-obra - Semanal</option>
+                        <option value="Limpieza profunda - Puntual">Limpieza profunda - Puntual</option>
+                        <option value="Limpieza profunda - Semanal">Limpieza profunda - Semanal</option>
+                        <option value="Organización - Puntual">Organización - Puntual</option>
+                        <option value="Organización - Semanal">Organización - Semanal</option>
+                        <option value="Plancha - Puntual">Plancha - Puntual</option>
+                        <option value="Plancha - Semanal">Plancha - Semanal</option>
+                        <option value="Recolección de basura - Puntual">Recolección de basura - Puntual</option>
+                        <option value="Recolección de basura - Semanal">Recolección de basura - Semanal</option>
+                        <option value="Tapicería - Puntual">Tapicería - Puntual</option>
+                        <option value="Tapicería - Semanal">Tapicería - Semanal</option>
+                        <option value="Ventanas - Puntual">Ventanas - Puntual</option>
+                        <option value="Ventanas - Semanal">Ventanas - Semanal</option>
+                    </select>
+                <input type="text" placeholder="Mi dirección" name="miDireccion" id="miDireccion" value="<?php echo htmlspecialchars($direccion); ?>">
+                <select name="miProvincia" id="miProvincia">
+                   <option value="<?php echo htmlspecialchars($provincia); ?>"><?php echo htmlspecialchars($provincia); ?></option>
+                </select>
+                <select name="miCiudad" id="miCiudad">
+                    <option value="<?php echo htmlspecialchars($ciudad); ?>"><?php echo htmlspecialchars($ciudad); ?></option>
+                </select>
             </div>
         </div>
         <div class="crearServ-bot">
-
+            <input type="submit" value="Crear Servicio">
         </div>
         </form>
     </div>

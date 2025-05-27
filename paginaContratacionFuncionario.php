@@ -39,25 +39,18 @@ if ($_SESSION['usuario']['tipo'] == 'clientes') {
     </ol>
     </nav>
     <!--fin migas de pan-->
-    <div class="pTrabajo">
 
-    <div class="CajaDetalle">
-        <p><b>Titulo:</b></p>
-        <p><b>Tipo:</b></p>
-        <p><b>Valor:</b></p>
-        <p><b>Dia:</b></p>
-        <p><b>Cliente:</b></p>
-        <p><b>Dirección:</b></p>
-        <p><b>Provincia:</b></p>
-        <p><b>Ciudad:</b></p>
-        <p><b>Descripción:</b></p>
-        <a href=""><button>Aplicar a trabajo</button></a>
-    </div>
-
-    <div class="valoraciones">
-   <h2>Valoraciones de Clientes:</h2>
-    <!--aqui mediante php va las valoraciones en caso de que no tenga va a parecer otra cosa-->
-    </div>
+    <div class="crearServ">
+        <form action="">
+            <div class="contraServ">
+                <label for="">Contra propuesta (opcional):</label>
+                <input type="text">
+                <textarea name="" id="" placeholder="Presentación"></textarea>
+            </div>
+        <div class="crearServ-bot">
+            <input type="submit" value="Enviar mensaje para contractación">
+        </div>
+        </form>
     </div>
 
     <?php include_once './assets/footer.php'; ?>

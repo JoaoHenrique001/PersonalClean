@@ -52,18 +52,18 @@ if (isset($_GET['idCliente'])) {
 
         <div class="areaDetalle">
             <table class="tablaDetalle">
-                <tr><td>ID Cliente:</td><td><?php echo $cliente['idCliente']; ?></td></tr>
-                <tr><td>Nombre:</td><td><?php echo $cliente['nombre']; ?></td></tr>
-                <tr><td>Apellidos:</td><td><?php echo $cliente['apellidos']; ?></td></tr>
-                <tr><td>Email:</td><td><?php echo $cliente['email']; ?></td></tr>
-                <tr><td>Contraseña:</td><td><?php echo $cliente['contraseña']; ?></td></tr>
-                <tr><td>Teléfono:</td><td><?php echo $cliente['telefono']; ?></td></tr>
-                <tr><td>Fecha de nacimiento:</td><td><?php echo $cliente['f_nacimiento']; ?></td></tr>
-                <tr><td>Nota media:</td><td><?php echo $cliente['notaMedia']; ?></td></tr>
-                <tr><td>Dirección:</td><td><?php echo $cliente['direccion']; ?></td></tr>
-                <tr><td>Provincia:</td><td><?php echo $cliente['provincia']; ?></td></tr>
-                <tr><td>Ciudad:</td><td><?php echo $cliente['ciudad']; ?></td></tr>
-                <tr><td>Código postal:</td><td><?php echo $cliente['codigoPostal']; ?></td></tr>
+                <tr><td>ID Cliente:</td><td class="detalleCampo"><?php echo $cliente['idCliente']; ?></td></tr>
+                <tr><td>Nombre:</td><td class="detalleCampo"><?php echo $cliente['nombre']; ?></td></tr>
+                <tr><td>Apellidos:</td><td class="detalleCampo"><?php echo $cliente['apellidos']; ?></td></tr>
+                <tr><td>Email:</td><td class="detalleCampo"><?php echo $cliente['email']; ?></td></tr>
+                <tr><td>Contraseña:</td><td class="detalleCampo"><?php echo $cliente['contraseña']; ?></td></tr>
+                <tr><td>Teléfono:</td><td class="detalleCampo"><?php echo $cliente['telefono']; ?></td></tr>
+                <tr><td>Fecha de nacimiento:</td><td class="detalleCampo"><?php echo $cliente['f_nacimiento']; ?></td></tr>
+                <tr><td>Nota media:</td><td class="detalleCampo"><?php echo $cliente['notaMedia']; ?></td></tr>
+                <tr><td>Dirección:</td><td class="detalleCampo"><?php echo $cliente['direccion']; ?></td></tr>
+                <tr><td>Provincia:</td><td class="detalleCampo"><?php echo $cliente['provincia']; ?></td></tr>
+                <tr><td>Ciudad:</td><td class="detalleCampo"><?php echo $cliente['ciudad']; ?></td></tr>
+                <tr><td>Código postal:</td><td class="detalleCampo"><?php echo $cliente['codigoPostal']; ?></td></tr>
             </table>
         </div>
     </main>

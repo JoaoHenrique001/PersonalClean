@@ -73,15 +73,15 @@ if (isset($_GET['idServicio'])) {
                     <span class="estado-indicador <?php echo $clase; ?>"></span>
                 </td>
             </tr>
-            <tr><td>Título:</td><td><?php echo $servicio['titulo']; ?></td></tr>
-            <tr><td>Descripción:</td><td><?php echo $servicio['descripcion']; ?></td></tr>
-            <tr><td>Tipo de Servicio:</td><td><?php echo $servicio['tipoServicio']; ?></td></tr>
-            <tr><td>Valor:</td><td><?php echo $servicio['valor']; ?> €</td></tr>
-            <tr><td>Día del Servicio:</td><td><?php echo $servicio['diaServicio']; ?></td></tr>
-            <tr><td>Dirección:</td><td><?php echo $servicio['direccion']; ?></td></tr>
-            <tr><td>Provincia:</td><td><?php echo $servicio['provincia']; ?></td></tr>
-            <tr><td>Ciudad:</td><td><?php echo $servicio['ciudad']; ?></td></tr>
-            <tr><td>Fecha de Solicitud:</td><td><?php echo $servicio['fechaServicio']; ?></td></tr>
+            <tr><td>Título:</td><td class="detalleCampo"><?php echo $servicio['titulo']; ?></td></tr>
+            <tr><td>Descripción:</td><td class="detalleCampo"><?php echo $servicio['descripcion']; ?></td></tr>
+            <tr><td>Tipo de Servicio:</td><td class="detalleCampo"><?php echo $servicio['tipoServicio']; ?></td></tr>
+            <tr><td>Valor:</td><td class="detalleCampo"><?php echo $servicio['valor']; ?> €</td></tr>
+            <tr><td>Día del Servicio:</td><td class="detalleCampo"><?php echo $servicio['diaServicio']; ?></td></tr>
+            <tr><td>Dirección:</td><td class="detalleCampo"><?php echo $servicio['direccion']; ?></td></tr>
+            <tr><td>Provincia:</td><td class="detalleCampo"><?php echo $servicio['provincia']; ?></td></tr>
+            <tr><td>Ciudad:</td><td class="detalleCampo"><?php echo $servicio['ciudad']; ?></td></tr>
+            <tr><td>Fecha de Solicitud:</td><td class="detalleCampo"><?php echo $servicio['fechaServicio']; ?></td></tr>
         </table>
     </div>
 </main>

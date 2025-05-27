@@ -211,6 +211,9 @@ header.dark{
 .areaDetalle.dark{
     background-color: #3c4b5b;
 }
+.detalleCampo.dark{
+    color: white;
+}
 .dropdown-item.dark {
     color: #ffffff;
 }
@@ -242,6 +245,26 @@ header.dark{
 .dark .elementoCaja-data,
 .dark .elementoCaja {
     color: white;
+}
+.contraServ > label.dark{
+    color: white;
+}
+.contraServ > textarea.dark{
+    background-color: #373646;
+    color: white;
+}
+.contraServ > input.dark{
+    background-color: #373646;
+    color: white;
+}
+.contraServ > textarea::placeholder.dark{
+    color: #ffffff;
+}
+.pTrabajo.dark{
+    color: white;
+}
+.CajaDetalle.dark{
+     background-color: #3C4B5B;
 }
 /*fin todo que va a ser cambiado a modo oscuro, despues tiene que agregar al script.js*/
 
@@ -1311,6 +1334,9 @@ color: black;
     overflow-x: auto;
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
 }
+.detalleCampo{
+    color: black;
+}
 .tablaDetalle {
     width: 100%;
     border-collapse: collapse;
@@ -1459,7 +1485,7 @@ color: black;
     border-radius: 14px;
     background: #008000;
     color: white;
-    box-shadow: inset 0px 4px 20px 10px rgba(0, 0, 0, 0.25);;
+    box-shadow: inset 0px 4px 20px 10px rgba(0, 0, 0, 0.25);
     display: flex;
     flex-direction: column;
     
@@ -1475,8 +1501,8 @@ color: black;
     font-size: 16px;
     border-radius: 14px;
     background-color: #EBDF3D;
-     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
-     border: none;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+    border: none;
     align-self: flex-end;
     margin-right: 44px;
     transition: 0.3s;
@@ -1561,7 +1587,7 @@ color: black;
     color: white;
 }
 .elementoCaja {
-    border-bottom: 1px solid #7b7b7b; /* solo borde inferior */
+    border-bottom: 1px solid #7b7b7b;
     color: #7b7b7b;
     margin-bottom: 10px;
     height: 130.52px;
@@ -1598,7 +1624,7 @@ color: black;
 
 /*fin pagina de soy funcionario y soy cliente*/
 
-/*inicio pagina crear servicio*/
+/*inicio pagina crear servicio (clientes)*/
 .crearServ{
     width: 636px;
     height: 360px;
@@ -1607,8 +1633,130 @@ color: black;
     border-radius: 14px;
     box-shadow: inset 0px 4px 20px 10px rgba(0, 0, 0, 0.25);
     justify-self: center;
+    padding: 30px;
 }
-/*fin pagina crear servicio*/
+.crearServ > form > .crearServ-campos{
+    display: flex;
+    flex-direction: row;
+    gap: 21px;
+}
+.crearServ > form > .crearServ-bot{
+    justify-self: center;
+}
+.crearServ > form > .crearServ-bot > input{
+    width: 374px;
+    height: 40px;
+    border-radius: 14px;
+    border: 0px;
+    background-color: #743EE0;
+    color: white;
+    transition: 0.3s;
+}
+.crearServ > form > .crearServ-bot > input:hover{
+    background-color: #EBDF3D;
+    color: rgb(0, 0, 0);
+    transform: scale(1.1);
+}
+.crearServ > form > .crearServ-campos > .crearServ-derec{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.crearServ-campJ{
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+}
+.crearServ-izq{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.crearServ-izq > input, .crearServ-derec > .crearServ-campJ > select, .crearServ-derec > input, .crearServ-derec > select, .crearServ-izq > textarea, .crearServ-campJ > input{
+  height: 34px;
+  border: solid rgba(0, 0, 0, 0.500) 1px;
+  border-radius: 8px;
+  padding-left: 10px;
+  background-color: #D9D9D9;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+}
+#descripcion{
+    width: 263px;
+    height: 196px;
+    max-height: 196px;
+    min-height: 190px;
+    margin-bottom: 15px;
+}
+#valor{
+    width: 153px;
+}
+#miProvincia, #miCiudad{ 
+    width: 155px;
+}
+/*fin pagina crear servicio (clientes)*/
+
+/*inicio pagina de contratacion (funcionario)*/
+.contraServ{
+    display: flex;
+    flex-direction: column;
+    width: 263px;
+    justify-self: center;
+}
+.contraServ > label{
+    margin-bottom: 4px;
+}
+.contraServ > input{
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+    padding-left: 10px;
+    border: solid rgba(0, 0, 0, 0.500) 1px;
+    background-color: #D9D9D9;
+    width: 162px;
+}
+.contraServ > textarea{
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+    padding-left: 10px;
+    border: solid rgba(0, 0, 0, 0.500) 1px;
+    background-color: #D9D9D9;
+    height: 156px;
+    max-height: 158px;
+    margin-bottom: 22px;
+    margin-top: 22px;
+}
+/*final pagina de contratacion (funcionario)*/
+
+/*inicio pagina de trabajo (funcionario)*/
+.CajaDetalle{
+    justify-self: center;
+    width: 494px;
+    height: 343px;
+    border-radius: 14px;
+    box-shadow: inset 0px 4px 20px 10px rgba(0, 0, 0, 0.25);
+    margin-top: 15.15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.valoraciones{
+    justify-self: center;
+}
+.CajaDetalle > a > button{
+    margin-top: 22px;
+    width: 374px;
+    height: 40px;
+    background-color: #743EE0;
+    color: white;
+    border-radius: 14px;
+    border: 0px;
+    transition: 0.3s;
+}
+.CajaDetalle > a > button:hover{
+    background-color: #EBDF3D;
+    color: black;
+    transform: scale(1.1);
+}
+/*fin pagina de trabajo (funcionario)*/
 
 /*inicio @media query*/
 @media only screen and (max-width: 1483px){

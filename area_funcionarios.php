@@ -1,6 +1,9 @@
 <?php
 include './assets/ajax/conexionBD.php';
-
+session_start();
+echo "<pre>";
+var_dump($_SESSION);
+echo "</pre>";
 function tiempoTranscurrido($fecha) {
     $ahora = new DateTime();
     $fechaServicio = new DateTime($fecha);
