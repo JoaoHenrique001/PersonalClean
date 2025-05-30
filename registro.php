@@ -4,8 +4,8 @@ $mensaje = "";
 include './assets/ajax/conexionBD.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    echo "Solicitud POST recibida.<br>";
 
-    // Sanitizar entradas
     $nombre = htmlspecialchars(trim($_POST["nombreInput"]));
     $apellidos = htmlspecialchars(trim($_POST["apellidoInput"]));
     $email = filter_var(trim($_POST["emailInput"]), FILTER_VALIDATE_EMAIL);
@@ -18,8 +18,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $ciudad = $_POST["ciudad"];
     $cp = htmlspecialchars(trim($_POST["cp"]));
     $direccion = htmlspecialchars(trim($_POST["direccion"]));
+    $descripcion = $_POST["descripcion"] ?? "";
 
-    // Validaciones
     if (!$nombre || !$apellidos || !$email || !$pass || !$confPass || !$telefono || !$fechaNacimiento || !$tipoUsuario || !$provincia || !$ciudad || !$cp || !$direccion) {
         $errores[] = "Todos los campos son obligatorios.";
     }
@@ -32,23 +32,46 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $errores[] = "Las contraseñas no coinciden.";
     }
 
-    // Si no hay errores, insertar en la base de datos
     if (empty($errores)) {
-        $passHash = password_hash($pass, PASSWORD_DEFAULT);
+        try {
 
-        $stmt = $conexion->prepare("INSERT INTO usuarios (nombre, apellidos, email, password, telefono, fecha_nacimiento, tipo_usuario, provincia, ciudad, codigo_postal, direccion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssssssssss", $nombre, $apellidos, $email, $passHash, $telefono, $fechaNacimiento, $tipoUsuario, $provincia, $ciudad, $cp, $direccion);
+            if ($tipoUsuario === "funcionarios") {
+                $sql = "INSERT INTO funcionarios (nombre, apellidos, email, contraseña, telefono, f_nacimiento, descripcion, direccion, provincia, ciudad, codigoPostal, notaMedia) 
+                        VALUES (:nombre, :apellidos, :email, :password, :telefono, :fechaNacimiento, :descripcion, :direccion, :provincia, :ciudad, :codigoPostal, :notaMedia)";
+                $stmt = $conexion->prepare($sql);
+                $stmt->bindValue(':notaMedia', 0);
+            } else {
+                $sql = "INSERT INTO clientes (nombre, apellidos, email, contraseña, telefono, f_nacimiento, direccion, provincia, ciudad, codigoPostal) 
+                        VALUES (:nombre, :apellidos, :email, :password, :telefono, :fechaNacimiento, :direccion, :provincia, :ciudad, :codigoPostal)";
+                $stmt = $conexion->prepare($sql);
+            }
 
-        if ($stmt->execute()) {
-            $mensaje = "Registro exitoso. Puedes <a href='login.php'>iniciar sesión aquí</a>.";
-        } else {
-            $errores[] = "Error al registrar. Intenta más tarde.";
+            $stmt->bindParam(':nombre', $nombre);
+            $stmt->bindParam(':apellidos', $apellidos);
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':password', $pass);
+            $stmt->bindParam(':telefono', $telefono);
+            $stmt->bindParam(':fechaNacimiento', $fechaNacimiento);
+            $stmt->bindParam(':direccion', $direccion);
+            $stmt->bindParam(':provincia', $provincia);
+            $stmt->bindParam(':ciudad', $ciudad);
+            $stmt->bindParam(':codigoPostal', $cp);
+
+            if ($tipoUsuario === "funcionarios") {
+                $stmt->bindParam(':descripcion', $descripcion);
+            }
+
+            if ($stmt->execute()) {
+                $mensaje = "Registro exitoso. Puedes <a href='login.php'>iniciar sesión aquí</a>.";
+            } else {
+                $errores[] = "Error al registrar. Intenta más tarde.";
+            }
+
+            $conexion = null;
+        } catch (PDOException $e) {
+            echo "Error en la inserción: " . $e->getMessage();
         }
-
-        $stmt->close();
     }
-
-    $conexion->close();
 }
 ?>
 
@@ -83,40 +106,39 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     ?>
     <!--fin modo oscuro y claro-->
     <div class="cajaformEnter">
-    <form id="formRegistro"  class="formEnter">
-        <a href="./index.php"><img src="./assets/images/logo.png" width="10px" height="10px" alt="logo"></a>
+    <form method="POST" id="formRegistro" class="formEnter">
+    <a href="./index.php"><img src="./assets/images/logo.png" width="10px" height="10px" alt="logo"></a>
 
-        <div class="nombreCompleto">
-            <input type="text" placeholder="Nombre" name="nombreInput" id="nombreInput" required>
-            <input type="text" placeholder="Apellidos" name="apellidoInput" id="apellidoInput" required>
-        </div>
-        <span id="nombreSpan"></span>
+    <div class="nombreCompleto">
+        <input type="text" placeholder="Nombre" name="nombreInput" id="nombreInput" required>
+        <input type="text" placeholder="Apellidos" name="apellidoInput" id="apellidoInput" required>
+    </div>
+    <span id="nombreSpan"></span>
 
-        <input type="text" placeholder="Email" id="emailInput" required>
-        <span id="emailSpan"></span>
+    <input type="text" placeholder="Email" name="emailInput" id="emailInput" required>
+    <span id="emailSpan"></span>
 
-        <input type="text" placeholder="Contraseña" id="contraseñaInput" required>
-        <span id="contraSpan"></span>
+    <input type="text" placeholder="Contraseña" name="contraseñaInput" id="contraseñaInput" required>
+    <span id="contraSpan"></span>
 
-        <input type="text" placeholder="Confirmar Contraseña" id="confcontraseñaInput" required>
-        <span id="confcontraSpan"></span>
+    <input type="text" placeholder="Confirmar Contraseña" name="confcontraseñaInput" id="confcontraseñaInput" required>
+    <span id="confcontraSpan"></span>
 
-        <input type="text" placeholder="Numero telefono ej: 444 44 44 44" id="numTelefono" required>
-        <span id="numTelefonoSpan"></span>
+    <input type="text" placeholder="Numero telefono ej: 444 44 44 44" name="numTelefono" id="numTelefono" required>
+    <span id="numTelefonoSpan"></span>
 
-        <label for="fechaNacimiento">Fecha nacimiento:</label>
-        <input type="date" name="fnacimiento" id="fnacimiento" required>
-        <span id="fnacSpan"></span>
+    <label for="fechaNacimiento">Fecha nacimiento:</label>
+    <input type="date" name="fnacimiento" id="fnacimiento" required>
+    <span id="fnacSpan"></span>
 
-        <select name="tipoUsuario" id="tipoUsuario" required>
-            <option value="">Tipo de Usuario</option>
-            <option value="funcionarios">Funcionario</option>
-            <option value="clientes">Cliente</option>
-        </select>
-        <span id="tipoSpan"></span>
+    <select name="tipoUsuario" id="tipoUsuario" required>
+        <option value="">Tipo de Usuario</option>
+        <option value="funcionarios">Funcionario</option>
+        <option value="clientes">Cliente</option>
+    </select>
+    <span id="tipoSpan"></span>
 
-
-        <div class="ProvCiud">
+    <div class="ProvCiud">
         <select name="provincia" id="provincia" required>
             <option value="">Provincia</option>
             <option value="Madrid">Madrid</option>
@@ -126,18 +148,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <select name="ciudad" id="ciudad" required>
             <option value="">Ciudad</option>
         </select>
-        </div>
-        <span id="ciudadSpan"></span>
+    </div>
+    <span id="ciudadSpan"></span>
 
-        <input type="text" id="cp" maxlength="5" placeholder="Codigo Postal ej:44444" required>
-        <span id="cpSpan"></span>
+    <input type="text" name="cp" id="cp" maxlength="5" placeholder="Codigo Postal ej:44444" required>
+    <span id="cpSpan"></span>
 
-        <input type="text" id="direccion" placeholder="Direccion" required>
-        <span id=direcSpan></span>
+    <input type="text" name="direccion" id="direccion" placeholder="Direccion" required>
+    <span id="direcSpan"></span>
 
-        <button type="submit">Registrar</button>
-        <p>¿Ya tienes cuenta? <a href="./login.php">hacer Log-in</a></p>
-    </form>
+    <button type="submit">Registrar</button>
+    <p>¿Ya tienes cuenta? <a href="./login.php">hacer Log-in</a></p>
+</form>
     </div>
 </body>
 </html>

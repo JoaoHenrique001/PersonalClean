@@ -39,32 +39,12 @@ if ($_SESSION['usuario']['tipo'] == 'clientes') {
     </ol>
     </nav>
     <!--fin migas de pan-->
-    <div class="pTrabajo">
-
-    <div class="CajaDetalle">
-        <p><b>Titulo:</b></p>
-        <p><b>Tipo:</b></p>
-        <p><b>Valor:</b></p>
-        <p><b>Dia:</b></p>
-        <p><b>Cliente:</b></p>
-        <p><b>Dirección:</b></p>
-        <p><b>Provincia:</b></p>
-        <p><b>Ciudad:</b></p>
-        <p><b>Descripción:</b></p>
-        <a href=""><button>Aplicar a trabajo</button></a>
+   
+    <div class="areaChat">
+        <aside class="conversasiones"></aside>
+        <div class="chat"></div>
     </div>
 
-    <div class="valoraciones">
-   <h2>Valoraciones de Clientes:</h2>
-    <!--aqui mediante php va las valoraciones en caso de que no tenga va a parecer otra cosa-->
-    <div class="espacioValoraciones">
-    <img src="./assets/images/nodataicon.svg" alt="">
-    <h3>No hay valoraciones</h3>
-    </div>
-    </div>
-    </div>
-
-    <?php include_once './assets/footer.php'; ?>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>AOS.init();</script>
 </body>

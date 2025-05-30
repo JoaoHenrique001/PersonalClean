@@ -42,21 +42,25 @@ if ($_SESSION['usuario']['tipo'] == 'clientes') {
     <div class="pTrabajo">
 
     <div class="CajaDetalle">
-        <p><b>Titulo:</b></p>
-        <p><b>Tipo:</b></p>
-        <p><b>Valor:</b></p>
-        <p><b>Dia:</b></p>
-        <p><b>Cliente:</b></p>
+        <p><b>Nombre:</b></p>
+        <p><b>Email:</b></p>
+        <p><b>Teléfono:</b></p>
+        <p><b>Edad:</b></p>
+        <p><b>Valoración:</b></p>
         <p><b>Dirección:</b></p>
         <p><b>Provincia:</b></p>
         <p><b>Ciudad:</b></p>
         <p><b>Descripción:</b></p>
-        <a href=""><button>Aplicar a trabajo</button></a>
+        <a href=""><button>Contratar</button></a>
     </div>
 
     <div class="valoraciones">
    <h2>Valoraciones de Clientes:</h2>
     <!--aqui mediante php va las valoraciones en caso de que no tenga va a parecer otra cosa-->
+    <div class="espacioValoraciones">
+    <img src="./assets/images/nodataicon.svg" alt="">
+    <h3>No hay valoraciones</h3>
+    </div>
     </div>
     </div>
 

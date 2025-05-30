@@ -1045,7 +1045,7 @@ footer{
     border-radius: 14px;
     display: flex;
     flex-direction: column;
-    width: 50vh;
+    width: 451px;
     height: fit-content;
     justify-content: center;
     align-items: center;
@@ -1740,6 +1740,7 @@ color: black;
 }
 .valoraciones{
     justify-self: center;
+    margin-top: 29px;
 }
 .CajaDetalle > a > button{
     margin-top: 22px;
@@ -1756,7 +1757,36 @@ color: black;
     color: black;
     transform: scale(1.1);
 }
+.espacioValoraciones{
+    text-align: center;
+    margin-top: 30px;
+}
 /*fin pagina de trabajo (funcionario)*/
+
+/*inicio mi area*/
+.centrado{
+    justify-self: center;
+    margin-top: 10px;
+}
+.noHayHistorioco{
+    justify-self: center;
+    text-align: center;
+}
+/*fin mi area*/
+
+/*inicio chat*/
+.areaChat{
+    display: flex;
+    flex-direction: row;
+
+}
+.areaChat > .conversasiones {
+    
+}
+.areaCha > .chat{
+    
+}
+/*fin chat*/
 
 /*inicio @media query*/
 @media only screen and (max-width: 1483px){

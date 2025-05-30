@@ -30,8 +30,8 @@
                 Trabaje con nosotros
               </button>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Nuestros funcionarios</a></li>
-                <li><a class="dropdown-item" href="#">Ofertas de Empleo</a></li>
+                <li><a class="dropdown-item" href="../nuestrosFuncionarios.php">Nuestros funcionarios</a></li>
+                <li><a class="dropdown-item" href="../ofertasDeEmpleo.php">Ofertas de Empleo</a></li>
               </ul>
            </div>
      </nav>

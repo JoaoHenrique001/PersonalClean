@@ -1,3 +1,57 @@
+<?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'vendor/autoload.php'; // Asegúrate de instalar PHPMailer con Composer
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $nombre = htmlspecialchars($_POST["nombre"]);
+    $apellido = htmlspecialchars($_POST["apellido"]);
+    $codigoPost = htmlspecialchars($_POST["codigoPost"]);
+    $correo = filter_var($_POST["correo"], FILTER_VALIDATE_EMAIL);
+    $servicio = htmlspecialchars($_POST["servicioForm"]);
+    $mensaje = htmlspecialchars($_POST["mensaje"]);
+
+    if (!$correo) {
+        echo "Correo inválido.";
+        exit;
+    }
+
+    $mail = new PHPMailer(true);
+
+    try {
+        // Configuración del servidor SMTP
+        $mail->isSMTP();
+        $mail->Host = 'smtp.tuempresa.com'; // Cambia al servidor SMTP que uses
+        $mail->SMTPAuth = true;
+        $mail->Username = 'tuemail@tuempresa.com'; // Tu email de envío
+        $mail->Password = 'tu_contraseña'; // Tu contraseña
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port = 587;
+
+        // Configurar destinatario y contenido
+        $mail->setFrom('tuemail@tuempresa.com', 'Tu Empresa');
+        $mail->addAddress('JH@personalclean.es'); // Email de recepción
+        $mail->Subject = 'Nuevo mensaje de contacto';
+        
+        // Formatear el cuerpo del mensaje
+        $mail->Body = "
+            Nombre: $nombre $apellido\n
+            Código Postal: $codigoPost\n
+            Correo: $correo\n
+            Servicio Solicitado: $servicio\n
+            Mensaje:\n$mensaje\n
+        ";
+
+        $mail->send();
+        echo "Correo enviado correctamente.";
+    } catch (Exception $e) {
+        echo "Error al enviar el correo: {$mail->ErrorInfo}";
+    }
+}
+?>
+
+
 <!--inicio espacio div contacto-->
 <div class="contacto" id="contmap">
     <!--inicio espacio ezquierdo de la div de contacto-->

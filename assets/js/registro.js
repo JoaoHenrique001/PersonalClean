@@ -421,7 +421,7 @@ document.addEventListener("DOMContentLoaded", function () {
       provincia.addEventListener("blur", validarProvincia);
       ciudad.addEventListener("blur", validarCiudad);
 
-      formulario.addEventListener("submit", enviarFormulario);
+      //formulario.addEventListener("submit", enviarFormulario);
 
       // envio final
       function enviarFormulario(event) {
