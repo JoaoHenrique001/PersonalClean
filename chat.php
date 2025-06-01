@@ -1,15 +1,52 @@
 <?php
-include './assets/ajax/conexionBD.php';
 session_start();
- echo "<pre>";
- var_dump($_SESSION);
- echo "</pre>";
-if (!$_SESSION['usuario']['tipo']) {
-    header("Location: logout.php");
+include './assets/ajax/conexionBD.php';
+
+// Para depuración (opcional)
+// echo "<pre>";
+// var_dump($_SESSION);
+// echo "</pre>";
+
+if (!isset($_SESSION['usuario'])) {
+    header("Location: login.php");
     exit;
 }
 
+$tipo_usuario = $_SESSION['usuario']['tipo'];
 
+$miTipo = ($tipo_usuario === 'clientes') ? 'cliente' : 'funcionario';
+
+if ($tipo_usuario === 'clientes') {
+    $user_id = $_SESSION['usuario']['idCliente'];
+    $sqlChats = "SELECT ch.idchats, f.nombre AS nombre_op, f.apellidos AS ap_op 
+                 FROM chats ch 
+                 JOIN funcionarios f ON ch.idFuncionario = f.idFuncionarios 
+                 WHERE ch.idCliente = :user_id";
+} else { 
+    $user_id = $_SESSION['usuario']['idFuncionarios'];
+    $sqlChats = "SELECT ch.idchats, c.nombre AS nombre_op, c.apellidos AS ap_op 
+                 FROM chats ch 
+                 JOIN clientes c ON ch.idCliente = c.idCliente 
+                 WHERE ch.idFuncionario = :user_id";
+}
+
+$stmtChats = $conexion->prepare($sqlChats);
+$stmtChats->bindValue(':user_id', $user_id);
+$stmtChats->execute();
+$chats = $stmtChats->fetchAll(PDO::FETCH_ASSOC);
+
+// Determinar el chat seleccionado. Por ejemplo, se pasa mediante GET "idchat".
+$selected_chat_id = isset($_GET['idchat']) ? (int)$_GET['idchat'] : null;
+
+// Si hay un chat seleccionado, obtenemos sus mensajes ordenados por fecha.
+$mensajes = [];
+if ($selected_chat_id) {
+    $sqlMensajes = "SELECT * FROM mensajes WHERE idChat = :chat_id ORDER BY fechaHora ASC";
+    $stmtMensajes = $conexion->prepare($sqlMensajes);
+    $stmtMensajes->bindValue(':chat_id', $selected_chat_id);
+    $stmtMensajes->execute();
+    $mensajes = $stmtMensajes->fetchAll(PDO::FETCH_ASSOC);
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -29,71 +66,57 @@ if (!$_SESSION['usuario']['tipo']) {
 <body>
     <?php include_once './assets/headerLogueado.php'; ?>
 
-      <!--inicio migas de pan-->
-    <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
-    <ol class="breadcrumb" style="--bs-breadcrumb-margin-bottom: 0rem;">
-    <li class="breadcrumb-item active" aria-current="page"><a href="index.php"><img src="./assets/images/house.svg" alt=""></a></li>
-    <li class="breadcrumb-item">Area Principal</li>
-    <li class="breadcrumb-item">Pagina de contratación</li>
-    </ol>
+    <!-- Migas de pan -->
+    <nav style="--bs-breadcrumb-divider: url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%278%27 height=%278%27%3E%3Cpath d=%27M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z%27 fill=%27%236c757d%27/%3E%3C/svg%3E');" aria-label="breadcrumb">
+        <ol class="breadcrumb" style="--bs-breadcrumb-margin-bottom: 0rem;">
+            <li class="breadcrumb-item active" aria-current="page">
+                <a href="index.php"><img src="./assets/images/house.svg" alt=""></a>
+            </li>
+            <li class="breadcrumb-item">Area Principal</li>
+            <li class="breadcrumb-item">Chat</li>
+        </ol>
     </nav>
-    <!--fin migas de pan-->
-   
+
     <div class="areaChat">
+        <!-- Aside: listado de conversaciones -->
         <aside class="conversasiones">
-            <!--elemento que se repite dependera de lo select y lo dato de la base de datos-->
-            <a href="">
-            <div class="conversasiones_persona">
-                <img src="./assets/images/userIcon.svg" alt="">
-                <p class="conversasiones_nombre">Sheapard</p>
-            </div>
-            </a>
-            <a href="">
-            <div class="conversasiones_persona">
-                <img src="./assets/images/userIcon.svg" alt="">
-                <p class="conversasiones_nombre">Sheapard</p>
-            </div>
-            </a>
-            <a href="">
-            <div class="conversasiones_persona">
-                <img src="./assets/images/userIcon.svg" alt="">
-                <p class="conversasiones_nombre">Sheapard</p>
-            </div>
-            </a>
-            <a href="">
-            <div class="conversasiones_persona">
-                <img src="./assets/images/userIcon.svg" alt="">
-                <p class="conversasiones_nombre">Sheapard</p>
-            </div>
-            </a>
-            <!--elemento que se repite dependera de lo select y lo dato de la base de datos-->
+            <?php foreach ($chats as $chat): ?>
+                <a href="chat.php?idchat=<?php echo $chat['idchats']; ?>">
+                    <div class="conversasiones_persona <?php echo ($selected_chat_id == $chat['idchats']) ? 'chatSelect' : ''; ?>">
+                        <img src="./assets/images/userIcon.svg" alt="">
+                        <p class="conversasiones_nombre">
+                            <?php echo htmlspecialchars($chat['nombre_op'] . ' ' . $chat['ap_op']); ?>
+                        </p>
+                    </div>
+                </a>
+            <?php endforeach; ?>
         </aside>
 
+        <!-- Área de chat: mensajes -->
         <div class="chat">
-            <!--elemento que dependera de los datos de la base de datos--> 
-            <div class="cajaSecundario">
-                <p>Hola que tal tio? mira te acabo de enviar una propuesta de trabajo</p>
-                <span>23:13</span>
-            </div>
-            <div class="cajaPrincipal">
-                <p>ostias! en serio dices?😯</p>
-                <span>23:14 <img src="./assets/images/eyeOpen.svg" alt=""></span>
-            </div>
-             <div class="cajaSecundario">
-                <p>Se trata de un servicio de limpieza profunda para residencias. Incluye limpieza completa de baños (inodoros, duchas, espejos, azulejos), limpieza de cocina (electrodomésticos, campana, superficies y fregadero), aspirado y fregado de todos los pisos, limpieza de ventanas internas, eliminación de polvo en muebles, puertas y rodapiés, y recolección de basura. Todo de forma detallada y con productos adecuados.</p>
-                <span>23:15</span>
-            </div>
-            <div class="cajaPrincipal">
-                <p>paso tio, soy un vago, solo de oir ya me da pereza😩</p>
-                <span>23:16 <img src="./assets/images/eyeClosed.svg" alt="Visto"></span>
-            </div>
-            <div class="envioMensaje">
-                <form method="POST">
-                    <textarea name="mensajeChat" id="mensajeChat" placeholder="Escribir mensaje"></textarea>
-                    <button><img src="./assets/images/sendMessage.svg" alt="No Visto"></button>
-                </form>
-            </div>
-            <!--elemento que dependera de los datos de la base de datos--> 
+            <?php if ($selected_chat_id): ?>
+                <?php foreach ($mensajes as $msg): 
+                    // Si el campo "envia" coincide con nuestro $miTipo, el mensaje fue enviado por el usuario actual.
+                    $clase = ($msg['envia'] == $miTipo) ? 'cajaPrincipal' : 'cajaSecundario';
+                ?>
+                    <div class="<?php echo $clase; ?>">
+                        <p><?php echo htmlspecialchars($msg['contenido']); ?></p>
+                        <span><?php echo date("H:i", strtotime($msg['fechaHora'])); ?></span>
+                    </div>
+                <?php endforeach; ?>
+                <!-- Formulario para enviar un nuevo mensaje -->
+                <div class="envioMensaje">
+                    <form method="POST">
+                        <input type="hidden" name="idChat" value="<?php echo $selected_chat_id; ?>">
+                        <textarea name="mensajeChat" id="mensajeChat" placeholder="Escribir mensaje"></textarea>
+                        <button type="submit">
+                            <img src="./assets/images/sendMessage.svg" alt="Enviar">
+                        </button>
+                    </form>
+                </div>
+            <?php else: ?>
+                <p>Seleccione un chat para ver los mensajes.</p>
+            <?php endif; ?>
         </div>
     </div>
 
