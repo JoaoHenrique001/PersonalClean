@@ -2,10 +2,27 @@
 session_start();
 include './assets/ajax/conexionBD.php';
 
-// Para depuración (opcional)
-// echo "<pre>";
-// var_dump($_SESSION);
-// echo "</pre>";
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["mensajeChat"]) && isset($_POST["idChat"])) {
+    $idChat = $_POST["idChat"];
+    $mensajeChat = trim($_POST["mensajeChat"]);
+
+    if (!empty($mensajeChat)) {
+        $tipo_usuario = $_SESSION['usuario']['tipo'];
+        $envia = ($tipo_usuario === "clientes") ? "cliente" : "funcionario";
+        $fechaHora = date("Y-m-d H:i:s");
+
+        $sqlInsert = "INSERT INTO mensajes (idChat, contenido, envia, fechaHora) 
+                      VALUES (:idChat, :contenido, :envia, :fechaHora)";
+        $stmtInsert = $conexion->prepare($sqlInsert);
+        $stmtInsert->bindValue(':idChat', $idChat);
+        $stmtInsert->bindValue(':contenido', $mensajeChat);
+        $stmtInsert->bindValue(':envia', $envia);
+        $stmtInsert->bindValue(':fechaHora', $fechaHora);
+        $stmtInsert->execute();
+    }
+    header("Location: " . $_SERVER["REQUEST_URI"]);
+    exit;
+}
 
 if (!isset($_SESSION['usuario'])) {
     header("Location: login.php");
@@ -13,7 +30,6 @@ if (!isset($_SESSION['usuario'])) {
 }
 
 $tipo_usuario = $_SESSION['usuario']['tipo'];
-
 $miTipo = ($tipo_usuario === 'clientes') ? 'cliente' : 'funcionario';
 
 if ($tipo_usuario === 'clientes') {
@@ -22,7 +38,7 @@ if ($tipo_usuario === 'clientes') {
                  FROM chats ch 
                  JOIN funcionarios f ON ch.idFuncionario = f.idFuncionarios 
                  WHERE ch.idCliente = :user_id";
-} else { 
+} else {
     $user_id = $_SESSION['usuario']['idFuncionarios'];
     $sqlChats = "SELECT ch.idchats, c.nombre AS nombre_op, c.apellidos AS ap_op 
                  FROM chats ch 
@@ -35,10 +51,8 @@ $stmtChats->bindValue(':user_id', $user_id);
 $stmtChats->execute();
 $chats = $stmtChats->fetchAll(PDO::FETCH_ASSOC);
 
-// Determinar el chat seleccionado. Por ejemplo, se pasa mediante GET "idchat".
 $selected_chat_id = isset($_GET['idchat']) ? (int)$_GET['idchat'] : null;
 
-// Si hay un chat seleccionado, obtenemos sus mensajes ordenados por fecha.
 $mensajes = [];
 if ($selected_chat_id) {
     $sqlMensajes = "SELECT * FROM mensajes WHERE idChat = :chat_id ORDER BY fechaHora ASC";
@@ -96,7 +110,6 @@ if ($selected_chat_id) {
         <div class="chat">
             <?php if ($selected_chat_id): ?>
                 <?php foreach ($mensajes as $msg): 
-                    // Si el campo "envia" coincide con nuestro $miTipo, el mensaje fue enviado por el usuario actual.
                     $clase = ($msg['envia'] == $miTipo) ? 'cajaPrincipal' : 'cajaSecundario';
                 ?>
                     <div class="<?php echo $clase; ?>">
@@ -104,14 +117,12 @@ if ($selected_chat_id) {
                         <span><?php echo date("H:i", strtotime($msg['fechaHora'])); ?></span>
                     </div>
                 <?php endforeach; ?>
-                <!-- Formulario para enviar un nuevo mensaje -->
+                <!-- Formulario de envío de mensaje (método POST) -->
                 <div class="envioMensaje">
-                    <form method="POST">
+                    <form method="POST" action="">
                         <input type="hidden" name="idChat" value="<?php echo $selected_chat_id; ?>">
                         <textarea name="mensajeChat" id="mensajeChat" placeholder="Escribir mensaje"></textarea>
-                        <button type="submit">
-                            <img src="./assets/images/sendMessage.svg" alt="Enviar">
-                        </button>
+                        <button type="submit"><img src="./assets/images/sendMessage.svg" alt="Enviar"></button>
                     </form>
                 </div>
             <?php else: ?>
@@ -119,8 +130,5 @@ if ($selected_chat_id) {
             <?php endif; ?>
         </div>
     </div>
-
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>AOS.init();</script>
 </body>
 </html>
