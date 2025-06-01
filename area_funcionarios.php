@@ -101,7 +101,7 @@ $servicios = $consulta->fetchAll(PDO::FETCH_ASSOC);
         <div class="notificaciones">
             <h1>Notificaciones</h1>
 
-            <a href="">
+            <a href="./chat.php">
             <div class="notificacionCaja">
                 <p>2</p>
                 <img src="./assets/images/chatIcon.svg" alt="">
@@ -109,7 +109,7 @@ $servicios = $consulta->fetchAll(PDO::FETCH_ASSOC);
             </div>
             </a>
 
-            <a href="">
+            <a href="./Miarea.php">
             <div class="notificacionCaja">
                 <img src="./assets/images/listIcon.svg" alt="">
                 <h2>Mi Servicios</h2>

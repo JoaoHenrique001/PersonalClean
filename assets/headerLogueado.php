@@ -54,6 +54,11 @@
         <img src="./assets/images/userIcon.svg" alt="Icono usuario" >
       </div>
       <ul class="dropdown-menu dropdown-menu-end user-dropdown">
+        <?php if ($_SESSION['usuario']['tipo'] === 'clientes'): ?>
+        <li><a class="dropdown-item" href="../area_clientes.php">Area Principal</a></li>
+        <?php elseif ($_SESSION['usuario']['tipo'] === 'funcionarios'): ?>
+        <li><a class="dropdown-item" href="../area_funcionarios.php">Area Principal</a></li>
+        <?php endif; ?>
         <li><a class="dropdown-item" href="./edicionPerfil.php">Editar perfil</a></li>
         <li><hr class="dropdown-divider"></li>
         <li><a class="dropdown-item text-danger" href="./logout.php">Cerrar sesión</a></li>

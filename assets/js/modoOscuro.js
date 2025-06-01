@@ -71,6 +71,7 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelectorAll('.contraServ > input').forEach(el => el.classList.add('dark'));
         document.querySelectorAll('.pTrabajo').forEach(el => el.classList.add('dark'));
         document.querySelectorAll('.CajaDetalle').forEach(el => el.classList.add('dark'));
+        document.querySelectorAll('.conversasiones_persona > .conversasiones_nombre').forEach(el => el.classList.add('dark'));
         ['#provincia', '#ciudad', '#tipoUsuario'].forEach(selector => {const el = document.querySelector(selector);if (el) el.classList.add('dark');});
     }
 
@@ -125,6 +126,7 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelectorAll('.contraServ > input').forEach(el => el.classList.remove('dark'));
         document.querySelectorAll('.pTrabajo').forEach(el => el.classList.remove('dark'));
         document.querySelectorAll('.CajaDetalle').forEach(el => el.classList.remove('dark'));
+        document.querySelectorAll('.conversasiones_persona > .conversasiones_nombre').forEach(el => el.classList.remove('dark'));
         ['#provincia', '#ciudad', '#tipoUsuario'].forEach(selector => {const el = document.querySelector(selector);if (el) el.classList.remove('dark');});
     }
 });

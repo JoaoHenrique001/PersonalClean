@@ -1,11 +1,10 @@
 <?php
 include './assets/ajax/conexionBD.php';
 session_start();
-echo "<pre>";
-var_dump($_SESSION);
-echo "</pre>";
-// Verificar si el usuario es un cliente, si no, redirigir a logout
-if ($_SESSION['usuario']['tipo'] == 'clientes') {
+ echo "<pre>";
+ var_dump($_SESSION);
+ echo "</pre>";
+if (!$_SESSION['usuario']['tipo']) {
     header("Location: logout.php");
     exit;
 }
@@ -24,7 +23,7 @@ if ($_SESSION['usuario']['tipo'] == 'clientes') {
     <script src="https://kit.fontawesome.com/998c60ef77.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./assets/estilos.css" />
     <script src="./assets/js/modoOscuro.js"></script>
-    <script src="./assets/js/cajaAviso.js"></script> <!--puede ser que crie otro archivo js-->
+    <script src="./assets/js/chat.js"></script> 
     <link rel="icon" type="image/ico" href="./assets/images/logo.ico" />
 </head>
 <body>
@@ -41,8 +40,61 @@ if ($_SESSION['usuario']['tipo'] == 'clientes') {
     <!--fin migas de pan-->
    
     <div class="areaChat">
-        <aside class="conversasiones"></aside>
-        <div class="chat"></div>
+        <aside class="conversasiones">
+            <!--elemento que se repite dependera de lo select y lo dato de la base de datos-->
+            <a href="">
+            <div class="conversasiones_persona">
+                <img src="./assets/images/userIcon.svg" alt="">
+                <p class="conversasiones_nombre">Sheapard</p>
+            </div>
+            </a>
+            <a href="">
+            <div class="conversasiones_persona">
+                <img src="./assets/images/userIcon.svg" alt="">
+                <p class="conversasiones_nombre">Sheapard</p>
+            </div>
+            </a>
+            <a href="">
+            <div class="conversasiones_persona">
+                <img src="./assets/images/userIcon.svg" alt="">
+                <p class="conversasiones_nombre">Sheapard</p>
+            </div>
+            </a>
+            <a href="">
+            <div class="conversasiones_persona">
+                <img src="./assets/images/userIcon.svg" alt="">
+                <p class="conversasiones_nombre">Sheapard</p>
+            </div>
+            </a>
+            <!--elemento que se repite dependera de lo select y lo dato de la base de datos-->
+        </aside>
+
+        <div class="chat">
+            <!--elemento que dependera de los datos de la base de datos--> 
+            <div class="cajaSecundario">
+                <p>Hola que tal tio? mira te acabo de enviar una propuesta de trabajo</p>
+                <span>23:13</span>
+            </div>
+            <div class="cajaPrincipal">
+                <p>ostias! en serio dices?😯</p>
+                <span>23:14 <img src="./assets/images/eyeOpen.svg" alt=""></span>
+            </div>
+             <div class="cajaSecundario">
+                <p>Se trata de un servicio de limpieza profunda para residencias. Incluye limpieza completa de baños (inodoros, duchas, espejos, azulejos), limpieza de cocina (electrodomésticos, campana, superficies y fregadero), aspirado y fregado de todos los pisos, limpieza de ventanas internas, eliminación de polvo en muebles, puertas y rodapiés, y recolección de basura. Todo de forma detallada y con productos adecuados.</p>
+                <span>23:15</span>
+            </div>
+            <div class="cajaPrincipal">
+                <p>paso tio, soy un vago, solo de oir ya me da pereza😩</p>
+                <span>23:16 <img src="./assets/images/eyeClosed.svg" alt="Visto"></span>
+            </div>
+            <div class="envioMensaje">
+                <form method="POST">
+                    <textarea name="mensajeChat" id="mensajeChat" placeholder="Escribir mensaje"></textarea>
+                    <button><img src="./assets/images/sendMessage.svg" alt="No Visto"></button>
+                </form>
+            </div>
+            <!--elemento que dependera de los datos de la base de datos--> 
+        </div>
     </div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>

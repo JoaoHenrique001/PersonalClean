@@ -57,8 +57,16 @@ $servicios = $consulta->fetchAll(PDO::FETCH_ASSOC);
       <!--inicio migas de pan-->
     <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
     <ol class="breadcrumb" style="--bs-breadcrumb-margin-bottom: 0rem;">
-    <li class="breadcrumb-item active" aria-current="page"><a href="index.php"><img src="./assets/images/house.svg" alt=""></a></li>
-    <li class="breadcrumb-item">Area Principal</li>
+    <?php if ($_SESSION['usuario']['tipo'] === 'clientes'): ?>
+    <li class="breadcrumb-item active" aria-current="page">
+        <a href="area_clientes.php"><img src="./assets/images/house.svg" alt=""></a>
+    </li>
+    <?php elseif ($_SESSION['usuario']['tipo'] === 'funcionarios'): ?>
+    <li class="breadcrumb-item active" aria-current="page">
+        <a href="area_funcionarios.php"><img src="./assets/images/house.svg" alt=""></a>
+    </li>
+    <?php endif; ?>
+    <li class="breadcrumb-item">Mi area</li>
     </ol>
     </nav>
     <!--fin migas de pan-->
@@ -101,38 +109,7 @@ $servicios = $consulta->fetchAll(PDO::FETCH_ASSOC);
 
      <h3 class="centrado">Historico Servicios:</h3>
 
-         <div class="soyPrincipal">
-        <!--inicio caja que se ira repetir dependendo del contenido de la pagina-->
-        <div class="listadoGeneral">
-        <?php foreach ($servicios as $servicio) { ?>
-            <div class="elementoCaja">
-                <p class="elementoCaja-timeinfo">Creado hace <span><?php echo tiempoTranscurrido($servicio['fechaServicio']); ?></span></p>    
-                <p class="elementoCaja-tituloServ"><?php echo htmlspecialchars($servicio['titulo']); ?></p>
-                <p class="elementoCaja-timeinfo"><?php echo htmlspecialchars($servicio['diaServicio']); ?></p> 
-                <p class="elementoCaja-descripcion"><?php echo htmlspecialchars($servicio['descripcion']); ?></p>
-                <div class="elementoCaja-data">
-                    <p class="data-dinero"><span><?php echo htmlspecialchars($servicio['valor']); ?></span>€</p>
-                    <p class="data-localidad"><img src="./assets/images/mappoint.svg" alt=""> <?php echo htmlspecialchars($servicio['provincia'] . " - " . $servicio['ciudad']); ?></p>
-                    <p class="data-person"><img src="./assets/images/personpc.svg" alt=""><span><?php echo htmlspecialchars($servicio['nombre_cliente']); ?></span></p>
-                    <p class="data-twork"><img src="./assets/images/handwork.svg" alt=""><span>Tipo:</span> <?php echo htmlspecialchars($servicio['tipoServicio']); ?></p>
-                    <p class="data-estado">
-    <?php 
-        echo "Estado: " . ucfirst($servicio['estado']); 
-        $estado = $servicio['estado'];
-        $clase = '';
-
-        // Definir la clase CSS según el estado
-        if ($estado == 'activo') $clase = 'estado-activo';
-        elseif ($estado == 'confirmacion') $clase = 'estado-confirmacion';
-        elseif ($estado == 'terminado') $clase = 'estado-terminado';
-    ?>
-    <span class="estado-indicador <?php echo $clase; ?>"></span>
-</p>
-                </div>
-            </div>
-        <?php } ?>
-    </div>
-    </div>
+        
 
     <div class="noHayHistorioco">
             <img class="centrado" src="./assets/images/historylogo.svg" alt="">

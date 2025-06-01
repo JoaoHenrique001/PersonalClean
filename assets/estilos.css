@@ -266,6 +266,9 @@ header.dark{
 .CajaDetalle.dark{
      background-color: #3C4B5B;
 }
+.conversasiones_persona > .conversasiones_nombre.dark {
+    color: white;
+}
 /*fin todo que va a ser cambiado a modo oscuro, despues tiene que agregar al script.js*/
 
 /*inicio elementos collaspe*/
@@ -1775,17 +1778,136 @@ color: black;
 /*fin mi area*/
 
 /*inicio chat*/
+/*inicio sidebar*/
 .areaChat{
     display: flex;
     flex-direction: row;
-
+    height: 100vh;
+    overflow: hidden;
 }
 .areaChat > .conversasiones {
+    height: 100%;
+    width: 222px;
+    padding-top: 7px;
+    border-right: solid black 1px;
+    overflow-y: auto;
+}
+.areaChat > .conversasiones > a > .conversasiones_persona{
+    display: flex;
+    flex-direction: row;
+    border-bottom: solid black 1px;
+    padding-left: 3px;
+     align-items: center;
+}
+.areaChat > .conversasiones > a {
+    color: black;
+     text-decoration: none;
+}
+.areaChat > .conversasiones > a > .conversasiones_persona > img {
+    width: 39px;
+    height: 39px;
+    margin-bottom: 4px;
+}
+.conversasiones_persona > .conversasiones_nombre {
+    font-size: 20px;
+    margin-left: 5px;
+    margin-top: 3px;
+    transition: 0.3s;
+    color: black;
+}
+.conversasiones_persona > .conversasiones_nombre:hover{
+     transform: scale(1.1);
+}
+.chatSelect{
+    background-color: #C8ACFF;
+}
+.areaChat > .chat {
+     width: 100%;
+    flex: 1; /* Ocupa todo el resto */
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow-y: auto; /* Scroll individual del chat */
+    padding: 10px;
+}
+/*fin sidebar*/
+
+/*inicio area mensajes*/
+.envioMensaje {
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    max-width: 800px;
+    padding: 10px;
+}
+.envioMensaje > form{
+    justify-self: center;
+}
+.envioMensaje > form > textarea{
+    width: 632px;
+    min-height: 34px;
+    height: 34px;
+    max-height: 80px;
+    background-color: #D9D9D9;
+    border-radius: 8px;
+    border: solid rgba(0, 0, 0, 0.5) 1px;
+    padding-left: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+}
+.envioMensaje > form > button{
+    border: solid black 0px;
+    background-color: #00000000;
+    position: absolute;
+    transition: 0.3s;
     
 }
-.areaCha > .chat{
-    
+.envioMensaje > form > button:hover{
+    transform: scale(1.2);
 }
+.chat > .cajaSecundario{
+    display: flex;
+    max-width: 451px;
+    background-color: #743EE0;
+    color: white;
+    align-self: flex-start;
+    border-radius: 0px 14px 14px 14px; 
+}
+.chat > .cajaSecundario > p{
+    margin: 7px; 
+    font-size: 16px;
+}
+.chat > .cajaSecundario > span{
+    font-size: 11px;
+    justify-self: end;
+    align-self: end;
+    margin-right: 8px;
+}
+.chat > .cajaPrincipal{
+    display: flex;
+    max-width: 451px;
+    background-color: #EBDF3D;
+    color: black;
+    align-self: flex-end;
+    border-radius: 14px 0px 14px 14px; 
+}
+.chat > .cajaPrincipal > p{
+    margin: 7px; 
+    font-size: 16px;
+}
+.chat > .cajaPrincipal > span{
+    font-size: 10px;
+    justify-self: end;
+    align-self: end;
+    margin-right: 8px;
+    display: flex;
+    flex-direction: row;
+}
+.chat > .cajaPrincipal > span > img{
+    margin-left: 4px;
+}
+/*fin area mensajes*/
 /*fin chat*/
 
 /*inicio @media query*/
