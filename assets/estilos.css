@@ -1508,12 +1508,20 @@ color: black;
     border: none;
     align-self: flex-end;
     margin-right: 44px;
+    margin-bottom: 4px;
+    transition: 0.3s;
+  }
+  .avisoContenido > button > a{
+    color: black;
     transition: 0.3s;
   }
   .avisoContenido > button:hover{
     background-color: #743EE0;
     color: white;
     cursor: pointer;
+  }
+  .avisoContenido > button > a:hover{
+     color: white;
   }
 /*fin caja de aviso*/
 
@@ -1594,6 +1602,10 @@ color: black;
     color: #7b7b7b;
     margin-bottom: 10px;
     height: 130.52px;
+    transition: 0.3s;
+}
+.elementoCaja:hover {
+    transform: scale(1.1);
 }
 .elementoCajaFuncionario{
     height: 100.52px;
@@ -1630,7 +1642,7 @@ color: black;
 /*inicio pagina crear servicio (clientes)*/
 .crearServ{
     width: 636px;
-    height: 360px;
+    height: 370px;
     margin-top: 91.15px;
     margin-bottom: 91.15px;
     border-radius: 14px;
