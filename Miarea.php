@@ -1,9 +1,13 @@
 <?php
 include './assets/ajax/conexionBD.php';
 session_start();
-echo "<pre>";
-var_dump($_SESSION);
-echo "</pre>";
+
+// Mostrar la sesión para depuración (se recomienda comentarlo en producción)
+// echo "<pre>";
+// var_dump($_SESSION);
+// echo "</pre>";
+
+// Función para calcular tiempo transcurrido
 function tiempoTranscurrido($fecha) {
     $ahora = new DateTime();
     $fechaServicio = new DateTime($fecha);
@@ -24,100 +28,119 @@ function tiempoTranscurrido($fecha) {
     }
 }
 
-// Obtener servicios desde la base de datos
-$sql = "SELECT s.*, c.nombre AS nombre_cliente, f.nombre AS nombre_funcionario 
-        FROM servicios s 
-        LEFT JOIN clientes c ON s.idcliente = c.idcliente 
-        LEFT JOIN funcionarios f ON s.idFuncionario = f.idFuncionarios
-        WHERE s.estado != 'terminado'";
+// Obtener el tipo de usuario
+$tipoUsuario = $_SESSION['usuario']['tipo'];
+$idUsuario = ($tipoUsuario === 'clientes') ? $_SESSION['usuario']['idCliente'] : $_SESSION['usuario']['idFuncionarios'];
 
-$consulta = $conexion->prepare($sql);
-$consulta->execute();
-$servicios = $consulta->fetchAll(PDO::FETCH_ASSOC);
+// Obtener servicios activos
+$sqlActivos = "SELECT s.*, c.nombre AS nombre_cliente, f.nombre AS nombre_funcionario 
+               FROM servicios s 
+               LEFT JOIN clientes c ON s.idcliente = c.idcliente 
+               LEFT JOIN funcionarios f ON s.idFuncionario = f.idFuncionarios
+               WHERE s.estado IN ('activo', 'confirmacion')
+               AND " . ($tipoUsuario === 'clientes' ? "s.idCliente = :idUsuario" : "s.idFuncionario = :idUsuario");
+
+$stmtActivos = $conexion->prepare($sqlActivos);
+$stmtActivos->bindValue(':idUsuario', $idUsuario, PDO::PARAM_INT);
+$stmtActivos->execute();
+$serviciosActivos = $stmtActivos->fetchAll(PDO::FETCH_ASSOC);
+
+// Obtener servicios históricos
+$sqlHistorico = "SELECT s.*, c.nombre AS nombre_cliente, f.nombre AS nombre_funcionario 
+                 FROM servicios s 
+                 LEFT JOIN clientes c ON s.idcliente = c.idcliente 
+                 LEFT JOIN funcionarios f ON s.idFuncionario = f.idFuncionarios
+                 WHERE s.estado = 'terminado'
+                 AND " . ($tipoUsuario === 'clientes' ? "s.idCliente = :idUsuario" : "s.idFuncionario = :idUsuario");
+
+$stmtHistorico = $conexion->prepare($sqlHistorico);
+$stmtHistorico->bindValue(':idUsuario', $idUsuario, PDO::PARAM_INT);
+$stmtHistorico->execute();
+$serviciosHistorico = $stmtHistorico->fetchAll(PDO::FETCH_ASSOC);
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagina Principal Funcionario | Personal Clean</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <title>Mi Área | Personal Clean</title>
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/998c60ef77.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./assets/estilos.css" />
     <script src="./assets/js/modoOscuro.js"></script>
-    <script src="./assets/js/cajaAviso.js"></script> <!--puede ser que crie otro archivo js-->
+    <script src="./assets/js/cajaAviso.js"></script>
     <link rel="icon" type="image/ico" href="./assets/images/logo.ico" />
 </head>
 <body>
     <?php include_once './assets/headerLogueado.php'; ?>
 
-      <!--inicio migas de pan-->
-    <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
-    <ol class="breadcrumb" style="--bs-breadcrumb-margin-bottom: 0rem;">
-    <?php if ($_SESSION['usuario']['tipo'] === 'clientes'): ?>
-    <li class="breadcrumb-item active" aria-current="page">
-        <a href="area_clientes.php"><img src="./assets/images/house.svg" alt=""></a>
-    </li>
-    <?php elseif ($_SESSION['usuario']['tipo'] === 'funcionarios'): ?>
-    <li class="breadcrumb-item active" aria-current="page">
-        <a href="area_funcionarios.php"><img src="./assets/images/house.svg" alt=""></a>
-    </li>
-    <?php endif; ?>
-    <li class="breadcrumb-item">Mi area</li>
-    </ol>
+     <!-- Migas de pan -->
+    <nav style="--bs-breadcrumb-divider: url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%278%27 height=%278%27%3E%3Cpath d=%27M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z%27 fill=%27%236c757d%27/%3E%3C/svg%3E');" aria-label="breadcrumb">
+        <ol class="breadcrumb" style="--bs-breadcrumb-margin-bottom: 0rem;">
+            <li class="breadcrumb-item active" aria-current="page">
+                <a href="index.php"><img src="./assets/images/house.svg" alt=""></a>
+            </li>
+            <li class="breadcrumb-item active"> <a href="<?php echo ($_SESSION['usuario']['tipo'] == 'funcionarios') ? 'area_funcionarios.php' : 'area_clientes.php'; ?>">Area Principal</a></li>
+            <li class="breadcrumb-item">Mi area</li>
+        </ol>
     </nav>
-    <!--fin migas de pan-->
+    <!-- Fin migas de pan -->
 
-     <h3 class="centrado">Mis servicios:</h3>
+    <h3 class="centrado">Mis servicios:</h3>
 
     <div class="soyPrincipal">
-        <!--inicio caja que se ira repetir dependendo del contenido de la pagina-->
         <div class="listadoGeneral">
-        <?php foreach ($servicios as $servicio) { ?>
-            <div class="elementoCaja">
-                <p class="elementoCaja-timeinfo">Creado hace <span><?php echo tiempoTranscurrido($servicio['fechaServicio']); ?></span></p>    
-                <p class="elementoCaja-tituloServ"><?php echo htmlspecialchars($servicio['titulo']); ?></p>
-                <p class="elementoCaja-timeinfo"><?php echo htmlspecialchars($servicio['diaServicio']); ?></p> 
-                <p class="elementoCaja-descripcion"><?php echo htmlspecialchars($servicio['descripcion']); ?></p>
-                <div class="elementoCaja-data">
-                    <p class="data-dinero"><span><?php echo htmlspecialchars($servicio['valor']); ?></span>€</p>
-                    <p class="data-localidad"><img src="./assets/images/mappoint.svg" alt=""> <?php echo htmlspecialchars($servicio['provincia'] . " - " . $servicio['ciudad']); ?></p>
-                    <p class="data-person"><img src="./assets/images/personpc.svg" alt=""><span><?php echo htmlspecialchars($servicio['nombre_cliente']); ?></span></p>
-                    <p class="data-twork"><img src="./assets/images/handwork.svg" alt=""><span>Tipo:</span> <?php echo htmlspecialchars($servicio['tipoServicio']); ?></p>
-                    <p class="data-estado">
-    <?php 
-        echo "Estado: " . ucfirst($servicio['estado']); 
-        $estado = $servicio['estado'];
-        $clase = '';
+            <?php if (!empty($serviciosActivos)): ?>
+                <?php foreach ($serviciosActivos as $servicio): ?>
+                    <div class="elementoCaja">
+                        <p class="elementoCaja-timeinfo">Creado hace <span><?php echo tiempoTranscurrido($servicio['fechaServicio']); ?></span></p>
+                        <p class="elementoCaja-tituloServ"><?php echo htmlspecialchars($servicio['titulo']); ?></p>
+                        <p class="elementoCaja-timeinfo"><?php echo htmlspecialchars($servicio['diaServicio']); ?></p>
+                        <p class="elementoCaja-descripcion"><?php echo htmlspecialchars($servicio['descripcion']); ?></p>
+                        <div class="elementoCaja-data">
+                            <p class="data-dinero"><span><?php echo htmlspecialchars($servicio['valor']); ?></span>€</p>
+                            <p class="data-localidad"><img src="./assets/images/mappoint.svg" alt=""> <?php echo htmlspecialchars($servicio['provincia'] . " - " . $servicio['ciudad']); ?></p>
+                            <p class="data-person"><img src="./assets/images/personpc.svg" alt=""><span><?php echo htmlspecialchars($servicio['nombre_cliente']); ?></span></p>
+                            <p class="data-twork"><img src="./assets/images/handwork.svg" alt=""><span>Tipo:</span> <?php echo htmlspecialchars($servicio['tipoServicio']); ?></p>
+                            <p class="data-estado">
+                                <?php 
+                                    echo "Estado: " . ucfirst($servicio['estado']); 
+                                    $clase = ($servicio['estado'] === 'activo') ? 'estado-activo' : 'estado-confirmacion';
+                                ?>
+                                <span class="estado-indicador <?php echo $clase; ?>"></span>
+                            </p>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p class="centrado">No hay servicios activos.</p>
+            <?php endif; ?>
+        </div>
+    </div>
 
-        // Definir la clase CSS según el estado
-        if ($estado == 'activo') $clase = 'estado-activo';
-        elseif ($estado == 'confirmacion') $clase = 'estado-confirmacion';
-        elseif ($estado == 'terminado') $clase = 'estado-terminado';
-    ?>
-    <span class="estado-indicador <?php echo $clase; ?>"></span>
-</p>
+    <h3 class="centrado">Histórico de Servicios:</h3>
+
+    <div class="soyPrincipal">
+        <div class="listadoGeneral">
+            <?php if (!empty($serviciosHistorico)): ?>
+                <?php foreach ($serviciosHistorico as $servicio): ?>
+                    <div class="elementoCaja">
+                        <p class="elementoCaja-timeinfo">Creado hace <span><?php echo tiempoTranscurrido($servicio['fechaServicio']); ?></span></p>
+                        <p class="elementoCaja-tituloServ"><?php echo htmlspecialchars($servicio['titulo']); ?></p>
+                        <p class="elementoCaja-timeinfo"><?php echo htmlspecialchars($servicio['diaServicio']); ?></p>
+                        <p class="elementoCaja-descripcion"><?php echo htmlspecialchars($servicio['descripcion']); ?></p>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <div class="noHayHistorioco">
+                    <img class="centrado" src="./assets/images/historylogo.svg" alt="">
+                    <h3>No hay histórico</h3>
                 </div>
-            </div>
-        <?php } ?>
-    </div>
-   
-    </div>
-
-     <h3 class="centrado">Historico Servicios:</h3>
-
-        
-
-    <div class="noHayHistorioco">
-            <img class="centrado" src="./assets/images/historylogo.svg" alt="">
-            <h3>no hay historico</h3>
+            <?php endif; ?>
+        </div>
     </div>
 
     <?php include_once './assets/footer.php'; ?>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>AOS.init();</script>
 </body>
 </html>

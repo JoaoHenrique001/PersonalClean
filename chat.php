@@ -86,7 +86,7 @@ if ($selected_chat_id) {
             <li class="breadcrumb-item active" aria-current="page">
                 <a href="index.php"><img src="./assets/images/house.svg" alt=""></a>
             </li>
-            <li class="breadcrumb-item">Area Principal</li>
+            <li class="breadcrumb-item active"> <a href="<?php echo ($_SESSION['usuario']['tipo'] == 'funcionarios') ? 'area_funcionarios.php' : 'area_clientes.php'; ?>">Area Principal</a></li>
             <li class="breadcrumb-item">Chat</li>
         </ol>
     </nav>
@@ -126,7 +126,10 @@ if ($selected_chat_id) {
                     </form>
                 </div>
             <?php else: ?>
+                <div class="mensajeVacio">
+                <img src="./assets/images/emptyMessages.svg" alt="">
                 <p>Seleccione un chat para ver los mensajes.</p>
+                </div>
             <?php endif; ?>
         </div>
     </div>

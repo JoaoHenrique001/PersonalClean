@@ -269,6 +269,12 @@ header.dark{
 .conversasiones_persona > .conversasiones_nombre.dark {
     color: white;
 }
+.centrado.dark{
+    color: white;
+}
+.mensajeVacio > p.dark{
+    color: white;
+}
 /*fin todo que va a ser cambiado a modo oscuro, despues tiene que agregar al script.js*/
 
 /*inicio elementos collaspe*/
@@ -1520,6 +1526,23 @@ color: black;
     color: white;
     cursor: pointer;
   }
+  .avisoContenido > form > button{
+     width: 145px;
+    height: 40px;
+    font-size: 16px;
+    border-radius: 14px;
+    background-color: #EBDF3D;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+    border: none;
+    align-self: flex-end;
+    margin-left: 344px;
+     transition: 0.3s;
+  }
+  .avisoContenido > form > button:hover{
+    background-color: #743EE0;
+    color: white;
+    cursor: pointer;
+  }
   .avisoContenido > button > a:hover{
      color: white;
   }
@@ -1707,6 +1730,21 @@ color: black;
 }
 #miProvincia, #miCiudad{ 
     width: 155px;
+}
+#contratarBtn{
+ margin-top: 22px;
+    width: 374px;
+    height: 40px;
+    background-color: #743EE0;
+    color: white;
+    border-radius: 14px;
+    border: 0px;
+    transition: 0.3s;
+}
+#contratarBtn:hover{
+ background-color: #EBDF3D;
+    color: black;
+    transform: scale(1.1);
 }
 /*fin pagina crear servicio (clientes)*/
 
@@ -1947,6 +1985,19 @@ color: black;
 .areaChat > .chat {
     scrollbar-width: thin;
     scrollbar-color: #743EE0 #f5f5f500;
+}
+.mensajeVacio{
+    align-self: center;
+    margin-top: 100px;
+}
+.mensajeVacio > img{
+    width: 140px;
+    height: 140px;
+    margin-left: 230px;
+}
+.mensajeVacio > p{
+    text-align: center;
+    font-size: 30px;
 }
 /*fin area mensajes*/
 /*fin chat*/
