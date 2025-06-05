@@ -72,14 +72,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <?php include_once './assets/headerLogueado.php'; ?>
 
-    <!-- Migas de pan -->
-    <nav>
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item active">
-                <a href="area_clientes.php">
-                    <img src="./assets/images/house.svg" alt="">
-                </a>
+     <!-- Migas de pan -->
+    <nav style="--bs-breadcrumb-divider: url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%278%27 height=%278%27%3E%3Cpath d=%27M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z%27 fill=%27%236c757d%27/%3E%3C/svg%3E');" aria-label="breadcrumb">
+        <ol class="breadcrumb" style="--bs-breadcrumb-margin-bottom: 0rem;">
+            <li class="breadcrumb-item active" aria-current="page">
+                <a href="index.php"><img src="./assets/images/house.svg" alt=""></a>
             </li>
+            <li class="breadcrumb-item active"> <a href="<?php echo ($_SESSION['usuario']['tipo'] == 'funcionarios') ? 'area_funcionarios.php' : 'area_clientes.php'; ?>">Area Principal</a></li>
             <li class="breadcrumb-item">Crear Servicio</li>
         </ol>
     </nav>
@@ -90,12 +89,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <form action="" method="POST">
             <div class="crearServ-campos">
                 <div class="crearServ-izq">
-                    <input type="text" placeholder="Título" name="titulo" required>
-                    <textarea placeholder="Descripción" name="descripcion" required></textarea>
+                    <input type="text" placeholder="Título" name="titulo" id="tituloServ" required>
+                    <textarea placeholder="Descripción" name="descripcion" id="descripcion" required></textarea>
                 </div>
                 <div class="crearServ-derec">
                     <div class="crearServ-campJ">
-                        <input type="number" placeholder="Valor (€)" name="valor" required>
+                        <input type="number" placeholder="Valor (€)" name="valor" id="valor" min="10" max="9999" required>
                         <select name="diaServicio" required>
                             <option value="">Día Servicio</option>
                             <option value="Lunes">Lunes</option>
@@ -113,10 +112,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <option value="Cuidado de mayores - Semanal">Cuidado de mayores - Semanal</option>
                         <option value="Cuidado de niños - Puntual">Cuidado de niños - Puntual</option>
                         <option value="Cuidado de niños - Semanal">Cuidado de niños - Semanal</option>
+                        <option value="Cristales - Puntual">Cristales - Puntual</option>
+                        <option value="Cristales - Semanal">Cristales - Semanal</option>
+                        <option value="Cuidado de mascotas - Puntual">Cuidado de mascotas - Puntual</option>
+                        <option value="Cuidado de mascotas - Semanal">Cuidado de mascotas - Semanal</option>
+                        <option value="Desinfección - Puntual">Desinfección - Puntual</option>
+                        <option value="Desinfección - Semanal">Desinfección - Semanal</option>
+                        <option value="Jardinería - Puntual">Jardinería - Puntual</option>
+                        <option value="Jardinería - Semanal">Jardinería - Semanal</option>
+                        <option value="Lavandería - Puntual">Lavandería - Puntual</option>
+                        <option value="Lavandería - Semanal">Lavandería - Semanal</option>
                         <option value="Limpieza - Puntual">Limpieza - Puntual</option>
                         <option value="Limpieza - Semanal">Limpieza - Semanal</option>
+                        <option value="Limpieza de garaje - Puntual">Limpieza de garaje - Puntual</option>
+                        <option value="Limpieza de garaje - Semanal">Limpieza de garaje - Semanal</option>
+                        <option value="Limpieza post-obra - Puntual">Limpieza post-obra - Puntual</option>
+                        <option value="Limpieza post-obra - Semanal">Limpieza post-obra - Semanal</option>
+                        <option value="Limpieza profunda - Puntual">Limpieza profunda - Puntual</option>
+                        <option value="Limpieza profunda - Semanal">Limpieza profunda - Semanal</option>
+                        <option value="Organización - Puntual">Organización - Puntual</option>
+                        <option value="Organización - Semanal">Organización - Semanal</option>
+                        <option value="Plancha - Puntual">Plancha - Puntual</option>
+                        <option value="Plancha - Semanal">Plancha - Semanal</option>
+                        <option value="Recolección de basura - Puntual">Recolección de basura - Puntual</option>Add commentMore actions
+                        <option value="Recolección de basura - Semanal">Recolección de basura - Semanal</option>
+                        <option value="Tapicería - Puntual">Tapicería - Puntual</option>
+                        <option value="Tapicería - Semanal">Tapicería - Semanal</option>
+                        <option value="Ventanas - Puntual">Ventanas - Puntual</option>
+                        <option value="Ventanas - Semanal">Ventanas - Semanal</option>
                     </select>
-                    <input type="text" placeholder="Mi dirección" name="miDireccion" value="<?php echo htmlspecialchars($direccion); ?>">
+                    <input type="text" placeholder="Mi dirección" name="miDireccion" id="miDireccion" value="<?php echo htmlspecialchars($direccion); ?>">
                     <select name="miProvincia">
                         <option value="<?php echo htmlspecialchars($provincia); ?>"><?php echo htmlspecialchars($provincia); ?></option>
                     </select>

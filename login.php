@@ -60,8 +60,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Login | Personal Clean</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="./assets/estilos.css">
-    <link rel="icon" type="image/ico" href="./assets/images/logo.ico">
     <script src="./assets/js/modoOscuro.js"></script>
+    <link rel="icon" type="image/ico" href="./assets/images/logo.ico">
 </head>
 <body>
     <?php include './assets/switchModoClaroOscuro.php'; ?>

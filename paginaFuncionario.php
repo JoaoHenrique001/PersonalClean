@@ -118,9 +118,27 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['idServicioSeleccionad
         <!-- Sección de Valoraciones -->
         <div class="valoraciones">
             <h2>Valoraciones de Clientes:</h2>
+
             <div class="espacioValoraciones">
+                <!--caso de que se tenga valoraciones-->
+                <div class="dataValoracion">
+                    <div class="cantidadEstrellas">
+                        <img src="./assets/images/fullstar.svg" alt="">
+                        <img src="./assets/images/fullstar.svg" alt="">
+                        <img src="./assets/images/fullstar.svg" alt="">
+                        <img src="./assets/images/fullstar.svg" alt="">
+                    </div>
+                    <p>
+                    <b>4.8</b>
+                    Ha trabajado muy bien, muy pontual y muy profesional
+                    </p>
+                </div>
+                <!--caso de que se tenga valoraciones-->
+
+                <!--caso de que no tenga valoraciones-->
                 <img src="./assets/images/nodataicon.svg" alt="">
                 <h3>No hay valoraciones</h3>
+                <!--caso de que no tenga valoraciones-->
             </div>
         </div>
     </div>
@@ -128,12 +146,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['idServicioSeleccionad
     <!-- Caja de selección de servicio (visible solo después de hacer clic en "Contratar") -->
     <div id="cajaid" class="cajaAviso" style="display: none;">
         <div id="avisoGeneral" class="avisoContenido">
-            <h2>Selecciona un servicio para asignar a este funcionario</h2>
+            <h2>Selecciona uno de sus servicio para asignar a este funcionario</h2>
             <form method="POST">
                 <input type="hidden" name="idFuncionarioSeleccionado" value="<?php echo $idFuncionario; ?>">
-                <label for="idServicioSeleccionado">Servicios disponibles:</label>
                 <select name="idServicioSeleccionado" id="idServicioSeleccionado" required>
-                    <option value="">Seleccione un servicio...</option>
+                    <option value="">Elegir un servicio...</option>
                     <?php foreach ($serviciosDisponibles as $servicio): ?>
                         <option value="<?php echo $servicio['idServicio']; ?>">
                             <?php echo htmlspecialchars($servicio['titulo']); ?>
