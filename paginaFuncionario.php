@@ -53,6 +53,28 @@ $serviciosDisponibles = $stmtServicios->fetchAll(PDO::FETCH_ASSOC);
 // Variable para controlar la visualización de la tarjeta emergente
 $mostrarCard = false;
 
+// Obtener las valoraciones del funcionario desde la tabla "valoraciones_clientes"
+$sqlValoraciones = "SELECT estrellas, comentario FROM valoraciones_clientes WHERE idFuncionario = :idFuncionario";
+$stmtValoraciones = $conexion->prepare($sqlValoraciones);
+$stmtValoraciones->bindValue(':idFuncionario', $idFuncionario, PDO::PARAM_INT);
+$stmtValoraciones->execute();
+$valoraciones = $stmtValoraciones->fetchAll(PDO::FETCH_ASSOC);
+
+$hayValoraciones = count($valoraciones) > 0;
+$promedioValoracion = 0;
+$comentarioPrincipal = "";
+
+if ($hayValoraciones) {
+    $sumaEstrellas = 0;
+    foreach ($valoraciones as $val) {
+         $sumaEstrellas += $val['estrellas'];
+    }
+    $promedioValoracion = round($sumaEstrellas / count($valoraciones), 1);
+    // Se toma el comentario del primer registro (puedes modificar para que se muestre el más reciente)
+    $comentarioPrincipal = $valoraciones[0]['comentario'];
+}
+$mostrarCard = false;
+
 // Procesamiento del formulario de contratación
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['idServicioSeleccionado'])) {
     $idServicioSeleccionado = (int)$_POST['idServicioSeleccionado'];
@@ -115,30 +137,37 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['idServicioSeleccionad
             <button id="contratarBtn">Contratar</button>
         </div>
 
-        <!-- Sección de Valoraciones -->
-        <div class="valoraciones">
+      <div class="valoraciones">
             <h2>Valoraciones de Clientes:</h2>
-
             <div class="espacioValoraciones">
-                <!--caso de que se tenga valoraciones-->
-                <div class="dataValoracion">
-                    <div class="cantidadEstrellas">
-                        <img src="./assets/images/fullstar.svg" alt="">
-                        <img src="./assets/images/fullstar.svg" alt="">
-                        <img src="./assets/images/fullstar.svg" alt="">
-                        <img src="./assets/images/fullstar.svg" alt="">
-                    </div>
-                    <p>
-                    <b>4.8</b>
-                    Ha trabajado muy bien, muy pontual y muy profesional
-                    </p>
-                </div>
-                <!--caso de que se tenga valoraciones-->
-
-                <!--caso de que no tenga valoraciones-->
-                <img src="./assets/images/nodataicon.svg" alt="">
-                <h3>No hay valoraciones</h3>
-                <!--caso de que no tenga valoraciones-->
+                <?php if ($hayValoraciones): ?>
+                    <?php foreach ($valoraciones as $val): 
+                        // Calcular la cantidad de estrellas a mostrar: la mitad de la puntuación
+                        // Por ejemplo, si $val['estrellas'] es 8, entonces fullStars = floor(8/2) = 4 y emptyStars = 5 - 4 = 1.
+                        $fullStars = floor($val['estrellas'] / 2);
+                        $emptyStars = 5 - $fullStars;
+                    ?>
+                        <div class="dataValoracion">
+                            <div class="cantidadEstrellas">
+                                <?php 
+                                for ($i=0; $i < $fullStars; $i++) {
+                                    echo '<img src="./assets/images/fullstar.svg" alt="Full Star">';
+                                }
+                                for ($j=0; $j < $emptyStars; $j++) {
+                                    echo '<img src="./assets/images/hollowstar.svg" alt="Hollow Star">';
+                                }
+                                ?>
+                            </div>
+                            <p>
+                                <b><?php echo htmlspecialchars(round($val['estrellas']/2,1)); ?></b> - 
+                                <?php echo htmlspecialchars($val['comentario']); ?>
+                            </p>
+                        </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <img src="./assets/images/nodataicon.svg" alt="">
+                    <h3>No hay valoraciones</h3>
+                <?php endif; ?>
             </div>
         </div>
     </div>

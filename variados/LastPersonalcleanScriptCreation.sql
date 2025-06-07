@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-06-2025 a las 19:09:45
+-- Tiempo de generación: 08-06-2025 a las 00:17:26
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -60,7 +60,10 @@ CREATE TABLE `chats` (
 INSERT INTO `chats` (`idchats`, `idCliente`, `idFuncionario`) VALUES
 (1, 10, 10),
 (2, 8, 8),
-(3, 7, 7);
+(3, 7, 7),
+(4, 4, 8),
+(5, 8, 11),
+(6, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -169,13 +172,38 @@ CREATE TABLE `mensajes` (
 --
 
 INSERT INTO `mensajes` (`idmensajes`, `idChat`, `contenido`, `envia`, `fechaHora`, `visto`) VALUES
-(1, 1, 'Hola, necesito ayuda con el servicio de limpieza.', '0', '2025-06-01 19:05:16', 'no'),
-(2, 1, 'Hola, claro, ¿en qué podemos ayudarte?', '0', '2025-06-01 19:05:16', 'si'),
-(3, 1, 'Quiero cambiar la fecha de la limpieza.', '0', '2025-06-01 19:05:16', 'no'),
-(4, 2, 'Buenos días, ¿ya confirmaron mi solicitud?', '0', '2025-06-01 19:05:16', 'no'),
-(5, 2, 'Sí, está confirmada para mañana a las 9am.', '0', '2025-06-01 19:05:16', 'si'),
-(6, 3, 'Hola, tuve un problema con el servicio anterior.', '0', '2025-06-01 19:05:16', 'no'),
-(7, 3, '¿Podrías especificar qué ocurrió?', '0', '2025-06-01 19:05:16', 'si');
+(1, 1, 'Hola, necesito ayuda con el servicio de limpieza.', 'cliente', '19:05:16', 'no'),
+(2, 1, 'Hola, claro, ¿en qué podemos ayudarte?', 'funcionario', '19:05:16', 'si'),
+(3, 1, 'Quiero cambiar la fecha de la limpieza.', 'cliente', '19:05:16', 'no'),
+(4, 2, 'Buenos días, ¿ya confirmaron mi solicitud?', 'funcionario', '19:05:16', 'no'),
+(5, 2, 'Sí, está confirmada para mañana a las 9am.', 'cliente', '19:05:16', 'si'),
+(6, 3, 'Hola, tuve un problema con el servicio anterior.', 'funcionario', '19:05:16', 'no'),
+(7, 3, '¿Podrías especificar qué ocurrió?', 'cliente', '19:05:16', 'si'),
+(8, 2, 'eso es bueno', 'funcionario', '22:21:26', 'si'),
+(9, 2, 'entonces llegare ahi a las 8:30 mas o menos', 'funcionario', '22:24:08', 'si'),
+(10, 4, 'Hola Buenas que tal?', 'funcionario', '22:40:02', 'si'),
+(11, 4, 'Olá, preciso de ajuda com meu pedido.', 'cliente', '23:12', 'no'),
+(12, 4, 'Bom dia! Claro, em que posso te ajudar?', 'funcionario', '10:13', 'no'),
+(13, 4, 'Meu pedido ainda não chegou. Fiz a compra há 10 dias.', 'cliente', '10:14', 'no'),
+(14, 4, 'Você poderia me informar o número do pedido?', 'funcionario', '10:15', 'no'),
+(15, 4, 'Claro! É o #20250485.', 'cliente', '2025-06-01 10:16', 'no'),
+(16, 4, 'Obrigado. Vou verificar e já te retorno.', 'funcionario', '2025-06-01 10:17', 'no'),
+(17, 4, 'Perfeito, obrigado.', 'cliente', '2025-06-01 10:18', 'no'),
+(18, 4, 'Verifiquei aqui, o pedido está a caminho e deve chegar até amanhã.', 'funcionario', '2025-06-01 10:20', 'no'),
+(19, 4, 'Ótimo, agradeço pela ajuda!', 'cliente', '2025-06-01 10:21', 'no'),
+(20, 4, 'Disponha! Qualquer coisa, é só chamar.', 'funcionario', '2025-06-01 10:22', 'no'),
+(21, 4, 'Ah, e outra dúvida: posso trocar o endereço de entrega?', 'cliente', '2025-06-01 10:24', 'no'),
+(22, 4, 'Se o pedido ainda não saiu para entrega, sim! Qual seria o novo endereço?', 'funcionario', '2025-06-01 10:25', 'no'),
+(23, 4, 'Rua das Palmeiras, 120, apartamento 302.', 'cliente', '2025-06-01 10:26', 'no'),
+(24, 4, 'Anotado! Vou solicitar a alteração agora mesmo.', 'funcionario', '2025-06-01 10:27', 'no'),
+(25, 4, 'Obrigado. Você é sempre muito atencioso!', 'cliente', '2025-06-01 10:28', 'no'),
+(26, 4, 'Fico feliz em ajudar :)', 'funcionario', '2025-06-01 10:29', 'no'),
+(27, 4, 'Se tiver qualquer atualização, me avisa por aqui?', 'cliente', '2025-06-01 10:30', 'no'),
+(28, 4, 'Claro! Assim que tiver retorno da transportadora, te aviso.', 'funcionario', '2025-06-01 10:31', 'no'),
+(29, 4, 'Perfeito. Agradeço mais uma vez.', 'cliente', '2025-06-01 10:32', 'no'),
+(30, 4, 'Disponha. Tenha um ótimo dia!', 'funcionario', '2025-06-01 10:33', 'no'),
+(31, 5, 'quiero trabajo', 'funcionario', '2025-06-03 23:44:05', 'si'),
+(32, 6, 'Quiero Curro tio', 'funcionario', '2025-06-04 23:53:24', 'si');
 
 -- --------------------------------------------------------
 
@@ -189,9 +217,40 @@ CREATE TABLE `pedidos_servicios` (
   `idFuncionario` int(11) NOT NULL,
   `activo` enum('si','no') NOT NULL,
   `descripcion` varchar(1000) DEFAULT NULL,
-  `valorAlternativo` decimal(5,2) DEFAULT NULL,
-  `diaServicioAlternativo` varchar(45) DEFAULT NULL
+  `valorAlternativo` decimal(5,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `pedidos_servicios`
+--
+
+INSERT INTO `pedidos_servicios` (`idpedidoServicio`, `idServicio`, `idFuncionario`, `activo`, `descripcion`, `valorAlternativo`) VALUES
+(1, 1, 1, 'no', 'soy buen trabajando', 90.00),
+(2, 1, 2, 'no', 'tambien soy bueno en el trabajo', 100.00),
+(3, 4, 3, 'no', 'quiero curro', 120.00),
+(4, 98, 3, 'no', 'curro', 200.00),
+(5, 1, 3, 'no', 'cocinar yo se', 200.00),
+(6, 99, 11, 'no', 'quiero trabajo', 300.00),
+(7, 99, 11, 'no', 'quiero trabajo', 300.00),
+(8, 3, 1, 'no', 'Quiero Curro tio', 999.99),
+(9, 3, 1, 'no', 'Quiero Curro tio', 999.99),
+(10, 3, 1, 'no', 'Quiero Curro tio', 999.99),
+(11, 3, 1, 'no', 'Quiero Curro tio', 999.99),
+(12, 3, 1, 'no', 'Quiero Curro tio', 999.99),
+(13, 3, 1, 'no', 'Quiero Curro tio', 999.99),
+(14, 3, 1, 'no', 'Quiero Curro tio', 999.99),
+(15, 3, 1, 'no', 'Quiero Curro tio', 999.99),
+(16, 3, 1, 'no', 'Quiero Curro tio', 999.99),
+(17, 3, 1, 'no', 'Quiero Curro tio', 999.99),
+(18, 3, 1, 'no', 'Quiero Curro tio', 999.99),
+(19, 3, 1, 'no', 'Quiero Curro tio', 999.99),
+(20, 3, 1, 'no', 'Quiero Curro tio', 999.99),
+(21, 3, 1, 'no', 'Quiero Curro tio', 999.99),
+(22, 3, 1, 'no', 'Quiero Curro tio', 999.99),
+(23, 3, 1, 'no', 'Quiero Curro tio', 999.99),
+(24, 3, 1, 'no', 'Quiero Curro tio', 999.99),
+(25, 3, 1, 'no', 'Quiero Curro tio', 999.99),
+(26, 3, 1, 'no', 'Quiero Curro tio', 999.99);
 
 -- --------------------------------------------------------
 
@@ -229,10 +288,12 @@ INSERT INTO `servicios` (`idServicio`, `idcliente`, `idFuncionario`, `fechaServi
 (92, 4, 3, '2025-06-04', 'terminado', 'Limpieza express', 'Limpieza ligera por visita', 'Express', 30.00, 'Jueves', 'Calle D', 'Sevilla', 'Sevilla', 'si'),
 (95, 3, 6, '2025-06-05', 'activo', 'Cristales', 'Limpieza de ventanas', 'Cristales', 60.00, 'Viernes', 'Calle E', 'Valencia', 'Valencia', 'no'),
 (97, 7, 6, '2025-06-06', 'confirmacion', 'Sofás', 'Limpieza de tapicerías', 'Tapicería', 70.00, 'Sábado', 'Calle F', 'Valencia', 'Valencia', 'no'),
-(98, 7, 7, '2025-06-07', 'activo', 'Armarios', 'Organización y limpieza de armarios', 'Organización', 40.00, 'Domingo', 'Calle G', 'Barcelona', 'Barcelona', 'no'),
+(98, 7, 7, '2025-06-07', 'confirmacion', 'Armarios', 'Organización y limpieza de armarios', 'Organización', 40.00, 'Domingo', 'Calle G', 'Barcelona', 'Barcelona', 'no'),
 (99, 8, 8, '2025-06-08', 'activo', 'Despacho', 'Limpieza de oficina en casa', 'Limpieza puntual', 55.00, 'Lunes', 'Calle H', 'Barcelona', 'Barcelona', 'no'),
 (100, 9, 9, '2025-06-09', 'terminado', 'Garaje', 'Limpieza y orden en garaje', 'Espacios grandes', 90.00, 'Martes', 'Calle I', 'Bilbao', 'Bilbao', 'si'),
-(101, 10, 10, '2025-06-10', 'confirmacion', 'Terraza', 'Limpieza y mantenimiento de terrazas', 'Exterior', 65.00, 'Miércoles', 'Calle J', 'Bilbao', 'Bilbao', 'no');
+(101, 10, 10, '2025-06-10', 'confirmacion', 'Terraza', 'Limpieza y mantenimiento de terrazas', 'Exterior', 65.00, 'Miércoles', 'Calle J', 'Bilbao', 'Bilbao', 'no'),
+(102, 2, 9, '2025-06-05', 'activo', 'experiencia 1', 'la propria exclavitud en persona', 'Cuidado de mayores - Semanal', 10.00, 'Lunes', 'Calle Falsa 123, Piso 3123', 'Madrid', 'Belmonte de Tajo', 'no'),
+(103, 2, NULL, '2025-06-05', 'activo', 'experiencia 1', 'la propria exclavitud en persona', 'Cuidado de mayores - Semanal', 10.00, 'Lunes', 'Calle Falsa 123, Piso 3123', 'Madrid', 'Belmonte de Tajo', 'no');
 
 -- --------------------------------------------------------
 
@@ -273,22 +334,23 @@ CREATE TABLE `valoraciones_servicios` (
   `idServicio` int(11) NOT NULL,
   `estrellas` int(11) DEFAULT NULL,
   `comentario` varchar(45) NOT NULL,
-  `idFuncionario` int(11) NOT NULL
+  `idFuncionario` int(11) NOT NULL,
+  `idCliente` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Volcado de datos para la tabla `valoraciones_servicios`
 --
 
-INSERT INTO `valoraciones_servicios` (`idvaloraciones_servicios`, `idServicio`, `estrellas`, `comentario`, `idFuncionario`) VALUES
-(1, 1, 9, 'Cliente educado y colaborador, todo salió bie', 1),
-(2, 2, 6, 'El cliente fue algo exigente, pero respetuoso', 2),
-(3, 3, 10, 'Cliente excelente, tenía todo preparado antes', 3),
-(4, 1, 5, 'Hubo dificultad en la comunicación, el servic', 2),
-(5, 2, 7, 'Todo bien en general, aunque había bastante d', 1),
-(6, 3, 4, 'Cliente tóxico, hizo comentarios irrespetuoso', 3),
-(7, 1, 8, 'Buen cliente, pagó a tiempo y permitió trabaj', 1),
-(8, 2, 10, 'Servicio perfecto, cliente muy respetuoso.', 2);
+INSERT INTO `valoraciones_servicios` (`idvaloraciones_servicios`, `idServicio`, `estrellas`, `comentario`, `idFuncionario`, `idCliente`) VALUES
+(1, 1, 9, 'Cliente educado y colaborador, todo salió bie', 1, 5),
+(2, 2, 6, 'El cliente fue algo exigente, pero respetuoso', 2, 3),
+(3, 3, 10, 'Cliente excelente, tenía todo preparado antes', 3, 3),
+(4, 1, 5, 'Hubo dificultad en la comunicación, el servic', 2, 5),
+(5, 2, 7, 'Todo bien en general, aunque había bastante d', 1, 2),
+(6, 3, 4, 'Cliente tóxico, hizo comentarios irrespetuoso', 3, 3),
+(7, 1, 8, 'Buen cliente, pagó a tiempo y permitió trabaj', 1, 5),
+(8, 2, 10, 'Servicio perfecto, cliente muy respetuoso.', 2, 2);
 
 --
 -- Índices para tablas volcadas
@@ -357,7 +419,8 @@ ALTER TABLE `valoraciones_clientes`
 ALTER TABLE `valoraciones_servicios`
   ADD PRIMARY KEY (`idvaloraciones_servicios`),
   ADD KEY `fk_val_serv_idServicio` (`idServicio`),
-  ADD KEY `fk_val_serv_idFuncionario` (`idFuncionario`);
+  ADD KEY `fk_val_serv_idFuncionario` (`idFuncionario`),
+  ADD KEY `fk_valoracion_cliente` (`idCliente`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -373,7 +436,7 @@ ALTER TABLE `administradores`
 -- AUTO_INCREMENT de la tabla `chats`
 --
 ALTER TABLE `chats`
-  MODIFY `idchats` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idchats` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `clientes`
@@ -391,19 +454,19 @@ ALTER TABLE `funcionarios`
 -- AUTO_INCREMENT de la tabla `mensajes`
 --
 ALTER TABLE `mensajes`
-  MODIFY `idmensajes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idmensajes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT de la tabla `pedidos_servicios`
 --
 ALTER TABLE `pedidos_servicios`
-  MODIFY `idpedidoServicio` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idpedidoServicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de la tabla `servicios`
 --
 ALTER TABLE `servicios`
-  MODIFY `idServicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
+  MODIFY `idServicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
 
 --
 -- AUTO_INCREMENT de la tabla `valoraciones_clientes`
@@ -460,7 +523,8 @@ ALTER TABLE `valoraciones_clientes`
 --
 ALTER TABLE `valoraciones_servicios`
   ADD CONSTRAINT `fk_val_serv_idFuncionario` FOREIGN KEY (`idFuncionario`) REFERENCES `funcionarios` (`idfuncionarios`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_val_serv_idServicio` FOREIGN KEY (`idServicio`) REFERENCES `servicios` (`idServicio`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_val_serv_idServicio` FOREIGN KEY (`idServicio`) REFERENCES `servicios` (`idServicio`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_valoracion_cliente` FOREIGN KEY (`idCliente`) REFERENCES `clientes` (`idCliente`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
