@@ -24,7 +24,7 @@ $usuarioLogueado = isset($_SESSION['usuario']);
     <!--fin framework fontawesome-->
 
     <!--enlace de css-->
-    <link rel="stylesheet" href="./assets/estilos.css">
+    <link rel="stylesheet" href="./assets/estilos.css?v=123">
     <!--enlace de css-->
 
     <!--enlace de script.js-->
@@ -61,12 +61,20 @@ $usuarioLogueado = isset($_SESSION['usuario']);
         <div class="contenido-sobreNosotros">
         <img src="./assets/images/pqContractarnos.png" alt="">
 
-        <p class="sobreTexto"> En <strong>Personal Clean</strong>, no solo limpiamos espacios, <em>transformamos ambientes</em>. Nuestro objetivo es que cada cliente sienta la tranquilidad de estar en un lugar <span class="destacado">limpio, seguro y acogedor</span>. </p> <p class="sobreTexto"> ¿Por qué elegirnos? Porque ofrecemos mucho más que un servicio: brindamos <strong>resultados visibles</strong>, <strong>trato humano</strong> y <strong>soluciones personalizadas</strong>, adaptadas a tus necesidades reales. </p> <p class="sobreTexto"> Nuestro equipo está formado por profesionales <span class="destacado">entrenados, responsables y apasionados</span> por lo que hacen. Trabajamos con <strong>productos certificados</strong> y aplicamos <em>técnicas actuales</em> que garantizan una limpieza eficiente y respetuosa con tu entorno. </p> <p class="sobreTexto"> Cada detalle importa. Por eso, nos enfocamos en ofrecer un servicio que combine <strong>eficacia, confianza y cercanía</strong>. Nos esforzamos para que cada experiencia con Personal Clean sea <span class="destacado">satisfactoria y libre de preocupaciones</span>. </p> <p class="sobreTexto"> Puntualidad, compromiso y transparencia son pilares que nos definen. <strong>Nos tomamos tu tiempo en serio</strong> y cuidamos cada espacio como si fuera nuestro. </p> <p class="sobreTexto"> <strong>Elegir Personal Clean</strong> es optar por una empresa que entiende que la limpieza va más allá del orden: es bienestar, salud y calidad de vida. <span class="destacado">Confía en nosotros y descubre cómo podemos hacer la diferencia en tu día a día.</span> </p>
+        <p class="sobreTexto"> En <strong>Personal Clean</strong>, no solo limpiamos espacios, <em>transformamos ambientes</em>. Nuestro objetivo es que cada cliente sienta la tranquilidad de estar en un lugar <span class="destacado">limpio, seguro y acogedor</span>. </p>
+        <p class="sobreTexto"> ¿Por qué elegirnos? Porque ofrecemos mucho más que un servicio: brindamos <strong>resultados visibles</strong>, <strong>trato humano</strong> y <strong>soluciones personalizadas</strong>, adaptadas a tus necesidades reales. </p>
+        <p class="sobreTexto"> Nuestro equipo está formado por profesionales <span class="destacado">entrenados, responsables y apasionados</span> por lo que hacen. Trabajamos con <strong>productos certificados</strong> y aplicamos <em>técnicas actuales</em> que garantizan una limpieza eficiente y respetuosa con tu entorno. </p>
+        <p class="sobreTexto"> Cada detalle importa. Por eso, nos enfocamos en ofrecer un servicio que combine <strong>eficacia, confianza y cercanía</strong>. Nos esforzamos para que cada experiencia con Personal Clean sea <span class="destacado">satisfactoria y libre de preocupaciones</span>. </p>
+        <p class="sobreTexto"> Puntualidad, compromiso y transparencia son pilares que nos definen. <strong>Nos tomamos tu tiempo en serio</strong> y cuidamos cada espacio como si fuera nuestro. </p> <p class="sobreTexto"> <strong>Elegir Personal Clean</strong> es optar por una empresa que entiende que la limpieza va más allá del orden: es bienestar, salud y calidad de vida. <span class="destacado">Confía en nosotros y descubre cómo podemos hacer la diferencia en tu día a día.</span> </p>
         </div>
       </div>
     <!--fin Main-->
 
-    
+    <!--inicio footer-->
+    <?php
+    include_once './assets/footer.php'
+    ?>
+    <!--fin footer-->
  
 </body>
     <!--inicio framework CSS y Js de AOS-->

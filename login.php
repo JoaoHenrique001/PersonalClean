@@ -41,7 +41,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'ciudad' => $user['ciudad'],
                 'tipo' => $tabla
                  ];}else{
-                
+                  $_SESSION['usuario'] = [
+                'nombre' => $user['nombre'],
+                'tipo' => $tabla
+                 ];
             }
 
             header("Location: " . $redirect);

@@ -11,7 +11,7 @@
              </button>
              <ul class="dropdown-menu">
                <li><a class="dropdown-item" href="../sobreNosotros.php">Sobre Nosotros</a></li>
-               <li><a class="dropdown-item" href="../porqueContractarnos.php">¿Por qué contratarnos?</a></li>
+               <li><a class="dropdown-item" href="../porqueContratarnos.php">¿Por qué contratarnos?</a></li>
              </ul>
              <button id="bottonHeader" type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
                  Servicios
@@ -74,8 +74,8 @@
     </h2>
     <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionTel">
       <div id="BotoTel" class="accordion-body">
-      <a class="dropdown-item" href="#">Sobre Nosotros</a>
-      <a class="dropdown-item" href="#">Por qué contratarnos</a>
+      <a class="dropdown-item" href="../sobreNosotros.php">Sobre Nosotros</a>
+      <a class="dropdown-item" href="../porqueContratarnos.php">Por qué contratarnos</a>
       </div>
     </div>
   </div>
@@ -102,8 +102,8 @@
     </h2>
     <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionTel">
       <div id="BotoTel" class="accordion-body">
-      <a class="dropdown-item" href="#">Solicitacion de empleo</a>
-      <a class="dropdown-item" href="#">Ofertas de Empleo</a>
+      <a class="dropdown-item" href="../nuestrosFuncionarios.php">Nuestros funcionarios</a>
+      <a class="dropdown-item" href="../ofertasDeEmpleo.php">Ofertas de Empleo</a>
       <a class="dropdown-item" href="../contacto.php">Contacto</a>
       </div>
     </div>

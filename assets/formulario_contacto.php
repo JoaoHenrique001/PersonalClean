@@ -7,11 +7,7 @@
             Contacta con nosostros
         </h1>
         <p data-aos-duration="1000" data-aos-delay="200"  data-aos="fade-right" data-aos-once="true">Cualquier duda, por favor, rellene el formulario. Le responderemos lo más rápido posible.</p>
-        <button data-aos-duration="1000" data-aos-delay="300"  data-aos="fade-right" data-aos-once="true">
-            <span>
-           Solicitacion de empleo 
-            </span>
-        </button>
+   
         <img data-aos-duration="1000" data-aos-delay="400"  data-aos="fade-right" src="./assets/images/telefono.jpg" alt="" data-aos-once="true">
     </div>
     <!--fin espacio ezquierdo de la div de contacto-->

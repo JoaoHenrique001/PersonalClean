@@ -74,6 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelectorAll('.conversasiones_persona > .conversasiones_nombre').forEach(el => el.classList.add('dark'));
         document.querySelectorAll('.centrado').forEach(el => el.classList.add('dark'));
         document.querySelectorAll('.mensajeVacio > p').forEach(el => el.classList.add('dark'));
+        document.querySelectorAll('.sobreTexto').forEach(el => el.classList.add('dark'));
         ['#provincia', '#ciudad', '#tipoUsuario'].forEach(selector => {const el = document.querySelector(selector);if (el) el.classList.add('dark');});
     }
 
@@ -115,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelectorAll('.detalleCampo').forEach(el => el.classList.remove('dark'));
         document.querySelectorAll('.dropdown-item').forEach(el => el.classList.remove('dark'));
         document.querySelectorAll('.tablaDetalle tr').forEach(tr => {const lastTd = tr.querySelector('td:last-child');if (lastTd) lastTd.classList.remove('dark');});
-        document.querySelectorAll('.contenido-sobreNosotros').forEach(el => el.classList.add('dark'));
+        document.querySelectorAll('.contenido-sobreNosotros').forEach(el => el.classList.remove('dark'));
         document.querySelectorAll('.campos > .campoedit').forEach(el => el.classList.remove('dark'));
         document.querySelectorAll('.campos > .labeledit').forEach(el => el.classList.remove('dark'));
         document.querySelectorAll('.soyPrincipal > .notificaciones > h1').forEach(el => el.classList.remove('dark'));
@@ -131,6 +132,7 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelectorAll('.conversasiones_persona > .conversasiones_nombre').forEach(el => el.classList.remove('dark'));
         document.querySelectorAll('.centrado').forEach(el => el.classList.remove('dark'));
         document.querySelectorAll('.mensajeVacio > p').forEach(el => el.classList.remove('dark'));
+        document.querySelectorAll('.sobreTexto').forEach(el => el.classList.remove('dark'));
         ['#provincia', '#ciudad', '#tipoUsuario'].forEach(selector => {const el = document.querySelector(selector);if (el) el.classList.remove('dark');});
     }
 });

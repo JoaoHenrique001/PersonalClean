@@ -1,6 +1,11 @@
 <?php
-session_start(); // ← Asegúrate de iniciar la sesión
+session_start();
 
+if(isset($_SESSION['usuario']['tipo'])){
+if ($_SESSION['usuario']['tipo'] == 'administradores') {
+    header("Location: logout.php");
+    exit;
+}}
 // Verificar si el usuario está logueado (puedes adaptar la condición si usas otro nombre)
 $usuarioLogueado = isset($_SESSION['usuario']);
 ?>
@@ -10,20 +15,12 @@ $usuarioLogueado = isset($_SESSION['usuario']);
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pagina Inicial | Personal Clean</title>
-
-  <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-
-  <!-- AOS -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
-  <!-- Estilos y Scripts -->
   <link rel="stylesheet" href="./assets/estilos.css">
   <script src="./assets/js/modoOscuro.js"></script>
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/ico" href="./assets/images/logo.ico">
+  <link rel="icon" type="image/ico" href="/assets/images/logo.ico">
 </head>
 <body>
 

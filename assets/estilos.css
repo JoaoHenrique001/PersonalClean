@@ -231,6 +231,9 @@ header.dark{
 .sobreTexto em.dark{
     color: white;
 }
+.sobreTexto.dark{
+    color: white;
+}
 .campos > .campoedit.dark{
     background-color: #373646;
     color: white;
@@ -302,6 +305,7 @@ header.dark{
     width: 100px;
     height: 40px;
     position: absolute;
+    z-index: 9999; 
     right: 0;
     
 }
@@ -958,6 +962,8 @@ footer{
 .sobreNosotros {
     display: flex;
     justify-content: center;
+    margin-bottom: 50px;
+    margin-top: 15px;
 }
 
 .contenido-sobreNosotros{
@@ -1206,6 +1212,7 @@ footer{
 
 /*inicio pagina area administradores*/
 .preAd{
+margin-top: 20px;
 margin-left: 50px;
 position: relative;
 top: 30px;
@@ -2063,6 +2070,26 @@ color: black;
     .logReg{
         flex-direction: column;
         margin-top: 70px;
+    }
+}
+
+@media only screen and (max-width: 1215px){
+    .contenido-sobreNosotros{
+        background: rgba(0, 0, 0, 0);
+        box-shadow: 0 0px 0px rgba(0, 0, 0, 0);
+    }
+    .contenido-sobreNosotros.dark{
+        background: rgba(0, 0, 0, 0);
+        box-shadow: 0 0px 0px rgba(0, 0, 0, 0);
+    }
+}
+@media only  screen and (max-width: 1010px){
+      .cajas{
+        display: flex;
+        flex-direction: column;
+    }
+    .cajaControl{
+        align-self: center;
     }
 }
 

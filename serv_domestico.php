@@ -69,7 +69,7 @@ $usuarioLogueado = isset($_SESSION['usuario']);
                 </a>
             </div>
             <div class="servicioImg">
-                <img src="./assets/images/Serv_domestico.jpg" alt="Servicio Domestico">
+                <img src="./assets/images/serv_domestico.jpg" alt="Servicio Domestico">
             </div>
         </div>
     <!--fin Main-->

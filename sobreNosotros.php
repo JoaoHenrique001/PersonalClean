@@ -24,7 +24,7 @@ $usuarioLogueado = isset($_SESSION['usuario']);
     <!--fin framework fontawesome-->
 
     <!--enlace de css-->
-    <link rel="stylesheet" href="./assets/estilos.css">
+    <link rel="stylesheet" href="./assets/estilos.css?v=123">
     <!--enlace de css-->
 
     <!--enlace de script.js-->
@@ -95,7 +95,11 @@ $usuarioLogueado = isset($_SESSION['usuario']);
       </div>
     <!--fin Main-->
 
-    
+     <!--inicio footer-->
+    <?php
+    include_once './assets/footer.php'
+    ?>
+    <!--fin footer-->
  
 </body>
     <!--inicio framework CSS y Js de AOS-->

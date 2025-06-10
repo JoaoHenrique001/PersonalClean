@@ -31,7 +31,7 @@ $funcionarios = $consulta->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="./assets/estilos.css" />
     <script src="./assets/js/modoOscuro.js"></script>
     <script src="./assets/js/cajaAviso.js"></script>
-    <link rel="icon" type="image/ico" href="./assets/images/logo.ico" />
+    <link rel="icon" type="image/ico" href="/assets/images/logo.ico">
 </head>
 <body>
     <?php include_once './assets/headerLogueado.php'; ?>

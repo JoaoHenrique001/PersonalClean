@@ -9,8 +9,8 @@
     <div class="footerparte2" id="todosELementos">
         <h3>Personal Clean:</h3>
         <ol>
-            <ul><a href="">Sobre Nosotros</a></ul>
-            <ul><a href="">Por qué contratarnos</a></ul>
+            <ul><a href="../sobreNosotros.php">Sobre Nosotros</a></ul>
+            <ul><a href="../porqueContratarnos.php">Por qué contratarnos</a></ul>
         </ol>
     </div>
     <!--3º div del footer (enfocado en la segunda parte de lo que esta disponible en la pagina)-->
