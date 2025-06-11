@@ -29,11 +29,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $miDireccion = trim($_POST['miDireccion'] ?? $direccion);
     $fechaServicio = date("Y-m-d H:i:s");
     $estado = "activo";
-    $valorado = "no";
+    $valorado = 0;
 
     // Insertar el nuevo servicio en la base de datos
-    $sql = "INSERT INTO servicios (idCliente, fechaServicio, estado, titulo, descripcion, tipoServicio, valor, diaServicio, direccion, provincia, ciudad, valorado) 
-            VALUES (:idCliente, :fechaServicio, :estado, :titulo, :descripcion, :tipoServicio, :valor, :diaServicio, :direccion, :provincia, :ciudad, :valorado)";
+    $sql = "INSERT INTO servicios (idCliente, fechaServicio, estado, titulo, descripcion, tipoServicio, valor, diaServicio, direccion, provincia, ciudad, valoradoPorCliente, valoradoPorFuncionario) 
+            VALUES (:idCliente, :fechaServicio, :estado, :titulo, :descripcion, :tipoServicio, :valor, :diaServicio, :direccion, :provincia, :ciudad, :valoradoPorCliente,  :valoradoPorFuncionario)";
     
     $consulta = $conexion->prepare($sql);
     $consulta->execute([
@@ -48,7 +48,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ':direccion' => $miDireccion,
         ':provincia' => $miProvincia,
         ':ciudad' => $miCiudad,
-        ':valorado' => $valorado
+        ':valoradoPorCliente' =>  $valorado,
+        ':valoradoPorFuncionario' => $valorado
     ]);
 
     $mostrarCard = true; // Activar la tarjeta de confirmación

@@ -101,7 +101,7 @@ $serviciosHistorico = $stmtHistorico->fetchAll(PDO::FETCH_ASSOC);
                         <div class="elementoCaja-data">
                             <p class="data-dinero"><span><?php echo htmlspecialchars($servicio['valor']); ?></span>€</p>
                             <p class="data-localidad"><img src="./assets/images/mappoint.svg" alt=""> <?php echo htmlspecialchars($servicio['provincia'] . " - " . $servicio['ciudad']); ?></p>
-                            <p class="data-person"><img src="./assets/images/personpc.svg" alt=""><span><?php echo htmlspecialchars($servicio['nombre_cliente']); ?></span></p>
+                            <p class="data-person"><img src="./assets/images/personpc.svg" alt=""><span>Funcionario: <?php echo htmlspecialchars($servicio['nombre_cliente']); ?></span></p>
                             <p class="data-twork"><img src="./assets/images/handwork.svg" alt=""><span>Tipo:</span> <?php echo htmlspecialchars($servicio['tipoServicio']); ?></p>
                             <p class="data-estado">
                                 <?php 

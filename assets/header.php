@@ -17,7 +17,7 @@
                  Servicios
                </button>
                <ul class="dropdown-menu">
-                 <li><a class="dropdown-item" href="./serv_domestico.php">Servicio domestico</a></li>
+                 <li><a class="dropdown-item" href="./serv_domestico.php">Servicio doméstico</a></li>
                  <li><a class="dropdown-item" href="./serv_limpieza.php">Servicio de limpieza</a></li>
                  <li><a class="dropdown-item" href="./serv_Cniños.php">Cuidado de niños</a></li>
                  <li><a class="dropdown-item" href="./serv_Cmayores.php">Cuidado de Mayores</a></li>

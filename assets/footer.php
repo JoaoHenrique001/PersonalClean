@@ -11,6 +11,8 @@
         <ol>
             <ul><a href="../sobreNosotros.php">Sobre Nosotros</a></ul>
             <ul><a href="../porqueContratarnos.php">Por qué contratarnos</a></ul>
+            <ul><a href="../nuestrosFuncionarios.php">Nuestros funcionarios</a></ul>
+            <ul><a href="../ofertasDeEmpleo.php">Ofertas de Empleo</a></ul>
         </ol>
     </div>
     <!--3º div del footer (enfocado en la segunda parte de lo que esta disponible en la pagina)-->

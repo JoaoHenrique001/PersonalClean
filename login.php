@@ -1,4 +1,4 @@
-<?php  
+<?php
 session_start();
 include './assets/ajax/conexionBD.php';
 $errores = '';
@@ -22,29 +22,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($user && $pass === $user['contraseña']) {
 
-            if($tabla == 'funcionarios'){
-            $_SESSION['usuario'] = [
-                'idFuncionarios' => $user['idFuncionarios'],
-                'nombre' => $user['nombre'],
-                'email' => $user['email'],
-                'direccion' => $user['direccion'],
-                'provincia' => $user['provincia'],
-                'ciudad' => $user['ciudad'],
-                'tipo' => $tabla
-            ];}else if($tabla == 'clientes'){
-                 $_SESSION['usuario'] = [
-                'idCliente' => $user['idCliente'],
-                'nombre' => $user['nombre'],
-                'email' => $user['email'],
-                'direccion' => $user['direccion'],
-                'provincia' => $user['provincia'],
-                'ciudad' => $user['ciudad'],
-                'tipo' => $tabla
-                 ];}else{
-                  $_SESSION['usuario'] = [
-                'nombre' => $user['nombre'],
-                'tipo' => $tabla
-                 ];
+            if ($tabla == 'funcionarios') {
+                $_SESSION['usuario'] = [
+                    'idFuncionarios' => $user['idFuncionarios'],
+                    'nombre' => $user['nombre'],
+                    'email' => $user['email'],
+                    'direccion' => $user['direccion'],
+                    'provincia' => $user['provincia'],
+                    'ciudad' => $user['ciudad'],
+                    'tipo' => $tabla
+                ];
+            } else if ($tabla == 'clientes') {
+                $_SESSION['usuario'] = [
+                    'idCliente' => $user['idCliente'],
+                    'nombre' => $user['nombre'],
+                    'email' => $user['email'],
+                    'direccion' => $user['direccion'],
+                    'provincia' => $user['provincia'],
+                    'ciudad' => $user['ciudad'],
+                    'tipo' => $tabla
+                ];
+            } else {
+                $_SESSION['usuario'] = [
+                    'nombre' => $user['nombre'],
+                    'tipo' => $tabla
+                ];
             }
 
             header("Location: " . $redirect);
@@ -58,6 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Login | Personal Clean</title>
@@ -66,11 +69,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script src="./assets/js/modoOscuro.js"></script>
     <link rel="icon" type="image/ico" href="./assets/images/logo.ico">
 </head>
+
 <body>
     <?php include './assets/switchModoClaroOscuro.php'; ?>
 
     <div class="cajaformEnter">
-        <form method="POST" class="formEnter">
+        <form method="POST" id="formLogin" class="formEnter">
             <a href="./index.php"><img src="./assets/images/logo.png" alt="logo" width="10" height="10"></a>
 
             <?php if ($errores): ?>
@@ -84,5 +88,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <p>¿No tienes cuenta? <a href="./registro.php">Registrarse</a></p>
         </form>
     </div>
+
+
+    <?php
+    include_once './assets/footer.php'
+    ?>
+
 </body>
+
 </html>

@@ -4,7 +4,7 @@ include './assets/ajax/conexionBD.php';
 
 // Verifica si está logueado
 if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['tipo'] !== 'administradores') {
-    header("Location: login.php");
+    header("Location: logout.php");
     exit;
 }
 

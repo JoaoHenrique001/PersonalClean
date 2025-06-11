@@ -90,6 +90,13 @@ $funcionarios = $consulta->fetchAll(PDO::FETCH_ASSOC);
             </div>
             </a>
 
+            <a href="./pedidosServicio.php">
+            <div class="notificacionCaja">
+                <img src="./assets/images/heyBuddy.svg" alt="">
+                <h2>Pedidos Servicios</h2>
+            </div>
+            </a>
+
             <a href="">
             <div class="notificacionCaja">
                 <img src="./assets/images/Starinbox.svg" alt="">

@@ -1054,7 +1054,6 @@ footer{
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    height: 100vh;
 }
 .formEnter{
     border-radius: 14px;
@@ -1123,6 +1122,12 @@ footer{
 }
 .formEnter > p > a:hover{
     font-size: 17px;
+}
+#formRegistro{
+    margin-bottom: 50px;
+}
+#formLogin{
+    margin-bottom: 100px;
 }
 #emailInput{
     width: 75%;
@@ -1459,11 +1464,12 @@ color: black;
     border-radius: 14px;
     font-size: 16px;
     border: 0px;
-    background-color: #743EE0;
-    color: white;
+    background-color: #797979;
+    color: rgb(0, 0, 0);
     font-family: Montserrat;
     margin-top: 5px;
     transition: 0.3s;
+    cursor: default;
 }
 .campos > label{
     margin-bottom: -4px;

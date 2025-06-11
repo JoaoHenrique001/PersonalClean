@@ -198,7 +198,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <select name="provincia" class="campoedit" id="provincia" required>
                <option value="">Provincia</option>
                <option value="Madrid" <?php if ($usuario['provincia'] === 'Madrid') echo 'selected'; ?>>Madrid</option>
-               <!-- Más opciones pueden agregarse aquí -->
             </select>
 
             <label class="labeledit" for="ciudad">Ciudad:</label>

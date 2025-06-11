@@ -66,7 +66,9 @@ $usuarioLogueado = isset($_SESSION['usuario']);
       </div>
     <!--fin Main-->
 
-    
+    <?php
+    include_once './assets/footer.php'
+    ?>
  
 </body>
     <!--inicio framework CSS y Js de AOS-->

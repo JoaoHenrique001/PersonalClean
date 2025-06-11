@@ -161,5 +161,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <p>¿Ya tienes cuenta? <a href="./login.php">hacer Log-in</a></p>
 </form>
     </div>
+
+    <?php
+    include_once './assets/footer.php'
+    ?>
+
 </body>
 </html>

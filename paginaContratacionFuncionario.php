@@ -165,5 +165,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </div>
         </div>
     <?php endif; ?>
+
+  <?php
+    include_once './assets/footer.php'
+    ?>
+
 </body>
 </html>
