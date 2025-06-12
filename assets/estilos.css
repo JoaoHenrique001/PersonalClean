@@ -278,6 +278,9 @@ header.dark{
 .mensajeVacio > p.dark{
     color: white;
 }
+.PedidosVacio > p.dark{
+    color: white;
+}
 /*fin todo que va a ser cambiado a modo oscuro, despues tiene que agregar al script.js*/
 
 /*inicio elementos collaspe*/
@@ -1708,6 +1711,51 @@ color: black;
 
 /*fin pagina de soy funcionario y soy cliente*/
 
+/*incio pagina de pedidos servicios*/
+.elementoCaja-tituloServ > span {
+    color: #743EE0;
+}
+.elementoCaja-butones{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 55px;
+    margin-left: 1000px;
+    margin-top: -60px;
+}
+.confirmed{
+    background-color: #008000;
+    border: none;
+    border-radius: 14px;
+    outline: none;
+    height: 52px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    transition: 0.3s;
+}
+.notconfirmed{
+    background-color: #FF0000;
+    border: none;
+    border-radius: 14px;
+    outline: none;
+    height: 52px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    transition: 0.3s;
+}
+.confirmed:hover{
+    transform: scale(1.2);
+}
+.notconfirmed:hover{
+    transform: scale(1.2);
+}
+.PedidosVacio {
+    align-self: center;
+}
+.PedidosVacio > p{
+    font-size: 40px;
+    margin-top: 5px;
+}
+/*fin pagina de pedidos servicios*/
+
 /*inicio pagina crear servicio (clientes)*/
 .crearServ{
     width: auto;
@@ -2070,6 +2118,50 @@ color: black;
 }
 /*fin area mensajes*/
 /*fin chat*/
+
+/*inicio apartado valoraciones areas de usuarios*/
+.avisoContenido > .valorarfuncionario{
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+}
+.avisoContenido > .valorarfuncionario > label > span{
+    color: #EBDF3D;
+}
+.avisoContenido > .valorarfuncionario > textarea{
+    height: 50px;
+    max-height: 101px;
+    min-height: 49px;
+    width: 401px;
+    max-width: 402px;
+    min-width: 400px;
+    background-color: #D9D9D9;
+    border-radius: 8px;
+    font-size: 16px;
+}
+.avisoContenido > .valorarfuncionario > select{
+    padding-left: 3px;
+}
+.avisoContenido > .valorarfuncionario > .botones{
+    align-self: end;
+}
+.avisoContenido > .valorarfuncionario > .botones > button{
+    width: 145px;
+    height: 40px;
+    border: 0px;
+    border-radius: 14px;
+    background-color: #EBDF3D;
+    font-size: 16px;
+    transition: 0.3s;
+}
+.avisoContenido > .valorarfuncionario > .botones > button:hover{
+     background-color: #743EE0;
+     color: white;
+     transform: scale(1.1);
+     cursor: pointer;
+}
+
+/*fin apartado valoraciones areas de usuarios*/
 
 /*inicio @media query*/
 @media only screen and (max-width: 1483px){

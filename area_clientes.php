@@ -97,12 +97,10 @@ $funcionarios = $consulta->fetchAll(PDO::FETCH_ASSOC);
             </div>
             </a>
 
-            <a href="">
-            <div class="notificacionCaja">
+            <div class="notificacionCaja" id="btnValoraciones">
                 <img src="./assets/images/Starinbox.svg" alt="">
                 <h2>Dar Valoraciones</h2>
             </div>
-            </a>
         </div>
     </div>
 

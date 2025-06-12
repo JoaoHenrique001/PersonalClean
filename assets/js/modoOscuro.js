@@ -75,6 +75,7 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelectorAll('.centrado').forEach(el => el.classList.add('dark'));
         document.querySelectorAll('.mensajeVacio > p').forEach(el => el.classList.add('dark'));
         document.querySelectorAll('.sobreTexto').forEach(el => el.classList.add('dark'));
+        document.querySelectorAll('.PedidosVacio > p').forEach(el => el.classList.add('dark'));
         ['#provincia', '#ciudad', '#tipoUsuario'].forEach(selector => {const el = document.querySelector(selector);if (el) el.classList.add('dark');});
     }
 
@@ -133,6 +134,7 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelectorAll('.centrado').forEach(el => el.classList.remove('dark'));
         document.querySelectorAll('.mensajeVacio > p').forEach(el => el.classList.remove('dark'));
         document.querySelectorAll('.sobreTexto').forEach(el => el.classList.remove('dark'));
+        document.querySelectorAll('.PedidosVacio > p').forEach(el => el.classList.remove('dark'));
         ['#provincia', '#ciudad', '#tipoUsuario'].forEach(selector => {const el = document.querySelector(selector);if (el) el.classList.remove('dark');});
     }
 });
