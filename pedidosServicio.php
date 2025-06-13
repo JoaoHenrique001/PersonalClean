@@ -2,12 +2,10 @@
 session_start();
 include './assets/ajax/conexionBD.php';
 
-// Lógica para procesar la acción cuando el formulario se envía
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'], $_POST['idpedido'])) {
     $idpedido = $_POST['idpedido'];
 
     if ($_POST['action'] === 'accept') {
-        // Primero, obtener los datos del pedido: idServicio e idFuncionario
         $sql = "SELECT idServicio, idFuncionario FROM pedidos_servicios WHERE idpedidoServicio = :idpedido";
         $stmt = $conexion->prepare($sql);
         $stmt->bindValue(':idpedido', $idpedido, PDO::PARAM_INT);
@@ -18,33 +16,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'], $_POST['idp
             $idServicio = $pedido['idServicio'];
             $idFuncionario = $pedido['idFuncionario'];
 
-            // Actualizar la tabla servicios asignándole el idFuncionario correspondiente
             $sqlUpdate = "UPDATE servicios SET idFuncionario = :idFuncionario WHERE idServicio = :idServicio";
             $stmtUpdate = $conexion->prepare($sqlUpdate);
             $stmtUpdate->bindValue(':idFuncionario', $idFuncionario, PDO::PARAM_INT);
             $stmtUpdate->bindValue(':idServicio', $idServicio, PDO::PARAM_INT);
             $stmtUpdate->execute();
 
-            // Eliminar el pedido de la tabla pedidos_servicios
             $sqlDelete = "DELETE FROM pedidos_servicios WHERE idpedidoServicio = :idpedido";
             $stmtDelete = $conexion->prepare($sqlDelete);
             $stmtDelete->bindValue(':idpedido', $idpedido, PDO::PARAM_INT);
             $stmtDelete->execute();
         }
     } elseif ($_POST['action'] === 'reject') {
-        // Simplemente eliminar el pedido sin actualizar la tabla de servicios
         $sqlDelete = "DELETE FROM pedidos_servicios WHERE idpedidoServicio = :idpedido";
         $stmtDelete = $conexion->prepare($sqlDelete);
         $stmtDelete->bindValue(':idpedido', $idpedido, PDO::PARAM_INT);
         $stmtDelete->execute();
     }
     
-    // Redireccionamos para evitar reenvío de formulario y refrescar la vista
     header("Location: " . $_SERVER['PHP_SELF']);
     exit;
 }
 
-// Consulta para mostrar los pedidos ya existentes
 $idCliente = $_SESSION['usuario']['idCliente'];
 $sql = "SELECT 
           ps.idpedidoServicio,
@@ -71,7 +64,7 @@ $pedidos = $consulta->fetchAll(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagina Principal de <?php echo $_SESSION['usuario']['nombre'] ?> | Personal Clean</title>
+    <title>Pedido Servicio <?php echo $_SESSION['usuario']['nombre'] ?> | Personal Clean</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
@@ -84,17 +77,17 @@ $pedidos = $consulta->fetchAll(PDO::FETCH_ASSOC);
 <body>
     <?php include_once './assets/headerLogueado.php'; ?>
 
-    <!-- Inicio migas de pan -->
     <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
         <ol class="breadcrumb" style="--bs-breadcrumb-margin-bottom: 0rem;">
             <li class="breadcrumb-item active" aria-current="page"><a href="index.php"><img src="./assets/images/house.svg" alt=""></a></li>
-            <li class="breadcrumb-item">Area Principal</li>
+            <li class="breadcrumb-item active">
+                <a href="<?php echo ($_SESSION['usuario']['tipo'] == 'funcionarios') ? 'area_funcionarios.php' : 'area_clientes.php'; ?>">Area Principal</a>
+            </li>
+            <li class="breadcrumb-item">Pedidos Servicios</li>
         </ol>
     </nav>
-    <!-- Fin migas de pan -->
 
     <div class="soyPrincipal">
-        <!-- Inicio caja que se repite, dependiendo del contenido de la página -->
         <div class="listadoGeneral">
             <?php if (!empty($pedidos)) { ?>
                 <?php foreach ($pedidos as $pedido) { ?>
@@ -123,7 +116,6 @@ $pedidos = $consulta->fetchAll(PDO::FETCH_ASSOC);
                             </p>
                         </div>
                         <div class="elementoCaja-butones">
-                            <!-- Formulario para confirmar el pedido -->
                             <form method="POST" style="display:inline;">
                                 <input type="hidden" name="action" value="accept">
                                 <input type="hidden" name="idpedido" value="<?php echo $pedido['idpedidoServicio']; ?>">
@@ -131,7 +123,6 @@ $pedidos = $consulta->fetchAll(PDO::FETCH_ASSOC);
                                     <img src="./assets/images/confirmed.svg" alt="confirmar pedido">
                                 </button>
                             </form>
-                            <!-- Formulario para rechazar el pedido -->
                             <form method="POST" style="display:inline;">
                                 <input type="hidden" name="action" value="reject">
                                 <input type="hidden" name="idpedido" value="<?php echo $pedido['idpedidoServicio']; ?>">
@@ -149,7 +140,6 @@ $pedidos = $consulta->fetchAll(PDO::FETCH_ASSOC);
                 </div>
             <?php } ?>
         </div>
-        <!-- Fin caja que se repite dependiendo del contenido de la página -->
         <div class="notificaciones">
             <h1>Notificaciones</h1>
             <a href="./chat.php">

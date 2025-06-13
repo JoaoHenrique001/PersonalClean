@@ -7,7 +7,6 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['tipo'] !== 'administra
     exit;
 }
 
-// Eliminar servicio si se envía el formulario
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
     $idServicio = $_POST['id'];
 
@@ -16,7 +15,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
     $stmt->execute();
 }
 
-// Consulta para mostrar servicios
 $sql = "SELECT 
             s.idServicio,
             c.nombre AS nombreCliente,

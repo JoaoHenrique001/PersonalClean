@@ -2,20 +2,17 @@
 include './assets/ajax/conexionBD.php';
 session_start();
 
-// Verificación de acceso (solo funcionarios)
 if ($_SESSION['usuario']['tipo'] == 'clientes') {
     header("Location: logout.php");
     exit;
 }
 
-// Verificar que se reciba el idServicio por GET
 if (!isset($_GET['idServicio'])) {
     echo "No se especificó el servicio.";
     exit;
 }
 $idServicio = (int)$_GET['idServicio'];
 
-// Obtener datos del servicio y del cliente
 $sqlServicio = "SELECT s.idcliente, c.nombre AS nombre_cliente 
                 FROM servicios s 
                 LEFT JOIN clientes c ON s.idcliente = c.idcliente 
@@ -34,17 +31,14 @@ $idCliente = $servicioData['idcliente'];
 $nombreCliente = $servicioData['nombre_cliente'];
 $idFuncionario = $_SESSION['usuario']['idFuncionarios'];
 
-// Inicialización de variables
 $error = "";
 $exito = "";
 $mostrarCard = false;
 
-// Procesamiento del formulario
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (isset($_POST['redirigirChat'])) {
-        $descripcion = $_POST['descripcion'] ?? "Solicitud de contratación enviada"; // Mensaje predeterminado si está vacío
+        $descripcion = $_POST['descripcion'] ?? "Solicitud de contratación enviada";
 
-        // Verificar si ya existe un chat entre el cliente y el funcionario
         $sqlChat = "SELECT idchats FROM chats WHERE idCliente = :idCliente AND idFuncionario = :idFuncionario";
         $stmtChat = $conexion->prepare($sqlChat);
         $stmtChat->bindValue(':idCliente', $idCliente, PDO::PARAM_INT);
@@ -53,7 +47,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $chatData = $stmtChat->fetch(PDO::FETCH_ASSOC);
 
         if (!$chatData) {
-            // Crear un nuevo chat si no existe
             $sqlNuevoChat = "INSERT INTO chats (idCliente, idFuncionario) VALUES (:idCliente, :idFuncionario)";
             $stmtNuevoChat = $conexion->prepare($sqlNuevoChat);
             $stmtNuevoChat->bindValue(':idCliente', $idCliente, PDO::PARAM_INT);
@@ -61,11 +54,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $stmtNuevoChat->execute();
             $idChat = $conexion->lastInsertId();
         } else {
-            // Si ya existe, usar ese chat
             $idChat = $chatData['idchats'];
         }
 
-        // Insertar el mensaje en la tabla `mensajes`
         $fechaHora = date("Y-m-d H:i:s");
         $sqlMensaje = "INSERT INTO mensajes (idChat, contenido, envia, fechaHora) 
                        VALUES (:idChat, :contenido, 'funcionario', :fechaHora)";
@@ -75,12 +66,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $stmtMensaje->bindValue(':fechaHora', $fechaHora);
         $stmtMensaje->execute();
 
-        // Redirigir a chat.php
         header("Location: chat.php?idchat=$idChat");
         exit;
     }
 
-    // Procesar la solicitud de contratación
     $valorAlternativo = trim($_POST['valorAlternativo'] ?? "");
     $descripcion = trim($_POST['descripcion'] ?? "");
 
@@ -117,7 +106,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <body>
     <?php include_once './assets/headerLogueado.php'; ?>
 
-      <!-- Migas de pan -->
     <nav style="--bs-breadcrumb-divider: url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%278%27 height=%278%27%3E%3Cpath d=%27M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z%27 fill=%27%236c757d%27/%3E%3C/svg%3E');" aria-label="breadcrumb">
         <ol class="breadcrumb" style="--bs-breadcrumb-margin-bottom: 0rem;">
             <li class="breadcrumb-item active" aria-current="page">
@@ -128,7 +116,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <li class="breadcrumb-item">Enviar Contratación</li>
         </ol>
     </nav>
-    <!-- Fin migas de pan -->
 
     <div class="crearServ">
         <?php if ($error): ?>

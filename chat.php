@@ -80,7 +80,6 @@ if ($selected_chat_id) {
 <body>
     <?php include_once './assets/headerLogueado.php'; ?>
 
-    <!-- Migas de pan -->
     <nav style="--bs-breadcrumb-divider: url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%278%27 height=%278%27%3E%3Cpath d=%27M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z%27 fill=%27%236c757d%27/%3E%3C/svg%3E');" aria-label="breadcrumb">
         <ol class="breadcrumb" style="--bs-breadcrumb-margin-bottom: 0rem;">
             <li class="breadcrumb-item active" aria-current="page">
@@ -92,7 +91,6 @@ if ($selected_chat_id) {
     </nav>
 
     <div class="areaChat">
-        <!-- Aside: listado de conversaciones -->
         <aside class="conversasiones">
             <?php foreach ($chats as $chat): ?>
                 <a href="chat.php?idchat=<?php echo $chat['idchats']; ?>">
@@ -106,7 +104,6 @@ if ($selected_chat_id) {
             <?php endforeach; ?>
         </aside>
 
-        <!-- Área de chat: mensajes -->
         <div class="chat">
             <?php if ($selected_chat_id): ?>
                 <?php foreach ($mensajes as $msg): 
@@ -117,7 +114,6 @@ if ($selected_chat_id) {
                         <span><?php echo date("H:i", strtotime($msg['fechaHora'])); ?></span>
                     </div>
                 <?php endforeach; ?>
-                <!-- Formulario de envío de mensaje (método POST) -->
                 <div class="envioMensaje">
                     <form method="POST" action="">
                         <input type="hidden" name="idChat" value="<?php echo $selected_chat_id; ?>">

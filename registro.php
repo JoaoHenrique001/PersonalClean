@@ -81,30 +81,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro | Personal Clean</title>
-
-    <!--inicio framework fontawesome-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <!--fin framework fontawesome-->
-
-    <!--enlace de css-->
     <link rel="stylesheet" href="./assets/estilos.css">
-    <!--enlace de css-->
-
-    <!--inicio logo de la pagina ventana-->
     <link rel="icon" type="image/ico" href="./assets/images/logo.ico">
-    <!--fin logo de la pagina ventana-->
-
-    <!--enlace de script.js-->
     <script src="./assets/js/modoOscuro.js"></script>
     <script src="./assets/js/registro.js"></script>
-    <!--enlace de script.js-->
 </head>
 <body>
-    <!--inicio modo oscuro y claro-->
     <?php
     include './assets/switchModoClaroOscuro.php';
     ?>
-    <!--fin modo oscuro y claro-->
     <div class="cajaformEnter">
     <form method="POST" id="formRegistro" class="formEnter">
     <a href="./index.php"><img src="./assets/images/logo.png" width="10px" height="10px" alt="logo"></a>

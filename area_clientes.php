@@ -1,10 +1,7 @@
 <?php
 session_start();
 include './assets/ajax/conexionBD.php';
-echo "<pre>";
-var_dump($_SESSION);
-echo "</pre>";
-// Verificar si el usuario es un cliente, si no, redirigir a logout
+
 if ($_SESSION['usuario']['tipo'] !== 'clientes') {
     header("Location: logout.php");
     exit;
@@ -36,17 +33,14 @@ $funcionarios = $consulta->fetchAll(PDO::FETCH_ASSOC);
 <body>
     <?php include_once './assets/headerLogueado.php'; ?>
 
-    <!--inicio migas de pan-->
     <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
     <ol class="breadcrumb" style="--bs-breadcrumb-margin-bottom: 0rem;">
     <li class="breadcrumb-item active" aria-current="page"><a href="index.php"><img src="./assets/images/house.svg" alt=""></a></li>
     <li class="breadcrumb-item">Area Principal</li>
     </ol>
     </nav>
-    <!--fin migas de pan-->
 
     <div class="soyPrincipal">
-        <!--inicio caja que se ira repetir dependendo del contenido de la pagina-->
         <div class="listadoGeneral">
             <?php foreach ($funcionarios as $funcionario) { ?>
                 <a href="paginaFuncionario.php?idFuncionarios=<?php echo $funcionario['idFuncionarios']; ?>">
@@ -65,7 +59,6 @@ $funcionarios = $consulta->fetchAll(PDO::FETCH_ASSOC);
                 </a>
             <?php } ?>
         </div>
-        <!--fin caja que se ira repetir dependendo del contenido de la pagina-->
         <div class="notificaciones">
             <h1>Notificaciones</h1>
 

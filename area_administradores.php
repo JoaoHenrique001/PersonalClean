@@ -2,13 +2,11 @@
 session_start();
 include './assets/ajax/conexionBD.php';
 
-// Verifica si está logueado
 if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['tipo'] !== 'administradores') {
     header("Location: logout.php");
     exit;
 }
 
-// Consultas para contar elementos
 $consultaFuncionarios = $conexion->query("SELECT COUNT(*) AS total FROM funcionarios");
 $totalFuncionarios = $consultaFuncionarios->fetch(PDO::FETCH_ASSOC)['total'];
 

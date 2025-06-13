@@ -7,17 +7,14 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['tipo'] !== 'administra
     exit;
 }
 
-// Verificamos si se pasó el ID por GET
 if (isset($_GET['idfuncionarios'])) {
     $id = $_GET['idfuncionarios'];
 
-    // Preparamos la consulta segura usando PDO
     $stmt = $conexion->prepare("SELECT * FROM funcionarios WHERE idfuncionarios = ?");
-    $stmt->execute([$id]); // Pasamos el parámetro directamente como array
+    $stmt->execute([$id]);
 
     $funcionario = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // Verificamos si hay resultados
     if (!$funcionario) {
         echo "Funcionario no encontrado.";
         exit;

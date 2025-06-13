@@ -2,7 +2,6 @@
 session_start();
 include './assets/ajax/conexionBD.php';
 
-// Verifica que el usuario esté logueado y tenga definido su tipo
 if (!isset($_SESSION['usuario']) || !isset($_SESSION['usuario']['tipo'])) {
     header("Location: login.php");
     exit;
@@ -11,7 +10,6 @@ if (!isset($_SESSION['usuario']) || !isset($_SESSION['usuario']['tipo'])) {
 $usuarioLogueado = $_SESSION['usuario']['email'];
 $tipoUsuario     = $_SESSION['usuario']['tipo'];
 
-// Solo aceptamos que el tipo sea 'clientes' o 'funcionarios'
 $tabla = ($tipoUsuario === 'clientes' || $tipoUsuario === 'funcionarios') ? $tipoUsuario : null;
 
 if (!$tabla) {
@@ -19,7 +17,6 @@ if (!$tabla) {
     exit;
 }
 
-// Consulta para obtener los datos del usuario
 if($_SESSION['usuario']['tipo'] == "funcionarios"){
 $stmt = $conexion->prepare("
     SELECT nombre, apellidos, email, contraseña, telefono, f_nacimiento,
@@ -43,7 +40,6 @@ if (!$usuario) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Mapeo de campos comunes recibidos desde el formulario
     $datos = [
         'nombre'       => $_POST['nombre'] ?? '',
         'apellidos'    => $_POST['apellido'] ?? '',
@@ -57,9 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'codigoPostal' => $_POST['codigo_postal'] ?? ''
     ];
 
-    // Según el tipo de usuario se arma la query UPDATE y se definen los parámetros
     if ($tipoUsuario === 'funcionarios') {
-        // Incluimos el campo descripción
         $datos['descripcion'] = $_POST['descripcion'] ?? '';
         $stmtUpdate = $conexion->prepare("
             UPDATE funcionarios SET
@@ -89,10 +83,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ':ciudad'       => $datos['ciudad'],
             ':codigoPostal' => $datos['codigoPostal'],
             ':descripcion'  => $datos['descripcion'],
-            ':emailLogged'  => $usuarioLogueado  // Se usa el email actual para identificar el registro
+            ':emailLogged'  => $usuarioLogueado
         ];
     } else if ($tipoUsuario === 'clientes') {
-        // Para "clientes" no se actualiza el campo descripción
         $stmtUpdate = $conexion->prepare("
             UPDATE clientes SET
                 nombre       = :nombre,
@@ -123,7 +116,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ];
     }
 
-    // Ejecuta la actualización y actualiza la variable de sesión con el nuevo nombre y email
     $stmtUpdate->execute($params);
     $_SESSION['usuario']['nombre'] = $datos['nombre'];
     $_SESSION['usuario']['email']  = $datos['email'];

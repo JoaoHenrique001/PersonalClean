@@ -2,29 +2,22 @@
 session_start();
 include './assets/ajax/conexionBD.php';
 
-// Verificar que el usuario esté logueado y que tenga un tipo definido
 if (!isset($_SESSION['usuario']) || empty($_SESSION['usuario']['tipo'])) {
     header("Location: logout.php");
     exit;
 }
 
-$tipoUsuario = $_SESSION['usuario']['tipo']; // 'clientes' o 'funcionarios'
+$tipoUsuario = $_SESSION['usuario']['tipo'];
 $msg = "";
 
-// Procesar envío del formulario para registrar la valoración
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["submit_rating"])) {
-    // Recibimos el id del servicio (para actualizar luego), la nota y el comentario
     $idServicio  = $_POST["idServicio"];
     $estrellas   = $_POST["estrellas"];
     $comentario  = $_POST["comentario"];
     
-    // "idPersona" se usará para introducir el id de la persona a valorar.
-    // Para clientes: es el id del funcionario.
-    // Para funcionarios: es el id del cliente.
     $idPersona   = $_POST["idPersona"];
     
     if ($tipoUsuario === "clientes") {
-        // Los clientes valoran a los funcionarios – inserción en valoraciones_clientes.
         $idCliente = $_SESSION['usuario']['idCliente'];
         $sqlInsert = "INSERT INTO valoraciones_clientes (idCliente, estrellas, comentario, idFuncionario)
                       VALUES (:idCliente, :estrellas, :comentario, :idPersona)";
@@ -34,7 +27,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["submit_rating"])) {
         $stmtInsert->bindValue(":comentario", $comentario, PDO::PARAM_STR);
         $stmtInsert->bindValue(":idPersona", $idPersona, PDO::PARAM_INT);
         if ($stmtInsert->execute()) {
-            // Actualizamos el servicio para marcarlo como valorado por cliente
             $sqlUpdate = "UPDATE servicios SET valoradoPorCliente = '1' WHERE idServicio = :idServicio";
             $stmtUpdate = $conexion->prepare($sqlUpdate);
             $stmtUpdate->bindValue(":idServicio", $idServicio, PDO::PARAM_INT);
@@ -44,18 +36,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["submit_rating"])) {
             $msg = "Error al registrar la valoración.";
         }
     } else if ($tipoUsuario === "funcionarios") {
-        // Los funcionarios valoran a los clientes – inserción en valoraciones_servicios.
         $idFuncionario = $_SESSION['usuario']['idFuncionarios'];
         $sqlInsert = "INSERT INTO valoraciones_servicios (idCliente, estrellas, comentario, idFuncionario)
                       VALUES (:idCliente, :estrellas, :comentario, :idFuncionario)";
-        // En este caso, "idPersona" es el id del cliente a valorar.
         $stmtInsert = $conexion->prepare($sqlInsert);
         $stmtInsert->bindValue(":idCliente", $idPersona, PDO::PARAM_INT);
         $stmtInsert->bindValue(":estrellas", $estrellas, PDO::PARAM_STR);
         $stmtInsert->bindValue(":comentario", $comentario, PDO::PARAM_STR);
         $stmtInsert->bindValue(":idFuncionario", $idFuncionario, PDO::PARAM_INT);
         if ($stmtInsert->execute()) {
-            // Actualizamos el servicio para marcarlo como valorado por funcionario
             $sqlUpdate = "UPDATE servicios SET valoradoPorFuncionario = '1' WHERE idServicio = :idServicio";
             $stmtUpdate = $conexion->prepare($sqlUpdate);
             $stmtUpdate->bindValue(":idServicio", $idServicio, PDO::PARAM_INT);
@@ -67,10 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["submit_rating"])) {
     }
 }
 
-// Consulta para obtener los servicios disponibles para valorar según el tipo de usuario
 if ($tipoUsuario === "clientes") {
-    // Los clientes valoran al funcionario asignado.
-    // Se obtienen los servicios donde el cliente actual participó y aún no se ha valorado (valoradoPorCliente = '0')
     $sql = "SELECT s.idServicio, s.titulo, s.fechaServicio,
                    f.idFuncionarios, f.nombre AS nombrePersona, f.apellidos AS apellidosPersona
             FROM servicios s
@@ -84,8 +70,6 @@ if ($tipoUsuario === "clientes") {
     $stmt->execute();
     $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } else if ($tipoUsuario === "funcionarios") {
-    // Los funcionarios valoran al cliente.
-    // Se obtienen los servicios donde el funcionario actual participó y aún no se ha valorado (valoradoPorFuncionario = '0')
     $sql = "SELECT s.idServicio, s.titulo, s.fechaServicio,
                    c.idCliente, c.nombre AS nombrePersona, c.apellidos AS apellidosPersona
             FROM servicios s
@@ -121,6 +105,9 @@ if ($tipoUsuario === "clientes") {
   <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
       <ol class="breadcrumb" style="--bs-breadcrumb-margin-bottom: 0rem;">
           <li class="breadcrumb-item active"><a href="index.php"><img src="./assets/images/house.svg" alt=""></a></li>
+           <li class="breadcrumb-item active">
+                <a href="<?php echo ($_SESSION['usuario']['tipo'] == 'funcionarios') ? 'area_funcionarios.php' : 'area_clientes.php'; ?>">Area Principal</a>
+            </li>
           <li class="breadcrumb-item">Valoraciones</li>
       </ol>
   </nav>

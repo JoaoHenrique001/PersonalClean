@@ -6,7 +6,6 @@ if ($_SESSION['usuario']['tipo'] == 'administradores') {
     header("Location: logout.php");
     exit;
 }}
-// Verificar si el usuario está logueado (puedes adaptar la condición si usas otro nombre)
 $usuarioLogueado = isset($_SESSION['usuario']);
 ?>
 <!DOCTYPE html>
@@ -24,7 +23,6 @@ $usuarioLogueado = isset($_SESSION['usuario']);
 </head>
 <body>
 
-  <!-- inicio Cabecera dinámica -->
   <?php
     if ($usuarioLogueado) {
       include_once './assets/headerLogueado.php';
@@ -32,19 +30,14 @@ $usuarioLogueado = isset($_SESSION['usuario']);
       include_once './assets/header.php';
     }
   ?>
-  <!--fin Cabecera dinámica -->
 
-    <!--inicio migas de pan-->
     <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
     <ol class="breadcrumb" style="--bs-breadcrumb-margin-bottom: 0rem;">
     <li class="breadcrumb-item active" aria-current="page"><img src="./assets/images/house.svg" alt=""></li>
     </ol>
     </nav>
-    <!--fin migas de pan-->
 
-    <!--inicio Main-->
 
-    <!--inicio div principal-->
     <div id="principal">
       <div id="titulo">
           <h1>!Disfruta de tu hogar recién limpio!</h1>
@@ -56,15 +49,11 @@ $usuarioLogueado = isset($_SESSION['usuario']);
           </a>
       </div>
     </div>
-    <!--fin div principal-->
 
-    <!--inicio servicios Div-->
     <?php
     include_once './assets/servdiv.php';
     ?>
-    <!--fin servicios Div-->
 
-<!--inicio frase llamativa-->
   <div id="fraseDiv">
     <div data-aos-duration="1000" data-aos-delay="100" data-aos="flip-left" id="frase" data-aos-once="true">
       <h1>Relájate</h1>
@@ -74,35 +63,23 @@ $usuarioLogueado = isset($_SESSION['usuario']);
       <img src="./assets/images/relajar.jpg" alt="">
     </div>
   </div>
-<!--fin frase llamativa-->
 
-<!--inicio contacta con nosostros-->
 <div class="cn">
-    <!--inicio titulo contacta con nosostros-->
     <div id="cn">
       <h1>Contacta con nosostros</h1>
     </div>
-    <!--fin titulo contacta con nosostros-->
 
-<!--inicio contactar-->
     <?php
     include_once './assets/formulario_contacto.php';
     ?>
-<!--fin contactar-->
 
-<!--fin titulo contacta con nosostros-->
 
-<!--inicio espacio preguntas frecuentes-->
   <div id="pregutasFrecuentes">
-    <!--inicio titulo preguntas frecuentes-->
     <div id="faq">
       <h1>Preguntas Frecuentes</h1>
     </div>
-    <!--fin titulo preguntas frecuentes-->
 
-    <!--inicio acordeon con las preguntas-->
     <div id="faqAcord">
-      <!--inicio acordion 1-->
     <div class="accordion" id="accordionPanelsStayOpenExample" data-aos-duration="1000" data-aos-delay="100" data-aos="fade-left" data-aos-once="true">
   <div class="accordion-item">
     <h2 class="accordion-header">
@@ -116,9 +93,7 @@ $usuarioLogueado = isset($_SESSION['usuario']);
       </div>
     </div>
   </div>
-  <!--fin acordion 1-->
 
-  <!--inicio acordion 2-->
   <div class="accordion-item">
     <h2 class="accordion-header">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
@@ -131,9 +106,7 @@ $usuarioLogueado = isset($_SESSION['usuario']);
       </div>
     </div>
   </div>
-  <!--fin acordion 2-->
 
-  <!--inicio acordion 3-->
   <div class="accordion-item">
     <h2 class="accordion-header">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
@@ -146,9 +119,7 @@ $usuarioLogueado = isset($_SESSION['usuario']);
       </div>
     </div>
   </div>
-  <!--fin acordion 3-->
 
-  <!--inicio acordion 4-->
   <div class="accordion-item">
     <h2 class="accordion-header">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false" aria-controls="panelsStayOpen-collapseFour">
@@ -161,9 +132,7 @@ $usuarioLogueado = isset($_SESSION['usuario']);
       </div>
     </div>
   </div>
-  <!--fin acordion 4-->
 
-  <!--inicio acordion 5-->
   <div class="accordion-item">
     <h2 class="accordion-header">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="false" aria-controls="panelsStayOpen-collapseFive">
@@ -176,9 +145,7 @@ $usuarioLogueado = isset($_SESSION['usuario']);
       </div>
     </div>
   </div>
-  <!--fin acordion 5-->
 
-  <!--inicio acordion 6-->
   <div class="accordion-item">
     <h2 class="accordion-header">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseSix" aria-expanded="false" aria-controls="panelsStayOpen-collapseSix">
@@ -191,9 +158,7 @@ $usuarioLogueado = isset($_SESSION['usuario']);
       </div>
     </div>
   </div>
-  <!--fin acordion 6-->
 
-  <!--inicio acordion 7-->
   <div class="accordion-item">
     <h2 class="accordion-header">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseSeven" aria-expanded="false" aria-controls="panelsStayOpen-collapseSeven">
@@ -206,9 +171,7 @@ $usuarioLogueado = isset($_SESSION['usuario']);
       </div>
     </div>
   </div>
-  <!--fin acordion 7-->
 
-  <!--inicio acordion 8-->
   <div class="accordion-item">
     <h2 class="accordion-header">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseEigth" aria-expanded="false" aria-controls="panelsStayOpen-collapseEigth">
@@ -221,9 +184,7 @@ $usuarioLogueado = isset($_SESSION['usuario']);
       </div>
     </div>
   </div>
-  <!--fin acordion 8-->
 
-  <!--inicio acordion 9-->
   <div class="accordion-item">
     <h2 class="accordion-header">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseNine" aria-expanded="false" aria-controls="panelsStayOpen-collapseNine">
@@ -236,9 +197,7 @@ $usuarioLogueado = isset($_SESSION['usuario']);
       </div>
     </div>
   </div>
-  <!--fin acordion 9-->
 
-  <!--inicio acordion 10-->
   <div class="accordion-item">
     <h2 class="accordion-header">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTen" aria-expanded="false" aria-controls="panelsStayOpen-collapseTen">
@@ -251,25 +210,16 @@ $usuarioLogueado = isset($_SESSION['usuario']);
       </div>
     </div>
   </div>
-  <!--fin acordion 10-->
 </div>
     </div>
-    <!--fin acordeon con las preguntas-->
   </div>
-<!--fin espacio preguntas frecuentes-->
 
-    <!--fin Main-->
-
-    <!--inicio footer-->
     <?php
     include_once './assets/footer.php';
     ?>
-    <!--fin footer-->
  
 </body>
-    <!--inicio framework CSS y Js de AOS-->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>AOS.init();</script>
-    <!--fin framework CSS y Js de AOS-->
 </html>
 

@@ -1,9 +1,7 @@
 <header>
-  <!--inicio div cabecera desktop-->
     <div class="cabecera">
      <a href="./index.php"><img id="logoCompleto" src="./assets/images/logoCompleto.png" alt="Logo-PersonalClean">
-                                       <img id="logoParcial" src="./assets/images/personalClean.png" alt="Logo-PersonalClean"></a>
-     <!--inicio barra de navegacion-->
+      <img id="logoParcial" src="./assets/images/personalClean.png" alt="Logo-PersonalClean"></a>
      <nav>
          <div class="GrupoBotonesHeader">
              <button id="bottonHeader" type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
@@ -34,24 +32,16 @@
               </ul>
            </div>
      </nav>
-     <!--fin barra de navegacion-->
 
-   <!--inicio modo oscuro y claro-->
    <?php
    include './assets/switchModoClaroOscuro.php';
    ?>
-    <!--fin modo oscuro y claro-->
 
-    <!--inicio div botones login y registro-->
     <div class="logReg">
       <a href="../login.php"><button>Log-in</button></a>
       <a href="../registro.php"><button>Registro</button></a>
     </div>
-    <!--fin div botones login y registro-->
     
-    <!--fin div cabecera desktop-->
-
-<!--inicio elemento para colapsar-->
 <div onclick="toggleAccordion()" class="colapsar">
     <input type="checkbox" id="check">
     <label for="check" class="checkbtn">
@@ -59,12 +49,8 @@
       <i onclick="toggleAccordion()" id="exe" class="fa fa-times"></i>
     </label>
     </div>
-<!--fin elemento para colapsar-->
-
-
  </header>
 
- <!--inicio barra de navegacion Telefono-->
  <div class="accordion accordion-flush" id="accordionTel">
   <div class="accordion-item">
     <h2 class="accordion-header">
@@ -108,12 +94,9 @@
       </div>
     </div>
   </div>
-   <!--inicio div botones login y registro-->
     <div class="logregTel">
       <a href="../login.php"><button>Log-in</button></a>
       <a href="../registro.php"><button>Registro</button></a>
     </div>
-    <!--fin div botones login y registro-->
 </div>
-  <!--fin barra de navegacion Telefono-->
  

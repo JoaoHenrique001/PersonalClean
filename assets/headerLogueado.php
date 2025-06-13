@@ -4,7 +4,6 @@
     <div class="cabecera">
      <a href="./index.php"><img id="logoCompleto" src="./assets/images/logoCompleto.png" alt="">
                                        <img id="logoParcial" src="./assets/images/personalClean.png" alt=""></a>
-     <!--inicio barra de navegacion-->
      <nav>
          <div class="GrupoBotonesHeader">
              <button id="bottonHeader" type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
@@ -35,9 +34,6 @@
               </ul>
            </div>
      </nav>
-     <!--fin barra de navegacion-->
-
-    <!--inicio modo oscuro y claro-->
     <div class="switchCO" id="varCO">
       <input type="checkbox" class="checkbox" id="chk"/>
       <label class="modoCO" for="chk">
@@ -46,9 +42,7 @@
         <div class="ball"></div>
       </label>
     </div>
-    <!--fin modo oscuro y claro-->
 
-    <!--inicio icono usuario-->
     <div class="dropdown">
       <div class="areaUsuario" role="button" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
         <img src="./assets/images/userIcon.svg" alt="Icono usuario" >
@@ -64,11 +58,8 @@
         <li><a class="dropdown-item text-danger" href="./logout.php">Cerrar sesión</a></li>
       </ul>
     </div>
-    <!--fin icono usuario-->
-    
     <!--fin div cabecera desktop-->
 
-<!--inicio elemento para colapsar-->
 <div onclick="toggleAccordion()" class="colapsar">
     <input type="checkbox" id="check">
     <label for="check" class="checkbtn">
@@ -76,9 +67,6 @@
       <i onclick="toggleAccordion()" id="exe" class="fa fa-times"></i>
     </label>
     </div>
-<!--fin elemento para colapsar-->
-
-
  </header>
 
  <!--inicio barra de navegacion Telefono-->

@@ -181,7 +181,6 @@ document.addEventListener("DOMContentLoaded", function () {
         "Zarzalejo"];
     let ciudadCampo = document.getElementById("ciudad");
     let provinciaCampo = document.getElementById("provincia");
-    // Llenar el select con las ciudades
     provinciaCampo.addEventListener("click" , () => {
         if(provinciaCampo.value == "Madrid"){
             for (let i = 0; i < Madrid.length; i++) {

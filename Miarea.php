@@ -2,12 +2,6 @@
 include './assets/ajax/conexionBD.php';
 session_start();
 
-// Mostrar la sesión para depuración (se recomienda comentarlo en producción)
-// echo "<pre>";
-// var_dump($_SESSION);
-// echo "</pre>";
-
-// Función para calcular tiempo transcurrido
 function tiempoTranscurrido($fecha) {
     $ahora = new DateTime();
     $fechaServicio = new DateTime($fecha);
@@ -28,11 +22,9 @@ function tiempoTranscurrido($fecha) {
     }
 }
 
-// Obtener el tipo de usuario
 $tipoUsuario = $_SESSION['usuario']['tipo'];
 $idUsuario = ($tipoUsuario === 'clientes') ? $_SESSION['usuario']['idCliente'] : $_SESSION['usuario']['idFuncionarios'];
 
-// Obtener servicios activos
 $sqlActivos = "SELECT s.*, c.nombre AS nombre_cliente, f.nombre AS nombre_funcionario 
                FROM servicios s 
                LEFT JOIN clientes c ON s.idcliente = c.idcliente 
@@ -45,7 +37,6 @@ $stmtActivos->bindValue(':idUsuario', $idUsuario, PDO::PARAM_INT);
 $stmtActivos->execute();
 $serviciosActivos = $stmtActivos->fetchAll(PDO::FETCH_ASSOC);
 
-// Obtener servicios históricos
 $sqlHistorico = "SELECT s.*, c.nombre AS nombre_cliente, f.nombre AS nombre_funcionario 
                  FROM servicios s 
                  LEFT JOIN clientes c ON s.idcliente = c.idcliente 
@@ -75,7 +66,6 @@ $serviciosHistorico = $stmtHistorico->fetchAll(PDO::FETCH_ASSOC);
 <body>
     <?php include_once './assets/headerLogueado.php'; ?>
 
-     <!-- Migas de pan -->
     <nav style="--bs-breadcrumb-divider: url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%278%27 height=%278%27%3E%3Cpath d=%27M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z%27 fill=%27%236c757d%27/%3E%3C/svg%3E');" aria-label="breadcrumb">
         <ol class="breadcrumb" style="--bs-breadcrumb-margin-bottom: 0rem;">
             <li class="breadcrumb-item active" aria-current="page">
@@ -85,7 +75,6 @@ $serviciosHistorico = $stmtHistorico->fetchAll(PDO::FETCH_ASSOC);
             <li class="breadcrumb-item">Mi area</li>
         </ol>
     </nav>
-    <!-- Fin migas de pan -->
 
     <h3 class="centrado">Mis servicios:</h3>
 

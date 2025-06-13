@@ -1,11 +1,8 @@
 <footer>
-    <!--inicio footer 1-->
 <div class="footer1">
-    <!--1º div del footer (enfocado en el logo)-->
     <div class="footerparte1">
     <a href="./index.php"><img src="./assets/images/logo.png" alt=""></a>
     </div>
-    <!--2º div del footer (enfocado en la primera parte de lo que esta disponible en la pagina)-->
     <div class="footerparte2" id="todosELementos">
         <h3>Personal Clean:</h3>
         <ol>
@@ -15,7 +12,6 @@
             <ul><a href="../ofertasDeEmpleo.php">Ofertas de Empleo</a></ul>
         </ol>
     </div>
-    <!--3º div del footer (enfocado en la segunda parte de lo que esta disponible en la pagina)-->
     <div class="footerparte3" id="todosELementos">
         <h3>Servicios:</h3>
         <ol>
@@ -25,7 +21,6 @@
             <ul><a href="../serv_Cmayores.php">Cuidade de ancianos</a></ul>
         </ol>
     </div>
-    <!--4º div del footer (enfocado en la parte de las redes sociales)-->
     <div class="footerparte4" id="todosELementos">
         <h3>Redes Sociales:</h3>
         <ol>
@@ -36,11 +31,7 @@
         </ol>
     </div>
 </div>
-    <!--fin footer 1-->
-
-    <!--inicio footer 2-->
     <div class="footer2">
         <p>© 2025 Personal Clean. Todos los derechos Reservados.</p>
     </div>
-    <!--fin footer 2-->
 </footer>

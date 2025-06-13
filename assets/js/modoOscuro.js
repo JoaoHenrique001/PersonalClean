@@ -1,16 +1,12 @@
 document.addEventListener('DOMContentLoaded', function () {
     const chk = document.getElementById('chk');
-    //aplicar el modo guardado al cargar la página
     const modoGuardado = localStorage.getItem('modo');
     if (modoGuardado === 'oscuro') {
         chk.checked = true;
         activarModoOscuro();
     }
-
-    // Evento para cambiar el modo
     chk.addEventListener('change', () => {
         const isDark = chk.checked;
-
         if (isDark) {
             activarModoOscuro();
             localStorage.setItem('modo', 'oscuro');
@@ -19,7 +15,6 @@ document.addEventListener('DOMContentLoaded', function () {
             localStorage.setItem('modo', 'claro');
         }
     });
-
     function activarModoOscuro() {
         document.body.classList.add('dark');
         document.documentElement.classList.add('dark-scrollbar');
@@ -144,10 +139,7 @@ document.addEventListener('DOMContentLoaded', function () {
         ['#provincia', '#ciudad', '#tipoUsuario'].forEach(selector => {const el = document.querySelector(selector);if (el) el.classList.remove('dark');});
     }
 });
-//fin logica para cambio de modo oscuro y claro
 
-
-/*inicio logica para enseñar barra de navegacion telefono*/
     function toggleAccordion() {
       accordionTel.classList.toggle('show');
       const exeElement = document.getElementById('exe');
@@ -160,4 +152,3 @@ document.addEventListener('DOMContentLoaded', function () {
         BarsElement.style.display = 'block';
       }
     }
-/*fin logica para enseñar barra de navegacion telefono*/

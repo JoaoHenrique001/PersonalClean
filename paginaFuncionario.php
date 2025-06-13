@@ -2,22 +2,19 @@
 include './assets/ajax/conexionBD.php';
 session_start();
 
-// Verificación de acceso (solo clientes)
 if ($_SESSION['usuario']['tipo'] !== 'clientes') {
     header("Location: logout.php");
     exit;
 }
 
-// Verificar que se reciba el idFuncionarios por GET
 if (!isset($_GET['idFuncionarios'])) {
     echo "No se especificó el funcionario.";
     exit;
 }
 
 $idFuncionario = (int)$_GET['idFuncionarios'];
-$idCliente = $_SESSION['usuario']['idCliente']; // ID del cliente en sesión
+$idCliente = $_SESSION['usuario']['idCliente'];
 
-// Obtener los datos del funcionario
 $sqlFuncionario = "SELECT nombre, apellidos, email, telefono, f_nacimiento, notaMedia, direccion, provincia, ciudad, descripcion
                    FROM funcionarios WHERE idFuncionarios = :idFuncionario";
 $stmtFuncionario = $conexion->prepare($sqlFuncionario);
@@ -30,30 +27,24 @@ if (!$funcionarioData) {
     exit;
 }
 
-// Función para calcular la edad a partir de la fecha de nacimiento
 function calcularEdad($fechaNacimiento) {
     $fechaNacimiento = new DateTime($fechaNacimiento);
     $hoy = new DateTime();
-    return $hoy->diff($fechaNacimiento)->y; // Diferencia en años
+    return $hoy->diff($fechaNacimiento)->y;
 }
 
-// Obtener la edad del funcionario
 $edadFuncionario = calcularEdad($funcionarioData['f_nacimiento']);
 
-// Ajustar la nota media (dividirla por 2)
 $notaMediaAjustada = round($funcionarioData['notaMedia'] / 2, 2);
 
-// Obtener los servicios del cliente que no tienen funcionario asignado
 $sqlServicios = "SELECT idServicio, titulo FROM servicios WHERE idCliente = :idCliente AND idFuncionario IS NULL";
 $stmtServicios = $conexion->prepare($sqlServicios);
 $stmtServicios->bindValue(':idCliente', $idCliente, PDO::PARAM_INT);
 $stmtServicios->execute();
 $serviciosDisponibles = $stmtServicios->fetchAll(PDO::FETCH_ASSOC);
 
-// Variable para controlar la visualización de la tarjeta emergente
 $mostrarCard = false;
 
-// Obtener las valoraciones del funcionario desde la tabla "valoraciones_clientes"
 $sqlValoraciones = "SELECT estrellas, comentario FROM valoraciones_clientes WHERE idFuncionario = :idFuncionario";
 $stmtValoraciones = $conexion->prepare($sqlValoraciones);
 $stmtValoraciones->bindValue(':idFuncionario', $idFuncionario, PDO::PARAM_INT);
@@ -70,23 +61,20 @@ if ($hayValoraciones) {
          $sumaEstrellas += $val['estrellas'];
     }
     $promedioValoracion = round($sumaEstrellas / count($valoraciones), 1);
-    // Se toma el comentario del primer registro (puedes modificar para que se muestre el más reciente)
     $comentarioPrincipal = $valoraciones[0]['comentario'];
 }
 $mostrarCard = false;
 
-// Procesamiento del formulario de contratación
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['idServicioSeleccionado'])) {
     $idServicioSeleccionado = (int)$_POST['idServicioSeleccionado'];
 
-    // Realizar el UPDATE en la tabla servicios
     $sqlUpdateServicio = "UPDATE servicios SET idFuncionario = :idFuncionario WHERE idServicio = :idServicioSeleccionado";
     $stmtUpdate = $conexion->prepare($sqlUpdateServicio);
     $stmtUpdate->bindValue(':idFuncionario', $idFuncionario, PDO::PARAM_INT);
     $stmtUpdate->bindValue(':idServicioSeleccionado', $idServicioSeleccionado, PDO::PARAM_INT);
 
     if ($stmtUpdate->execute()) {
-        header("Location: Miarea.php"); // Redirigir a "Mi área"
+        header("Location: Miarea.php");
         exit;
     } else {
         echo "Error al actualizar el servicio.";
@@ -104,13 +92,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['idServicioSeleccionad
     <script src="https://kit.fontawesome.com/998c60ef77.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./assets/estilos.css" />
     <script src="./assets/js/modoOscuro.js"></script>
-    <script src="./assets/js/cajaAviso.js"></script> <!--puede ser que crie otro archivo js-->
+    <script src="./assets/js/cajaAviso.js"></script>
     <link rel="icon" type="image/ico" href="./assets/images/logo.ico" />
 </head>
 <body>
     <?php include_once './assets/headerLogueado.php'; ?>
 
-     <!-- Migas de pan -->
     <nav style="--bs-breadcrumb-divider: url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%278%27 height=%278%27%3E%3Cpath d=%27M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z%27 fill=%27%236c757d%27/%3E%3C/svg%3E');" aria-label="breadcrumb">
         <ol class="breadcrumb" style="--bs-breadcrumb-margin-bottom: 0rem;">
             <li class="breadcrumb-item active" aria-current="page">
@@ -120,7 +107,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['idServicioSeleccionad
             <li class="breadcrumb-item">Pagina de contratación Funcionario</li>
         </ol>
     </nav>
-    <!-- Fin migas de pan -->
 
     <div class="pTrabajo">
         <div class="CajaDetalle">
@@ -133,7 +119,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['idServicioSeleccionad
             <p><b>Provincia:</b> <?php echo htmlspecialchars($funcionarioData['provincia']); ?></p>
             <p><b>Ciudad:</b> <?php echo htmlspecialchars($funcionarioData['ciudad']); ?></p>
             <p><b>Descripción:</b> <?php echo htmlspecialchars($funcionarioData['descripcion']); ?></p>
-            <!-- Botón de contratación -->
             <button id="contratarBtn">Contratar</button>
         </div>
 
@@ -142,8 +127,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['idServicioSeleccionad
             <div class="espacioValoraciones">
                 <?php if ($hayValoraciones): ?>
                     <?php foreach ($valoraciones as $val): 
-                        // Calcular la cantidad de estrellas a mostrar: la mitad de la puntuación
-                        // Por ejemplo, si $val['estrellas'] es 8, entonces fullStars = floor(8/2) = 4 y emptyStars = 5 - 4 = 1.
                         $fullStars = floor($val['estrellas'] / 2);
                         $emptyStars = 5 - $fullStars;
                     ?>
@@ -172,7 +155,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['idServicioSeleccionad
         </div>
     </div>
 
-    <!-- Caja de selección de servicio (visible solo después de hacer clic en "Contratar") -->
     <div id="cajaid" class="cajaAviso" style="display: none;">
         <div id="avisoGeneral" class="avisoContenido">
             <h2>Selecciona uno de sus servicio para asignar a este funcionario</h2>

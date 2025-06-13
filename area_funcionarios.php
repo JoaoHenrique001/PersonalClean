@@ -2,12 +2,6 @@
 include './assets/ajax/conexionBD.php';
 session_start();
 
-// Mostrar datos de depuración (opcional)
-// echo "<pre>";
-// var_dump($_SESSION);
-// echo "</pre>";
-
-// Verificar que el usuario sea un funcionario
 if ($_SESSION['usuario']['tipo'] !== 'funcionarios') {
     header("Location: logout.php");
     exit;
@@ -33,8 +27,6 @@ function tiempoTranscurrido($fecha) {
     }
 }
 
-// Obtener servicios disponibles (trabajos) de la base de datos.  
-// Se excluyen aquellos con estado "terminado".
 $sql = "SELECT s.*, c.nombre AS nombre_cliente, f.nombre AS nombre_funcionario 
         FROM servicios s 
         LEFT JOIN clientes c ON s.idcliente = c.idcliente 
@@ -44,6 +36,7 @@ $consulta = $conexion->prepare($sql);
 $consulta->execute();
 $servicios = $consulta->fetchAll(PDO::FETCH_ASSOC);
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -62,7 +55,6 @@ $servicios = $consulta->fetchAll(PDO::FETCH_ASSOC);
 <body>
     <?php include_once './assets/headerLogueado.php'; ?>
 
-    <!-- Migas de pan -->
     <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
         <ol class="breadcrumb" style="--bs-breadcrumb-margin-bottom: 0rem;">
             <li class="breadcrumb-item active" aria-current="page">
@@ -71,13 +63,10 @@ $servicios = $consulta->fetchAll(PDO::FETCH_ASSOC);
             <li class="breadcrumb-item">Area Principal</li>
         </ol>
     </nav>
-    <!-- Fin migas de pan -->
 
     <div class="soyPrincipal">
-        <!-- Listado de trabajos disponibles -->
         <div class="listadoGeneral">
             <?php foreach ($servicios as $servicio) { ?>
-                <!-- Cada tarjeta es un enlace que dirige a paginaTrabajo.php pasando el idServicio -->
                 <a href="paginaTrabajo.php?idServicio=<?php echo $servicio['idServicio']; ?>">
                     <div class="elementoCaja">
                         <p class="elementoCaja-timeinfo">
@@ -124,7 +113,6 @@ $servicios = $consulta->fetchAll(PDO::FETCH_ASSOC);
                 </a>
             <?php } ?>
         </div>
-        <!-- Sección de Notificaciones -->
         <div class="notificaciones">
             <h1>Notificaciones</h1>
             <a href="./chat.php">

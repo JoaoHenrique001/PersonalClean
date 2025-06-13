@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-    //sistema de agregar ciudads dependendo de la provincia
     let Madrid = ["Ajalvir",
         "Alameda del Valle",
         "Álamo, El",
@@ -181,7 +180,6 @@ document.addEventListener("DOMContentLoaded", function () {
         "Zarzalejo"];
     let ciudadCampo = document.getElementById("ciudad");
     let provinciaCampo = document.getElementById("provincia");
-    // Llenar el select con las ciudades
     provinciaCampo.addEventListener("change" , () => {
         if(provinciaCampo.value == "Madrid"){
             for (let i = 0; i < Madrid.length; i++) {
@@ -196,7 +194,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const formulario = document.getElementById("formRegistro");
 
-    //sistema verificar campos usuario
     let nombre = document.getElementById("nombreInput");
     let apellidos = document.getElementById("apellidoInput");
     let email = document.getElementById("emailInput");
@@ -287,13 +284,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     
     function validarTelefono() {
-      // Dejar solo los números
       numeroTel.value = numeroTel.value.replace(/\D/g, '');
 
-      // Validar usando el regex
       const esValido = telefonoRegex.test(numeroTel.value);
 
-      // Aplicar clases de error o limpiar mensajes
       numeroTel.classList.toggle("errorInput", !esValido);
       Mtelefono.textContent = esValido ? "" : "El teléfono debe empezar con 6, 7, 8 o 9 y contener solo números.";
       Mtelefono.classList.toggle("errorSpan", !esValido);
@@ -332,7 +326,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }     
     function transformarFecha(fecha) {
-      // Separar la fecha original por "/"
       var partes = fecha.split("/");
     
       if (partes.length !== 3) {
@@ -343,7 +336,6 @@ document.addEventListener("DOMContentLoaded", function () {
       var mes = partes[1];
       var anio = partes[2];
     
-      // Retornar en el nuevo formato
       return anio + "/" + mes + "/" + dia;
     }
 
@@ -405,7 +397,6 @@ document.addEventListener("DOMContentLoaded", function () {
         return esValido;
     }
 
-      // eventos vinculados al elemento
       nombre.addEventListener("blur", validarNombre);
       apellidos.addEventListener("blur", validarNombre)
       email.addEventListener("blur", validarEmail);
@@ -421,9 +412,7 @@ document.addEventListener("DOMContentLoaded", function () {
       provincia.addEventListener("blur", validarProvincia);
       ciudad.addEventListener("blur", validarCiudad);
 
-      //formulario.addEventListener("submit", enviarFormulario);
 
-      // envio final
       function enviarFormulario(event) {
         event.preventDefault();
         const validaciones = [
@@ -446,5 +435,4 @@ document.addEventListener("DOMContentLoaded", function () {
         }
           
       }
-
   });

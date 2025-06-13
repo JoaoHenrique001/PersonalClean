@@ -2,13 +2,11 @@
 include './assets/ajax/conexionBD.php';
 session_start();
 
-// Verificar que el usuario sea un funcionario
 if ($_SESSION['usuario']['tipo'] !== 'funcionarios') {
     header("Location: logout.php");
     exit;
 }
 
-// Verificar que se reciba el idServicio por GET
 if (!isset($_GET['idServicio'])) {
     echo "No se ha especificado un servicio.";
     exit;
@@ -16,7 +14,6 @@ if (!isset($_GET['idServicio'])) {
 
 $idServicio = (int)$_GET['idServicio'];
 
-// Consultar los datos del servicio a partir del idServicio
 $sql = "SELECT s.*, 
                c.idcliente, c.nombre AS nombre_cliente, c.apellidos AS apellido_cliente, 
                f.nombre AS nombre_funcionario, f.apellidos AS apellido_funcionario 
@@ -29,15 +26,11 @@ $stmt->bindValue(':idServicio', $idServicio, PDO::PARAM_INT);
 $stmt->execute();
 $servicio = $stmt->fetch(PDO::FETCH_ASSOC);
 
-// Si no se encontró el servicio, se muestra un error
 if (!$servicio) {
     echo "Servicio no encontrado.";
     exit;
 }
 
-// --- Obtener valoraciones ---
-// Ahora queremos sacar todas las valoraciones desde la tabla "valoraciones_servicios"
-// donde el idCliente sea el mismo que el del servicio.
 $idClienteServicio = $servicio['idcliente'];
 $sqlValoraciones = "SELECT estrellas, comentario 
                     FROM valoraciones_servicios 
@@ -48,7 +41,6 @@ $stmtValoraciones->execute();
 $valoraciones = $stmtValoraciones->fetchAll(PDO::FETCH_ASSOC);
 $hayValoraciones = count($valoraciones) > 0;
 
-// Función para renderizar estrellas con la lógica: la mitad del campo "estrellas" full,
 function renderEstrellas($estrellasValoracion) {
     $fullStars = floor($estrellasValoracion / 2);
     $hollowStars = 5 - $fullStars;
@@ -80,7 +72,6 @@ function renderEstrellas($estrellasValoracion) {
 <body>
     <?php include_once './assets/headerLogueado.php'; ?>
 
-    <!-- Migas de pan -->
     <nav style="--bs-breadcrumb-divider: url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%278%27 height=%278%27%3E%3Cpath d=%27M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z%27 fill=%27%236c757d%27/%3E%3C/svg%3E');" aria-label="breadcrumb">
         <ol class="breadcrumb" style="--bs-breadcrumb-margin-bottom: 0rem;">
             <li class="breadcrumb-item active" aria-current="page">
@@ -92,10 +83,8 @@ function renderEstrellas($estrellasValoracion) {
             <li class="breadcrumb-item">Pagina de contratación</li>
         </ol>
     </nav>
-    <!-- Fin migas de pan -->
 
     <div class="pTrabajo">
-        <!-- Caja de detalles del servicio -->
         <div class="CajaDetalle">
             <p><b>Título:</b> <?php echo htmlspecialchars($servicio['titulo']); ?></p>
             <p><b>Tipo:</b> <?php echo htmlspecialchars($servicio['tipoServicio']); ?></p>
@@ -106,13 +95,11 @@ function renderEstrellas($estrellasValoracion) {
             <p><b>Provincia:</b> <?php echo htmlspecialchars($servicio['provincia']); ?></p>
             <p><b>Ciudad:</b> <?php echo htmlspecialchars($servicio['ciudad']); ?></p>
             <p><b>Descripción:</b> <?php echo htmlspecialchars($servicio['descripcion']); ?></p>
-            <!-- Botón para aplicar al trabajo -->
             <a href="paginaContratacionFuncionario.php?idServicio=<?php echo $servicio['idServicio']; ?>">
                 <button>Aplicar a trabajo</button>
             </a>
         </div>
 
-        <!-- Sección de Valoraciones -->
         <div class="valoraciones">
             <h2>Valoraciones de Clientes:</h2>
             <div class="espacioValoraciones">

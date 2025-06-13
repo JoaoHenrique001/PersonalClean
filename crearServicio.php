@@ -2,22 +2,18 @@
 include './assets/ajax/conexionBD.php';
 session_start();
 
-// Verificación de acceso (solo clientes)
 if ($_SESSION['usuario']['tipo'] !== 'clientes') {
     header("Location: logout.php");
     exit;
 }
 
-// Obtener datos del usuario desde la sesión
 $idCliente = $_SESSION['usuario']['idCliente'];
 $provincia = $_SESSION['usuario']['provincia'] ?? "";
 $ciudad = $_SESSION['usuario']['ciudad'] ?? "";
 $direccion = $_SESSION['usuario']['direccion'] ?? "";
 
-// Variable para controlar la visualización de la tarjeta emergente
 $mostrarCard = false;
 
-// Procesamiento del formulario de creación de servicio
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $titulo = trim($_POST['titulo'] ?? "");
     $descripcion = trim($_POST['descripcion'] ?? "");
@@ -31,7 +27,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $estado = "activo";
     $valorado = 0;
 
-    // Insertar el nuevo servicio en la base de datos
     $sql = "INSERT INTO servicios (idCliente, fechaServicio, estado, titulo, descripcion, tipoServicio, valor, diaServicio, direccion, provincia, ciudad, valoradoPorCliente, valoradoPorFuncionario) 
             VALUES (:idCliente, :fechaServicio, :estado, :titulo, :descripcion, :tipoServicio, :valor, :diaServicio, :direccion, :provincia, :ciudad, :valoradoPorCliente,  :valoradoPorFuncionario)";
     
@@ -52,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ':valoradoPorFuncionario' => $valorado
     ]);
 
-    $mostrarCard = true; // Activar la tarjeta de confirmación
+    $mostrarCard = true;
 }
 ?>
 
@@ -67,13 +62,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <script src="https://kit.fontawesome.com/998c60ef77.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./assets/estilos.css" />
     <script src="./assets/js/modoOscuro.js"></script>
-    <script src="./assets/js/cajaAviso.js"></script> <!--puede ser que crie otro archivo js-->
+    <script src="./assets/js/cajaAviso.js"></script>
     <link rel="icon" type="image/ico" href="./assets/images/logo.ico" />
 </head>
 <body>
     <?php include_once './assets/headerLogueado.php'; ?>
 
-     <!-- Migas de pan -->
     <nav style="--bs-breadcrumb-divider: url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%278%27 height=%278%27%3E%3Cpath d=%27M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z%27 fill=%27%236c757d%27/%3E%3C/svg%3E');" aria-label="breadcrumb">
         <ol class="breadcrumb" style="--bs-breadcrumb-margin-bottom: 0rem;">
             <li class="breadcrumb-item active" aria-current="page">
@@ -83,7 +77,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <li class="breadcrumb-item">Crear Servicio</li>
         </ol>
     </nav>
-    <!-- Fin migas de pan -->
 
     <div class="crearServ">
         <?php if (!$mostrarCard): ?>
@@ -158,7 +151,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <?php endif; ?>
     </div>
 
-    <!-- Caja de confirmación -->
     <?php if ($mostrarCard): ?>
         <div id="cajaid" class="cajaAviso">
             <div id="avisoGeneral" class="avisoContenido">
