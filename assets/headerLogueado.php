@@ -91,8 +91,8 @@
     </h2>
     <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionTel">
       <div id="BotoTel" class="accordion-body">
-      <a class="dropdown-item" href="#">Sobre Nosotros</a>
-      <a class="dropdown-item" href="#">Por qué contratarnos</a>
+      <a class="dropdown-item" href="../sobreNosotros.php">Sobre Nosotros</a>
+      <a class="dropdown-item" href="../porqueContratarnos.php">Por qué contratarnos</a>
       </div>
     </div>
   </div>
@@ -119,9 +119,28 @@
     </h2>
     <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionTel">
       <div id="BotoTel" class="accordion-body">
-      <a class="dropdown-item" href="#">Solicitacion de empleo</a>
-      <a class="dropdown-item" href="#">Ofertas de Empleo</a>
+       <a class="dropdown-item" href="../nuestrosFuncionarios.php">Nuestros funcionarios</a>
+      <a class="dropdown-item" href="../ofertasDeEmpleo.php">Ofertas de Empleo</a>
       <a class="dropdown-item" href="../contacto.php">Contacto</a>
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingUsuario">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseUsuario" aria-expanded="false" aria-controls="collapseUsuario">
+        Mi cuenta
+      </button>
+    </h2>
+    <div id="collapseUsuario" class="accordion-collapse collapse" aria-labelledby="headingUsuario" data-bs-parent="#accordionTel">
+      <div class="accordion-body">
+        <?php if ($_SESSION['usuario']['tipo'] === 'clientes'): ?>
+          <a class="dropdown-item" href="../area_clientes.php">Área Principal</a>
+        <?php elseif ($_SESSION['usuario']['tipo'] === 'funcionarios'): ?>
+          <a class="dropdown-item" href="../area_funcionarios.php">Área Principal</a>
+        <?php endif; ?>
+        <a class="dropdown-item" href="./edicionPerfil.php">Editar perfil</a>
+        <hr class="dropdown-divider">
+        <a class="dropdown-item text-danger" href="./logout.php">Cerrar sesión</a>
       </div>
     </div>
   </div>

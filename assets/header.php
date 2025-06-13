@@ -108,6 +108,12 @@
       </div>
     </div>
   </div>
+   <!--inicio div botones login y registro-->
+    <div class="logregTel">
+      <a href="../login.php"><button>Log-in</button></a>
+      <a href="../registro.php"><button>Registro</button></a>
+    </div>
+    <!--fin div botones login y registro-->
 </div>
   <!--fin barra de navegacion Telefono-->
  
