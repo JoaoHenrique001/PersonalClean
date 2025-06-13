@@ -139,11 +139,11 @@ $servicios = $consulta->fetchAll(PDO::FETCH_ASSOC);
                     <h2>Mi Servicios</h2>
                 </div>
             </a>
-            <a href="">
-                <div class="notificacionCaja">
-                    <img src="./assets/images/Starinbox.svg" alt="">
-                    <h2>Dar Valoraciones</h2>
-                </div>
+            <a href="./valoraciones.php">
+            <div class="notificacionCaja" id="btnValoraciones">
+                <img src="./assets/images/Starinbox.svg" alt="">
+                <h2>Dar Valoraciones</h2>
+            </div>
             </a>
         </div>
     </div>
